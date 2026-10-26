@@ -96,7 +96,7 @@ async function runMobileFirstE2ETest() {
     // -------------------------------------------------------------
     console.log('\n--- 3. Testing Mobile Quick Add Bottom Sheet ---');
     const quickAddTapped = await page.evaluate(() => {
-      const addBtn = document.querySelector('button[aria-label="Quick add size"]');
+      const addBtn = document.querySelector('button[data-action="quick-add"], button[aria-label="Quick add size"]');
       if (addBtn) {
         addBtn.click();
         return true;

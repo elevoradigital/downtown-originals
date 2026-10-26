@@ -593,7 +593,7 @@ export const ProductDetailPage: React.FC = () => {
       </section>
 
       {/* SECTION: STYLED IN THIS LOOK / CROSS-SELL */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface">
+      <section className="w-full px-3 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface">
         <div className="flex items-end justify-between gap-4 mb-10">
           <div>
             <span className="font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
@@ -612,7 +612,7 @@ export const ProductDetailPage: React.FC = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
           {styledLookProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

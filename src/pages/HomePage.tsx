@@ -138,7 +138,7 @@ export const HomePage: React.FC = () => {
         </section>
 
         {/* SECTION 2: NEW ARRIVALS */}
-        <section id="new-arrivals" className="w-full px-4 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface border-b border-surface-container-high">
+        <section id="new-arrivals" className="w-full px-3 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface border-b border-surface-container-high">
           {/* Section Header with Blur Fade */}
           <BlurFade delay={0.1} duration={0.4} yOffset={6}>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
@@ -176,7 +176,7 @@ export const HomePage: React.FC = () => {
 
           {/* Product Grid with Blur Fade */}
           <BlurFade delay={0.15} duration={0.45} yOffset={8}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
               {filteredNewArrivals.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

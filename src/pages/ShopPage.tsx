@@ -143,7 +143,7 @@ export const ShopPage: React.FC = () => {
   return (
     <div className="w-full pt-24 sm:pt-28 bg-surface">
       {/* Top Header Section */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 pt-8 pb-6 bg-surface-container-lowest border-b border-surface-container-high">
+      <section className="w-full px-3 sm:px-8 lg:px-12 pt-8 pb-6 bg-surface-container-lowest border-b border-surface-container-high">
         <BlurFade delay={0.05} duration={0.4} yOffset={6}>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
@@ -170,7 +170,7 @@ export const ShopPage: React.FC = () => {
 
       {/* Category Pill Strip & Controls Bar */}
       <section className="sticky top-20 sm:top-24 z-30 w-full bg-surface-container-lowest/95 backdrop-blur-md border-b border-surface-container-high shadow-sm">
-        <div className="px-4 sm:px-8 lg:px-12 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="px-3 sm:px-8 lg:px-12 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Category Pills */}
           <div className="w-full md:w-auto flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0 pb-1 md:pb-0">
             {CATEGORIES.map((cat) => (
@@ -220,7 +220,7 @@ export const ShopPage: React.FC = () => {
       </section>
 
       {/* Main Content: Sidebar + Products Grid */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 py-8 sm:py-12">
+      <section className="w-full px-3 sm:px-8 lg:px-12 pt-6 sm:pt-8 pb-32 sm:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Desktop Parametric Matrix Sidebar */}
           <aside
@@ -428,7 +428,7 @@ export const ShopPage: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <div id="shopProductGrid" className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+              <div id="shopProductGrid" className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}

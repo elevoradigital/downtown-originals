@@ -67,9 +67,9 @@ export const CheckoutPage: React.FC = () => {
       <div className="w-full pt-36 pb-space-2xl px-margin-mobile md:px-margin bg-surface min-h-[80vh] flex items-center justify-center">
         <div className="w-full max-w-2xl bg-surface-container-lowest p-space-xl border-2 border-primary shadow-2xl flex flex-col gap-space-lg">
           <div className="flex items-center gap-space-sm text-secondary">
-            <span className="material-symbols-outlined text-[36px]">check_circle</span>
+            <span className="material-symbols-outlined text-[36px]">fact_check</span>
             <span className="font-label-code text-label-code uppercase tracking-widest font-bold">
-              CONCEPT ORDER RECEIVED
+              DEMONSTRATION ORDER SUMMARY
             </span>
           </div>
 
@@ -78,7 +78,7 @@ export const CheckoutPage: React.FC = () => {
               THANK YOU, {form.firstName.toUpperCase()}.
             </h1>
             <p className="font-body-md text-body-md text-on-surface-variant mt-2">
-              Order confirmation prototype generated. A concept summary has been documented for order reference:
+              This simulated order summary has been generated for client demonstration review:
             </p>
           </div>
 
@@ -381,10 +381,14 @@ export const CheckoutPage: React.FC = () => {
                     <span className="font-bold text-primary">UPI / QR SCANNER (GPay, PhonePe, Paytm)</span>
                   </div>
                   {form.paymentMethod === 'upi' && (
-                    <div className="pt-2">
+                    <div className="pt-2 flex flex-col gap-2">
+                      <div className="p-2.5 bg-surface-container border border-surface-container-high font-label-meta text-[11px] text-on-surface-variant flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-secondary text-[14px]">info</span>
+                        <span>SANDBOX DEMO MODE: Enter an illustrative UPI VPA or leave blank for simulated intent.</span>
+                      </div>
                       <input
                         type="text"
-                        placeholder="username@okhdfcbank"
+                        placeholder="concept.shopper@okhdfcbank"
                         value={form.upiId}
                         onChange={(e) => setForm({ ...form, upiId: e.target.value })}
                         className="w-full p-2.5 bg-surface-container-lowest border border-surface-container-high font-body-md text-sm"
@@ -407,24 +411,31 @@ export const CheckoutPage: React.FC = () => {
                       onChange={() => setForm({ ...form, paymentMethod: 'card' })}
                       className="accent-secondary"
                     />
-                    <span className="font-bold text-primary">DEBIT / CREDIT CARD (VISA, MASTERCARD, AMEX)</span>
+                    <span className="font-bold text-primary">DEBIT / CREDIT CARD (SANDBOX TEST CARD)</span>
                   </div>
                   {form.paymentMethod === 'card' && (
                     <div className="grid grid-cols-2 gap-2 pt-2">
+                      <div className="col-span-2 p-2.5 bg-surface-container border border-surface-container-high font-label-meta text-[11px] text-on-surface-variant flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-secondary text-[14px]">info</span>
+                        <span>DEMO GATEWAY PREVIEW: Simulated test card loaded. Real card numbers are not collected.</span>
+                      </div>
                       <input
                         type="text"
-                        placeholder="Card Number (Demo)"
-                        className="col-span-2 p-2.5 bg-surface-container-lowest border border-surface-container-high font-body-md text-sm"
+                        readOnly
+                        value="•••• •••• •••• 4242 (TEST CARD)"
+                        className="col-span-2 p-2.5 bg-surface-container-lowest border border-surface-container-high font-label-code text-xs text-primary cursor-not-allowed"
                       />
                       <input
                         type="text"
-                        placeholder="MM / YY"
-                        className="p-2.5 bg-surface-container-lowest border border-surface-container-high font-body-md text-sm"
+                        readOnly
+                        value="12 / 28"
+                        className="p-2.5 bg-surface-container-lowest border border-surface-container-high font-label-code text-xs text-primary cursor-not-allowed"
                       />
                       <input
-                        type="password"
-                        placeholder="CVV"
-                        className="p-2.5 bg-surface-container-lowest border border-surface-container-high font-body-md text-sm"
+                        type="text"
+                        readOnly
+                        value="CVV: •••"
+                        className="p-2.5 bg-surface-container-lowest border border-surface-container-high font-label-code text-xs text-primary cursor-not-allowed"
                       />
                     </div>
                   )}

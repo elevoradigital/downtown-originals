@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { CartItem, Product, ProductSize } from '../types';
-import { PRODUCTS } from '../data/products';
 
 interface CartContextType {
   cart: CartItem[];
@@ -29,40 +28,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const saved = localStorage.getItem('downtown_cart');
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
       }
     } catch {
       // Fallback
     }
-
-    // Default seed items matching Stitch reference: [ 2 ] items
-    const m65 = PRODUCTS.find(p => p.id === 'prod-001');
-    const tee = PRODUCTS.find(p => p.id === 'prod-002');
-
-    const initialItems: CartItem[] = [];
-    if (m65) {
-      initialItems.push({
-        id: `${m65.id}-Washed Charcoal-L`,
-        productId: m65.id,
-        product: m65,
-        selectedColor: 'Washed Charcoal',
-        selectedSize: 'L',
-        quantity: 1,
-        price: m65.price
-      });
-    }
-    if (tee) {
-      initialItems.push({
-        id: `${tee.id}-Vintage Black-M`,
-        productId: tee.id,
-        product: tee,
-        selectedColor: 'Vintage Black',
-        selectedSize: 'M',
-        quantity: 1,
-        price: tee.price
-      });
-    }
-    return initialItems;
+    // Genuinely empty shopping cart for first-time visitors
+    return [];
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -80,6 +55,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const toggleCart = () => setIsCartOpen(prev => !prev);
 
   const addToCart = (product: Product, selectedColor: string, selectedSize: ProductSize, quantity = 1) => {
+    // Validate size availability
+    const sizeSpec = product.sizes.find(s => s.size === selectedSize);
+    if (sizeSpec && !sizeSpec.inStock) {
+      console.warn(`Size ${selectedSize} is unavailable for ${product.name}`);
+      return;
+    }
+
+    const safeQty = Math.max(1, Math.min(10, Math.floor(quantity)));
     const itemId = `${product.id}-${selectedColor}-${selectedSize}`;
     
     setCart(prev => {
@@ -87,7 +70,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (existing) {
         return prev.map(item => 
           item.id === itemId 
-            ? { ...item, quantity: Math.min(10, item.quantity + quantity) }
+            ? { ...item, quantity: Math.min(10, item.quantity + safeQty) }
             : item
         );
       }
@@ -99,7 +82,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           product,
           selectedColor,
           selectedSize,
-          quantity: Math.min(10, quantity),
+          quantity: safeQty,
           price: product.price
         }
       ];

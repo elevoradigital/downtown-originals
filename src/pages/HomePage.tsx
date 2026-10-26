@@ -40,7 +40,7 @@ export const HomePage: React.FC = () => {
               </div>
 
               {/* Master Title */}
-              <h1 className="font-display-hero text-5xl sm:text-7xl lg:text-display-hero uppercase tracking-tight text-primary leading-none mb-space-md">
+              <h1 className="font-display-hero text-4xl sm:text-6xl lg:text-display-hero uppercase tracking-tight text-primary leading-none mb-space-md break-words">
                 OWN YOUR<br />
                 <span className="text-on-surface-variant/40 hover:text-primary transition-colors duration-300">
                   EVERYDAY.

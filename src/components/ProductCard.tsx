@@ -21,6 +21,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
   const handleSizeSelect = (size: ProductSize, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    const sizeSpec = product.sizes.find(s => s.size === size);
+    if (!sizeSpec || !sizeSpec.inStock) return;
     addToCart(product, activeColor.name, size, 1);
     setShowSizePicker(false);
   };

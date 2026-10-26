@@ -43,23 +43,23 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
         </div>
 
         {/* Main Navigation Bar */}
-        <div className="h-20 w-full px-margin-mobile md:px-margin flex items-center justify-between gap-space-md">
+        <div className="h-16 sm:h-20 w-full px-3 sm:px-margin-mobile md:px-margin flex items-center justify-between gap-2 sm:gap-space-md">
           {/* Mobile Menu Toggle Button */}
-          <div className="flex items-center gap-space-xs lg:hidden">
+          <div className="flex items-center gap-space-xs lg:hidden shrink-0">
             <button
               aria-label="Open Navigation Menu"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="w-11 h-11 flex items-center justify-center text-primary hover:text-secondary transition-colors"
+              className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-primary hover:text-secondary transition-colors"
             >
               <span className="material-symbols-outlined text-[24px]">menu</span>
             </button>
           </div>
 
           {/* Brand Logo */}
-          <div className="flex items-center gap-space-lg">
+          <div className="flex items-center gap-space-lg min-w-0">
             <Link
               to="/"
-              className="font-headline-sm text-headline-sm uppercase tracking-tight text-primary hover:opacity-80 transition-opacity"
+              className="font-headline-sm text-lg sm:text-headline-sm uppercase tracking-tight text-primary hover:opacity-80 transition-opacity truncate whitespace-nowrap"
             >
               DOWNTOWN ORIGINALS
             </Link>

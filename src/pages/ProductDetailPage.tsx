@@ -35,6 +35,9 @@ export const ProductDetailPage: React.FC = () => {
   const activeColor = product.colors[selectedColorIndex] || product.colors[0];
   const isFavorited = isInWishlist(product.id);
 
+  const selectedSizeObj = product.sizes.find(s => s.size === selectedSize);
+  const isSelectedSizeAvailable = selectedSizeObj ? selectedSizeObj.inStock : false;
+
   const handleColorChange = (index: number) => {
     setSelectedColorIndex(index);
     if (product.images[index]) {
@@ -43,10 +46,12 @@ export const ProductDetailPage: React.FC = () => {
   };
 
   const handleAddToCart = () => {
+    if (!isSelectedSizeAvailable) return;
     addToCart(product, activeColor.name, selectedSize, quantity);
   };
 
   const handleBuyNow = () => {
+    if (!isSelectedSizeAvailable) return;
     addToCart(product, activeColor.name, selectedSize, quantity);
     navigate('/checkout');
   };
@@ -188,18 +193,24 @@ export const ProductDetailPage: React.FC = () => {
               )}
 
               {/* Price Row */}
-              <div className="flex items-baseline gap-space-sm mt-space-md pt-space-sm border-t border-surface-container-high">
-                <span className="font-headline-sm text-headline-sm font-bold text-primary">
-                  ₹{product.price.toLocaleString('en-IN')}
-                </span>
-                {product.originalPrice && (
-                  <span className="font-label-code text-label-code text-outline line-through">
-                    ₹{product.originalPrice.toLocaleString('en-IN')}
+              <div className="flex flex-wrap items-baseline justify-between gap-space-sm mt-space-md pt-space-sm border-t border-surface-container-high">
+                <div className="flex items-baseline gap-space-sm">
+                  <span className="font-headline-sm text-headline-sm font-bold text-primary">
+                    ₹{product.price.toLocaleString('en-IN')}
                   </span>
-                )}
-                <span className="font-label-meta text-[11px] text-secondary font-semibold ml-auto">
+                  {product.originalPrice && (
+                    <span className="font-label-code text-label-code text-outline line-through">
+                      ₹{product.originalPrice.toLocaleString('en-IN')}
+                    </span>
+                  )}
+                </div>
+                <span className="font-label-meta text-[11px] text-secondary font-semibold">
                   INCL. OF ALL TAXES • FREE SHIPPING OVER ₹3,999
                 </span>
+              </div>
+              <div className="flex items-center gap-1 font-label-meta text-[10px] uppercase text-on-surface-variant/80 pt-1">
+                <span className="material-symbols-outlined text-[13px] text-secondary">info</span>
+                <span>ILLUSTRATIVE DEMO PRICE &amp; CONCEPT SPECIFICATIONS</span>
               </div>
             </div>
 
@@ -279,49 +290,75 @@ export const ProductDetailPage: React.FC = () => {
 
             {/* Quantity Stepper & CTAs */}
             <div className="flex flex-col gap-space-sm pt-space-xs">
-              <div className="flex items-stretch gap-space-sm">
+              <div className="flex flex-col sm:flex-row items-stretch gap-space-sm">
                 {/* Stepper */}
-                <div className="flex items-center border border-primary bg-surface-container-lowest">
-                  <button
-                    type="button"
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-12 flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors text-lg"
-                    aria-label="Decrease quantity"
-                  >
-                    -
-                  </button>
-                  <span className="w-10 text-center font-label-code text-label-code font-bold">
-                    {quantity}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setQuantity(Math.min(10, quantity + 1))}
-                    className="w-10 h-12 flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors text-lg"
-                    aria-label="Increase quantity"
-                  >
-                    +
-                  </button>
+                <div className="flex items-center justify-between sm:justify-start border border-primary bg-surface-container-lowest h-12 px-2 sm:px-0">
+                  <span className="sm:hidden font-label-code text-xs text-on-surface-variant uppercase font-semibold">QUANTITY:</span>
+                  <div className="flex items-center">
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-10 h-12 flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors text-lg"
+                      aria-label="Decrease quantity"
+                    >
+                      -
+                    </button>
+                    <span className="w-10 text-center font-label-code text-label-code font-bold">
+                      {quantity}
+                    </span>
+                    <button
+                      type="button"
+                      disabled={quantity >= 10}
+                      onClick={() => setQuantity(Math.min(10, quantity + 1))}
+                      className={`w-10 h-12 flex items-center justify-center transition-colors text-lg ${
+                        quantity >= 10 ? 'opacity-30 cursor-not-allowed text-outline' : 'text-primary hover:bg-surface-container-low'
+                      }`}
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
 
                 {/* Add to Bag Button */}
                 <button
                   type="button"
+                  disabled={!isSelectedSizeAvailable}
                   onClick={handleAddToCart}
-                  className="flex-1 py-4 bg-primary text-on-primary font-title-sm text-title-sm uppercase tracking-wider hover:bg-secondary hover:text-on-secondary transition-all flex items-center justify-center gap-space-sm shadow-md group"
+                  className={`flex-1 py-4 font-title-sm text-title-sm uppercase tracking-wider transition-all flex items-center justify-center gap-space-sm shadow-md group ${
+                    !isSelectedSizeAvailable
+                      ? 'bg-surface-container-high text-outline cursor-not-allowed border border-outline-variant shadow-none'
+                      : 'bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary'
+                  }`}
                 >
-                  <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
-                  <span>ADD TO BAG — ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
+                  <span className="material-symbols-outlined text-[20px]">
+                    {!isSelectedSizeAvailable ? 'block' : 'shopping_bag'}
+                  </span>
+                  <span>
+                    {!isSelectedSizeAvailable
+                      ? `OUT OF STOCK (${selectedSize})`
+                      : `ADD TO BAG — ₹${(product.price * quantity).toLocaleString('en-IN')}`}
+                  </span>
                 </button>
               </div>
 
               {/* Buy Now Direct Button */}
               <button
                 type="button"
+                disabled={!isSelectedSizeAvailable}
                 onClick={handleBuyNow}
-                className="w-full py-3.5 bg-secondary text-on-secondary font-title-sm text-title-sm uppercase tracking-wider hover:bg-secondary-container transition-all flex items-center justify-center gap-space-sm shadow-md"
+                className={`w-full py-3.5 font-title-sm text-title-sm uppercase tracking-wider transition-all flex items-center justify-center gap-space-sm shadow-md ${
+                  !isSelectedSizeAvailable
+                    ? 'bg-surface-container text-outline cursor-not-allowed border border-outline-variant shadow-none'
+                    : 'bg-secondary text-on-secondary hover:bg-secondary-container'
+                }`}
               >
-                <span>BUY NOW (EXPRESS CHECKOUT)</span>
-                <span className="material-symbols-outlined text-[18px]">bolt</span>
+                <span>
+                  {!isSelectedSizeAvailable ? 'VARIANT CURRENTLY UNAVAILABLE' : 'BUY NOW (EXPRESS CHECKOUT)'}
+                </span>
+                <span className="material-symbols-outlined text-[18px]">
+                  {!isSelectedSizeAvailable ? 'error_outline' : 'bolt'}
+                </span>
               </button>
             </div>
 

@@ -63,28 +63,30 @@ export const CartDrawer: React.FC = () => {
           </button>
         </div>
 
-        {/* Free Shipping Progress Indicator */}
-        <div className="px-space-lg py-space-sm bg-surface-container-low border-b border-surface-container-high">
-          {amountNeededForFreeShipping > 0 ? (
-            <div className="flex flex-col gap-1.5">
-              <div className="flex justify-between items-center font-label-meta text-label-meta uppercase tracking-wider text-on-surface">
-                <span>ADD ₹{amountNeededForFreeShipping.toLocaleString('en-IN')} FOR FREE SHIPPING</span>
-                <span className="font-bold text-secondary">{progressPercent}%</span>
+        {/* Free Shipping Progress Indicator (Visible when items exist) */}
+        {cart.length > 0 && (
+          <div className="px-space-lg py-space-sm bg-surface-container-low border-b border-surface-container-high">
+            {amountNeededForFreeShipping > 0 ? (
+              <div className="flex flex-col gap-1.5">
+                <div className="flex justify-between items-center font-label-meta text-label-meta uppercase tracking-wider text-on-surface">
+                  <span>ADD ₹{amountNeededForFreeShipping.toLocaleString('en-IN')} FOR FREE SHIPPING</span>
+                  <span className="font-bold text-secondary">{progressPercent}%</span>
+                </div>
+                <div className="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-secondary transition-all duration-300 ease-out"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
               </div>
-              <div className="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-secondary transition-all duration-300 ease-out"
-                  style={{ width: `${progressPercent}%` }}
-                />
+            ) : (
+              <div className="flex items-center gap-space-xs font-label-meta text-label-meta uppercase tracking-widest text-secondary font-semibold">
+                <span className="material-symbols-outlined text-[16px]">check_circle</span>
+                <span>UNLOCKED: COMPLIMENTARY EXPRESS METRO SHIPPING</span>
               </div>
-            </div>
-          ) : (
-            <div className="flex items-center gap-space-xs font-label-meta text-label-meta uppercase tracking-widest text-secondary font-semibold">
-              <span className="material-symbols-outlined text-[16px]">check_circle</span>
-              <span>UNLOCKED: COMPLIMENTARY EXPRESS METRO SHIPPING</span>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
 
         {/* Cart Item List */}
         <div className="flex-1 overflow-y-auto p-space-lg flex flex-col gap-space-md">
@@ -177,8 +179,11 @@ export const CartDrawer: React.FC = () => {
                       </span>
                       <button
                         type="button"
+                        disabled={item.quantity >= 10}
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-7 h-7 flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors"
+                        className={`w-7 h-7 flex items-center justify-center transition-colors ${
+                          item.quantity >= 10 ? 'opacity-30 cursor-not-allowed text-outline' : 'text-primary hover:bg-surface-container-low'
+                        }`}
                         aria-label="Increase quantity"
                       >
                         +

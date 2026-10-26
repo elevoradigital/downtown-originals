@@ -141,8 +141,11 @@ export const CartPage: React.FC = () => {
                       </span>
                       <button
                         type="button"
+                        disabled={item.quantity >= 10}
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low"
+                        className={`w-8 h-8 flex items-center justify-center transition-colors ${
+                          item.quantity >= 10 ? 'opacity-30 cursor-not-allowed text-outline' : 'text-primary hover:bg-surface-container-low'
+                        }`}
                       >
                         +
                       </button>

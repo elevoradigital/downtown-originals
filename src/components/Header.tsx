@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             {[1, 2, 3, 4].map((idx) => (
               <span key={idx} className="flex items-center gap-space-sm whitespace-nowrap">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
-                NEW DROP. NEW ENERGY. • FREE EXPRESS SHIPPING ACROSS INDIA ON ORDERS OVER ₹3,999 • DROP 04: SURPLUS METROPOLIS
+                ELEVORA CONCEPT PREVIEW • UNOFFICIAL PROTOTYPE PREPARED FOR DOWNTOWN ORIGINALS • DROP 04: SURPLUS METROPOLIS • FREE SHIPPING OVER ₹3,999
               </span>
             ))}
           </div>

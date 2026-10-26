@@ -79,6 +79,17 @@ const AppContent: React.FC = () => {
       <CartDrawer />
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       <SizeGuideModal isOpen={isGlobalSizeGuideOpen} onClose={() => setIsGlobalSizeGuideOpen(false)} />
+
+      {/* Floating Concept Disclosure Badge */}
+      <aside
+        aria-label="Concept Prototype Disclosure"
+        className="fixed bottom-4 left-4 z-30 hidden md:flex items-center gap-2.5 px-3.5 py-2 bg-primary/95 text-on-primary backdrop-blur-md border border-white/20 shadow-2xl font-label-meta text-[11px] uppercase tracking-wider select-none pointer-events-auto"
+      >
+        <span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+        <span className="font-bold text-secondary-fixed">ELEVORA CONCEPT</span>
+        <span className="text-outline-variant">|</span>
+        <span className="text-white/80">Unofficial Prototype • Illustrative Data</span>
+      </aside>
     </div>
   );
 };

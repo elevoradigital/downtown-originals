@@ -171,10 +171,28 @@ export const Footer: React.FC<FooterProps> = ({ onOpenSizeGuide }) => {
         </div>
       </div>
 
+      {/* ELEVORA Studio Concept Disclosure Notice */}
+      <div className="w-full px-margin-mobile md:px-margin py-space-lg bg-surface-container-low border-t border-surface-container-high">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md p-space-md bg-surface-container-lowest border border-surface-container-high shadow-sm">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2 font-label-code text-xs uppercase font-bold text-secondary">
+              <span className="material-symbols-outlined text-[16px]">verified_user</span>
+              <span>CONCEPT DISCLOSURE // ELEVORA DIGITAL STUDIO</span>
+            </div>
+            <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed max-w-2xl">
+              This website is an unofficial creative direction and e-commerce flagship concept prepared by <strong>ELEVORA</strong> for prospective client review. It is not an officially owned, approved, or endorsed platform of Downtown Originals. All trademarks, photography, product names, inventory quantities, and prices are illustrative prototype data.
+            </p>
+          </div>
+          <div className="shrink-0 font-label-code text-[11px] uppercase bg-surface-container-high px-3 py-1.5 text-primary font-bold border border-surface-container-highest">
+            PORTFOLIO CONCEPT PREVIEW
+          </div>
+        </div>
+      </div>
+
       {/* Sub-footer Copyright */}
       <div className="w-full px-margin-mobile md:px-margin py-space-md border-t border-surface-container-high flex flex-col md:flex-row items-center justify-between gap-space-md font-label-meta text-label-meta uppercase text-on-surface-variant">
         <div>
-          © 2025 DOWNTOWN ORIGINALS. CONTEMPORARY STREETWEAR EDITORIAL. ALL RIGHTS RESERVED.
+          © 2025 DOWNTOWN ORIGINALS. UNOFFICIAL DIGITAL CONCEPT BY ELEVORA. ALL RIGHTS RESERVED.
         </div>
         <div className="flex items-center gap-space-md">
           <span className="text-on-surface font-semibold">CURRENCY: INR ₹ / INDIA</span>

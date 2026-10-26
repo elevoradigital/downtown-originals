@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface SizeGuideModalProps {
   isOpen: boolean;
@@ -8,6 +8,22 @@ interface SizeGuideModalProps {
 
 export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose, productName }) => {
   const [unit, setUnit] = useState<'cm' | 'inches'>('cm');
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 

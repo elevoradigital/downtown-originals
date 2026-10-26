@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -12,6 +12,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
   const { cartCount, openCart } = useCart();
   const { wishlistCount } = useWishlist();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [bagAnimated, setBagAnimated] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -27,6 +28,32 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
     if (path.startsWith('/#')) return false;
     return location.pathname === path;
   };
+
+  // Body scroll lock & Escape listener for mobile menu
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsMobileMenuOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMobileMenuOpen]);
+
+  // Micro-interaction: Pulse bag indicator when cart count updates
+  useEffect(() => {
+    if (cartCount > 0) {
+      setBagAnimated(true);
+      const timer = setTimeout(() => setBagAnimated(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [cartCount]);
 
   return (
     <>
@@ -67,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <button
               aria-label="Open Navigation Menu"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-primary hover:text-secondary transition-colors"
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-all"
               type="button"
             >
               <span className="material-symbols-outlined text-[24px]">menu</span>
@@ -76,7 +103,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             {/* Brand Logo */}
             <Link
               to="/"
-              className="font-headline-sm text-xl sm:text-2xl lg:text-[26px] uppercase tracking-tight text-primary hover:opacity-80 transition-opacity font-bold truncate whitespace-nowrap flex items-center gap-2"
+              className="font-headline-sm text-xl sm:text-2xl lg:text-[26px] uppercase tracking-tight text-primary hover:opacity-80 active:scale-[0.99] transition-all font-bold truncate whitespace-nowrap flex items-center gap-2"
             >
               <span>DOWNTOWN ORIGINALS</span>
               <span className="hidden md:inline-block w-1.5 h-1.5 rounded-full bg-secondary mb-1"></span>
@@ -92,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
                 className={`font-title-sm text-xs tracking-widest uppercase transition-all duration-200 relative py-1 ${
                   isActive(link.path)
                     ? 'text-primary font-bold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-primary'
-                    : 'text-on-surface-variant hover:text-primary'
+                    : 'text-on-surface-variant hover:text-primary hover:after:content-[""] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:right-0 hover:after:h-[1px] hover:after:bg-outline-variant'
                 }`}
               >
                 {link.label}
@@ -106,7 +133,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <button
               aria-label="Search Collection"
               onClick={onOpenSearch}
-              className="w-10 h-10 flex items-center justify-center text-primary hover:text-secondary transition-colors"
+              className="w-10 h-10 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-all"
               type="button"
             >
               <span className="material-symbols-outlined text-[22px]">search</span>
@@ -116,25 +143,29 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <Link
               to="/shop?filter=wishlist"
               aria-label="Wishlist"
-              className="relative w-10 h-10 hidden sm:flex items-center justify-center text-primary hover:text-secondary transition-colors"
+              className="relative w-10 h-10 hidden sm:flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-all"
             >
               <span className="material-symbols-outlined text-[22px]">favorite_border</span>
               {wishlistCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 font-label-code text-[10px] bg-secondary text-on-secondary w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                <span className="absolute top-1.5 right-1.5 font-label-code text-[10px] bg-secondary text-on-secondary w-4 h-4 flex items-center justify-center rounded-full font-bold transition-transform">
                   {wishlistCount}
                 </span>
               )}
             </Link>
 
-            {/* Shopping Bag Button */}
+            {/* Shopping Bag Button with Micro-Interaction */}
             <button
               aria-label="Shopping Bag"
               onClick={openCart}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-primary bg-surface-container-lowest hover:bg-primary hover:text-on-primary transition-all duration-200 group shadow-sm active:scale-95"
+              className={`flex items-center gap-2 px-3 sm:px-4 py-2 border border-primary bg-surface-container-lowest hover:bg-primary hover:text-on-primary transition-all duration-200 group shadow-sm active:scale-95 ${
+                bagAnimated ? 'scale-105 border-secondary' : ''
+              }`}
               type="button"
             >
               <span className="material-symbols-outlined text-[19px]">shopping_bag</span>
-              <span className="font-label-code text-xs text-secondary font-bold group-hover:text-white transition-colors">
+              <span className={`font-label-code text-xs font-bold transition-all ${
+                bagAnimated ? 'text-secondary font-black' : 'text-secondary group-hover:text-white'
+              }`}>
                 [ {cartCount} ]
               </span>
             </button>
@@ -164,7 +195,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <button
                 aria-label="Close menu"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-1 text-primary hover:text-secondary"
+                className="p-1 text-primary hover:text-secondary active:scale-90 transition-transform"
                 type="button"
               >
                 <span className="material-symbols-outlined text-[24px]">close</span>
@@ -247,7 +278,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
                   setIsMobileMenuOpen(false);
                   onOpenSearch();
                 }}
-                className="flex items-center gap-1.5 text-primary hover:text-secondary font-bold"
+                className="flex items-center gap-1.5 text-primary hover:text-secondary font-bold active:scale-95 transition-transform"
                 type="button"
               >
                 <span className="material-symbols-outlined text-[18px]">search</span>
@@ -259,7 +290,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
                   setIsMobileMenuOpen(false);
                   openCart();
                 }}
-                className="flex items-center gap-1.5 text-primary hover:text-secondary font-bold"
+                className="flex items-center gap-1.5 text-primary hover:text-secondary font-bold active:scale-95 transition-transform"
                 type="button"
               >
                 <span className="material-symbols-outlined text-[18px]">shopping_bag</span>

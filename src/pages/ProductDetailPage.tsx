@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PRODUCTS } from '../data/products';
 import { ProductSize } from '../types';
 import { useCart } from '../context/CartContext';
@@ -22,6 +23,7 @@ export const ProductDetailPage: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState<ProductSize>('L');
   const [quantity, setQuantity] = useState(1);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+  const [addedRecently, setAddedRecently] = useState(false);
 
   // When slug changes, reset defaults
   useEffect(() => {
@@ -48,7 +50,11 @@ export const ProductDetailPage: React.FC = () => {
 
   const handleAddToCart = () => {
     if (!isSelectedSizeAvailable) return;
+    setAddedRecently(true);
     addToCart(product, activeColor.name, selectedSize, quantity);
+    setTimeout(() => {
+      setAddedRecently(false);
+    }, 1200);
   };
 
   const handleBuyNow = () => {
@@ -112,13 +118,20 @@ export const ProductDetailPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* LEFT COLUMN: Multi-Angle Editorial Gallery */}
           <div className="lg:col-span-7 flex flex-col gap-4">
-            {/* Main Image Viewport Frame */}
+            {/* Main Image Viewport Frame with Smooth Crossfade */}
             <div className="relative w-full aspect-[4/5] bg-surface-container-low overflow-hidden border border-surface-container-high shadow-md">
-              <img
-                src={product.images[selectedImageIndex] || product.images[0]}
-                alt={`${product.name} in ${activeColor.name}`}
-                className="w-full h-full object-cover transition-opacity duration-300"
-              />
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={selectedImageIndex}
+                  src={product.images[selectedImageIndex] || product.images[0]}
+                  alt={`${product.name} in ${activeColor.name}`}
+                  initial={{ opacity: 0.85, scale: 1.01 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0.85 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                  className="w-full h-full object-cover"
+                />
+              </AnimatePresence>
 
               {/* Float Badges Top Left */}
               <div className="absolute top-4 left-4 flex flex-col gap-1.5 z-10 pointer-events-none">
@@ -130,11 +143,11 @@ export const ProductDetailPage: React.FC = () => {
                 </span>
               </div>
 
-              {/* Wishlist Button on Image */}
+              {/* Wishlist Button on Image with Tactile Feedback */}
               <button
                 onClick={() => toggleWishlist(product.id)}
                 aria-label="Wishlist toggle"
-                className={`absolute top-4 right-4 w-10 h-10 flex items-center justify-center transition-all shadow-md z-10 border ${
+                className={`absolute top-4 right-4 w-10 h-10 flex items-center justify-center transition-all duration-200 active:scale-85 shadow-md z-10 border ${
                   isFavorited
                     ? 'bg-secondary text-on-secondary border-secondary'
                     : 'bg-surface-container-lowest/90 backdrop-blur-sm text-primary hover:bg-primary hover:text-on-primary border-surface-container-high'
@@ -152,13 +165,13 @@ export const ProductDetailPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Thumbnail Strip */}
+            {/* Thumbnail Strip with Micro-Interactions */}
             <div className="grid grid-cols-5 gap-3">
               {product.images.map((imgUrl, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSelectedImageIndex(idx)}
-                  className={`aspect-[4/5] bg-surface-container-low overflow-hidden border-2 transition-all ${
+                  className={`aspect-[4/5] bg-surface-container-low overflow-hidden border-2 transition-all duration-200 active:scale-90 ${
                     selectedImageIndex === idx
                       ? 'border-secondary scale-95 shadow-sm'
                       : 'border-surface-container-high opacity-70 hover:opacity-100 hover:border-primary'
@@ -270,11 +283,11 @@ export const ProductDetailPage: React.FC = () => {
                       type="button"
                       disabled={!s.inStock}
                       onClick={() => setSelectedSize(s.size)}
-                      className={`py-2.5 sm:py-3 text-center font-label-code text-xs font-bold border transition-all relative ${
+                      className={`py-2.5 sm:py-3 text-center font-label-code text-xs font-bold border transition-all duration-150 active:scale-90 relative ${
                         !s.inStock
                           ? 'opacity-30 border-surface-container-high bg-surface-container text-outline line-through cursor-not-allowed'
                           : isSelected
-                          ? 'bg-primary text-on-primary border-primary shadow-sm'
+                          ? 'bg-primary text-on-primary border-primary shadow-sm scale-[1.02]'
                           : 'bg-surface-container-lowest text-primary border-outline-variant hover:border-primary'
                       }`}
                     >
@@ -300,7 +313,7 @@ export const ProductDetailPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-10 h-12 flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors text-lg"
+                      className="w-10 h-12 flex items-center justify-center text-primary hover:bg-surface-container-low active:scale-90 transition-all text-lg"
                       aria-label="Decrease quantity"
                     >
                       -
@@ -312,7 +325,7 @@ export const ProductDetailPage: React.FC = () => {
                       type="button"
                       disabled={quantity >= 10}
                       onClick={() => setQuantity(Math.min(10, quantity + 1))}
-                      className={`w-10 h-12 flex items-center justify-center transition-colors text-lg ${
+                      className={`w-10 h-12 flex items-center justify-center active:scale-90 transition-all text-lg ${
                         quantity >= 10 ? 'opacity-30 cursor-not-allowed text-outline' : 'text-primary hover:bg-surface-container-low'
                       }`}
                       aria-label="Increase quantity"
@@ -322,23 +335,27 @@ export const ProductDetailPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Add to Bag Button */}
+                {/* Add to Bag Button with Tactile Feedback */}
                 <button
                   type="button"
                   disabled={!isSelectedSizeAvailable}
                   onClick={handleAddToCart}
-                  className={`flex-1 py-3.5 sm:py-4 font-title-sm text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98] ${
+                  className={`flex-1 py-3.5 sm:py-4 font-title-sm text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-md active:scale-[0.98] ${
                     !isSelectedSizeAvailable
                       ? 'bg-surface-container-high text-outline cursor-not-allowed border border-outline-variant shadow-none'
+                      : addedRecently
+                      ? 'bg-secondary text-on-secondary border border-secondary shadow-lg'
                       : 'bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary'
                   }`}
                 >
                   <span className="material-symbols-outlined text-[18px]">
-                    {!isSelectedSizeAvailable ? 'block' : 'shopping_bag'}
+                    {!isSelectedSizeAvailable ? 'block' : addedRecently ? 'check_circle' : 'shopping_bag'}
                   </span>
                   <span>
                     {!isSelectedSizeAvailable
                       ? `OUT OF STOCK (${selectedSize})`
+                      : addedRecently
+                      ? 'ADDED TO BAG [ ✓ ]'
                       : `ADD TO BAG — ₹${(product.price * quantity).toLocaleString('en-IN')}`}
                   </span>
                 </button>
@@ -349,7 +366,7 @@ export const ProductDetailPage: React.FC = () => {
                 type="button"
                 disabled={!isSelectedSizeAvailable}
                 onClick={handleBuyNow}
-                className={`w-full py-3.5 font-title-sm text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98] ${
+                className={`w-full py-3.5 font-title-sm text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-md active:scale-[0.98] ${
                   !isSelectedSizeAvailable
                     ? 'bg-surface-container text-outline cursor-not-allowed border border-outline-variant shadow-none'
                     : 'bg-secondary text-on-secondary hover:bg-secondary-container'

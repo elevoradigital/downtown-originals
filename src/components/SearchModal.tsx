@@ -16,9 +16,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
   useEffect(() => {
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
       setTimeout(() => inputRef.current?.focus(), 50);
       setResults(PRODUCTS.slice(0, 4)); // default suggested items
+      return () => {
+        document.body.style.overflow = '';
+      };
     } else {
+      document.body.style.overflow = '';
       setQuery('');
     }
   }, [isOpen]);

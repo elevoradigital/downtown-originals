@@ -26,13 +26,13 @@ export const CartPage: React.FC = () => {
           YOUR SHOPPING BAG IS EMPTY
         </h1>
         <p className="font-body-lg text-sm sm:text-base text-on-surface-variant max-w-md mt-2 mb-8">
-          No archive pieces currently in your cart. Explore Drop 04 before limited production runs sell out.
+          You haven't added any garments to your bag yet. Explore the collection to select pieces.
         </p>
         <Link
           to="/shop"
           className="px-8 py-4 bg-primary text-on-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary transition-colors shadow-md"
         >
-          EXPLORE NEW ARRIVALS
+          EXPLORE THE COLLECTION
         </Link>
       </div>
     );
@@ -47,7 +47,7 @@ export const CartPage: React.FC = () => {
             SHOPPING BAG
           </h1>
           <span className="font-label-code text-xs text-secondary font-bold">
-            {cart.length} {cart.length === 1 ? 'ITEM' : 'ITEMS'} RESERVED FOR YOUR SESSION
+            {cart.length} {cart.length === 1 ? 'ITEM' : 'ITEMS'} IN YOUR BAG
           </span>
         </div>
 
@@ -69,7 +69,7 @@ export const CartPage: React.FC = () => {
           ) : (
             <div className="flex items-center gap-2 font-label-code text-xs uppercase text-secondary font-bold">
               <span className="material-symbols-outlined text-[18px]">check_circle</span>
-              <span>UNLOCKED: COMPLIMENTARY EXPRESS METRO SHIPPING INCLUDED</span>
+              <span>COMPLIMENTARY SHIPPING UNLOCKED (ORDERS OVER ₹3,999)</span>
             </div>
           )}
         </div>

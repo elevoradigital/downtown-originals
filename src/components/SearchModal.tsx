@@ -74,7 +74,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="SEARCH PRODUCTS, SILHOUETTES, GSM..."
+            placeholder="SEARCH BY PRODUCT, SILHOUETTE, GSM, OR CATEGORY..."
             className="flex-1 bg-transparent font-title-sm text-xs sm:text-sm uppercase tracking-wide text-primary placeholder:text-on-surface-variant/50 focus:outline-none"
           />
           {query && (
@@ -112,14 +112,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         {/* Search Results */}
         <div className="max-h-[60vh] overflow-y-auto p-space-md flex flex-col gap-space-sm">
           <div className="font-label-meta text-label-meta uppercase tracking-wider text-on-surface-variant mb-1">
-            {query.trim() ? `RESULTS (${results.length})` : 'POPULAR IN ARCHIVE'}
+            {query.trim() ? `RESULTS (${results.length})` : 'SUGGESTED PIECES'}
           </div>
 
           {results.length === 0 ? (
             <div className="py-space-xl text-center flex flex-col items-center gap-space-xs text-on-surface-variant">
               <span className="material-symbols-outlined text-[36px]">search_off</span>
-              <p className="font-body-md text-body-md">NO ARCHIVE PRODUCTS FOUND FOR "{query}"</p>
-              <span className="font-label-meta text-label-meta uppercase">Try searching by category or fabric gsm</span>
+              <p className="font-body-md text-body-md">NO PIECES FOUND FOR "{query}"</p>
+              <span className="font-label-meta text-label-meta uppercase">Try searching by silhouette, category, or fabric weight</span>
             </div>
           ) : (
             results.map((product) => (
@@ -158,7 +158,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
         {/* Modal Bottom Actions */}
         <div className="p-space-sm bg-surface-container-low border-t border-surface-container-high flex justify-between items-center font-label-meta text-label-meta uppercase text-on-surface-variant">
-          <span>{PRODUCTS.length} TOTAL ARCHIVE UNITS</span>
+          <span>{PRODUCTS.length} TOTAL PIECES IN COLLECTION</span>
           <button
             onClick={() => {
               onClose();
@@ -166,7 +166,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
             }}
             className="text-primary hover:text-secondary font-bold flex items-center gap-1"
           >
-            VIEW ALL CATALOG
+            VIEW ALL PIECES
             <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
           </button>
         </div>

@@ -79,7 +79,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <span className="text-outline">/</span>
               <span className="text-secondary-fixed">DROP 04: SURPLUS METROPOLIS</span>
               <span className="text-outline">/</span>
-              <span>FREE COMPLIMENTARY SHIPPING OVER ₹3,999</span>
+              <span>COMPLIMENTARY SHIPPING OVER ₹3,999</span>
+              <span className="text-outline">/</span>
+              <span>7-DAY HASSLE-FREE EXCHANGES</span>
               <span className="text-outline">/</span>
               <span className="text-outline-variant">ELEVORA CONCEPT PREVIEW</span>
             </div>

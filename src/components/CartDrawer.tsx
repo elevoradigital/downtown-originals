@@ -99,7 +99,7 @@ export const CartDrawer: React.FC = () => {
             ) : (
               <div className="flex items-center gap-2 font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
                 <span className="material-symbols-outlined text-[16px]">check_circle</span>
-                <span>UNLOCKED: COMPLIMENTARY EXPRESS METRO SHIPPING</span>
+                <span>COMPLIMENTARY SHIPPING UNLOCKED (ORDERS OVER ₹3,999)</span>
               </div>
             )}
           </div>
@@ -117,7 +117,7 @@ export const CartDrawer: React.FC = () => {
                   YOUR BAG IS EMPTY
                 </h4>
                 <p className="font-body-md text-sm text-on-surface-variant max-w-xs mt-1">
-                  Discover Drop 04 and limited surplus capsule editions before archive closure.
+                  Select pieces from Drop 04 to begin your order.
                 </p>
               </div>
               <button
@@ -128,7 +128,7 @@ export const CartDrawer: React.FC = () => {
                 className="mt-2 px-6 py-3 bg-primary text-on-primary font-title-sm text-xs uppercase tracking-wider hover:bg-secondary transition-colors"
                 type="button"
               >
-                BROWSE NEW DROP
+                EXPLORE THE COLLECTION
               </button>
             </div>
           ) : (

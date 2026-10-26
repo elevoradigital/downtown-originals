@@ -24,19 +24,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenSizeGuide }) => {
       <div className="w-full px-margin-mobile md:px-margin py-space-2xl border-b border-surface-container-high">
         <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
           <span className="font-label-code text-label-code uppercase tracking-widest text-secondary font-bold mb-space-xs">
-            NEWSLETTER INITIATIVE
+            INNER CIRCLE DISPATCH
           </span>
           <h3 className="font-headline-md text-headline-md uppercase text-primary mb-space-sm">
-            JOIN THE INNER CIRCLE — EARLY ACCESS TO LIMITED DROPS
+            DIRECT NOTIFICATION FOR NEW RUNS &amp; RESTOCKS
           </h3>
           <p className="font-body-md text-body-md text-on-surface-variant max-w-xl mb-space-lg">
-            Be the first to access curated archive releases, private warehouse clearances, and seasonal runway capsules before public availability.
+            Receive drop announcements, restock alerts for foundational silhouettes, and seasonal lookbook releases delivered directly to your inbox.
           </p>
 
           {subscribed ? (
             <div className="p-4 bg-surface-container-low border border-secondary text-primary font-label-code text-label-code flex items-center gap-2 animate-fadeIn">
               <span className="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
-              <span>WELCOME TO THE INNER CIRCLE. CHECK YOUR INBOX FOR DROP NOTIFICATIONS.</span>
+              <span>YOU ARE SUBSCRIBED. YOU WILL RECEIVE DROP ALERTS AND RESTOCK NOTICES.</span>
             </div>
           ) : (
             <form onSubmit={handleSubscribe} className="w-full max-w-md flex flex-col sm:flex-row gap-0 border border-primary">
@@ -124,7 +124,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenSizeGuide }) => {
               </button>
             </li>
             <li>
-              <span className="cursor-default">Authentic Guarantee</span>
+              <span className="cursor-default">Craft &amp; Fabric Standards</span>
             </li>
           </ul>
         </div>

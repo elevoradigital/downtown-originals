@@ -136,16 +136,16 @@ export const ShopPage: React.FC = () => {
                 <span>SURPLUS METROPOLIS</span>
               </div>
               <h1 className="font-headline-lg text-3xl sm:text-5xl uppercase text-primary leading-none">
-                {filterParam === 'wishlist' ? 'SAVED ARCHIVE PIECES' : 'SHOP ALL COLLECTION'}
+                {filterParam === 'wishlist' ? 'SAVED ARCHIVE PIECES' : 'ALL PIECES'}
               </h1>
               <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-2xl mt-2">
-                Engineered silhouettes, custom heavyweights, and tailored surplus staples crafted for post-industrial movement.
+                Heavyweight basics, tailored hybrid blazers, and modular utility trousers designed for everyday movement.
               </p>
             </div>
 
             <div className="flex items-baseline gap-2 font-label-code text-xs uppercase text-on-surface-variant bg-surface-container-low px-3 py-1.5 border border-surface-container-high shrink-0 self-start md:self-auto">
               <span className="text-primary font-bold">{filteredProducts.length} OF {PRODUCTS.length}</span>
-              <span>ARCHIVED PIECES AVAILABLE</span>
+              <span>PIECES AVAILABLE</span>
             </div>
           </div>
         </BlurFade>
@@ -396,10 +396,10 @@ export const ShopPage: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-headline-sm text-xl uppercase text-primary font-bold">
-                    NO ARCHIVED PIECES MATCH YOUR CRITERIA
+                    NO PIECES MATCH YOUR SELECTED FILTERS
                   </h3>
                   <p className="font-body-md text-sm text-on-surface-variant max-w-md mt-1">
-                    Try loosening your GSM specs, fit architecture, or price ceiling to view more garments.
+                    Try loosening your GSM specs, fit architecture, or price limit to view more garments.
                   </p>
                 </div>
                 <button
@@ -407,7 +407,7 @@ export const ShopPage: React.FC = () => {
                   onClick={clearAllFilters}
                   className="px-6 py-3 bg-primary text-on-primary font-title-sm text-xs uppercase tracking-wider hover:bg-secondary transition-colors"
                 >
-                  RESET MATRIX TO DEFAULT
+                  RESET FILTERS
                 </button>
               </div>
             ) : (

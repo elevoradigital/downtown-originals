@@ -69,7 +69,7 @@ export const CheckoutPage: React.FC = () => {
           <div className="flex items-center gap-space-sm text-secondary">
             <span className="material-symbols-outlined text-[36px]">fact_check</span>
             <span className="font-label-code text-label-code uppercase tracking-widest font-bold">
-              DEMONSTRATION ORDER SUMMARY
+              ORDER CONFIRMATION (SIMULATED)
             </span>
           </div>
 
@@ -78,7 +78,7 @@ export const CheckoutPage: React.FC = () => {
               THANK YOU, {form.firstName.toUpperCase()}.
             </h1>
             <p className="font-body-md text-body-md text-on-surface-variant mt-2">
-              This simulated order summary has been generated for client demonstration review:
+              Your demonstration order has been recorded. In a live store, an order confirmation and SMS tracking details would be dispatched immediately.
             </p>
           </div>
 
@@ -93,7 +93,7 @@ export const CheckoutPage: React.FC = () => {
             </div>
             <div className="flex justify-between">
               <span className="text-on-surface-variant">ESTIMATED DISPATCH:</span>
-              <span className="font-bold text-secondary">24-48 HOURS METROPOLIS PRIORITY</span>
+              <span className="font-bold text-secondary">24-48 HOURS VIA BLUE DART / DELHIVERY</span>
             </div>
             <div className="flex justify-between">
               <span className="text-on-surface-variant">SELECTED PAYMENT MODE:</span>
@@ -102,7 +102,7 @@ export const CheckoutPage: React.FC = () => {
           </div>
 
           <div className="p-space-sm bg-secondary/10 border-l-4 border-secondary text-on-surface font-body-sm text-xs leading-relaxed">
-            <strong>NOTICE:</strong> This is a portfolio concept demonstration for Downtown Originals. No financial transaction or payment was captured or processed.
+            <strong>NOTICE:</strong> This is an interactive portfolio demonstration developed by ELEVORA for Downtown Originals. No financial transaction or payment was captured or processed.
           </div>
 
           <div className="flex flex-col sm:flex-row gap-space-sm pt-space-xs">
@@ -110,7 +110,7 @@ export const CheckoutPage: React.FC = () => {
               to="/shop"
               className="flex-1 py-4 bg-primary text-on-primary font-title-sm text-center uppercase tracking-wider hover:bg-secondary transition-colors"
             >
-              CONTINUE BROWSING CATALOG
+              CONTINUE BROWSING ALL PIECES
             </Link>
             <Link
               to="/"
@@ -127,15 +127,15 @@ export const CheckoutPage: React.FC = () => {
   if (cart.length === 0) {
     return (
       <div className="w-full pt-36 pb-space-2xl px-margin-mobile md:px-margin text-center">
-        <h1 className="font-headline-lg text-3xl uppercase text-primary">BAG IS EMPTY</h1>
+        <h1 className="font-headline-lg text-3xl uppercase text-primary">YOUR SHOPPING BAG IS EMPTY</h1>
         <p className="font-body-md text-on-surface-variant mt-2 mb-6">
-          Add items to your shopping bag before proceeding to checkout.
+          Add pieces to your shopping bag before proceeding to checkout.
         </p>
         <Link
           to="/shop"
           className="px-6 py-3 bg-primary text-on-primary font-title-sm uppercase hover:bg-secondary transition-colors"
         >
-          EXPLORE DROP 04
+          EXPLORE THE COLLECTION
         </Link>
       </div>
     );
@@ -156,7 +156,7 @@ export const CheckoutPage: React.FC = () => {
         {/* Header Breadcrumb */}
         <div className="mb-space-lg pb-space-sm border-b border-surface-container-high flex items-center justify-between">
           <h1 className="font-headline-lg text-3xl sm:text-4xl uppercase text-primary">
-            CHECKOUT ARCHITECTURE
+            CHECKOUT
           </h1>
           <Link
             to="/cart"
@@ -176,7 +176,7 @@ export const CheckoutPage: React.FC = () => {
                 <span className="font-headline-sm text-headline-sm uppercase text-primary">
                   01. CONTACT DETAILS
                 </span>
-                <span className="font-label-code text-label-code text-secondary font-bold">CLIENT PROFILE</span>
+                <span className="font-label-code text-label-code text-secondary font-bold">CONTACT INFO</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm font-label-code text-label-code">
@@ -209,9 +209,9 @@ export const CheckoutPage: React.FC = () => {
             <div className="bg-surface-container-lowest p-space-lg border border-surface-container-high shadow-sm flex flex-col gap-space-md">
               <div className="flex items-center justify-between border-b border-surface-container-high pb-space-xs">
                 <span className="font-headline-sm text-headline-sm uppercase text-primary">
-                  02. SHIPPING DESTINATION
+                  02. DELIVERY ADDRESS
                 </span>
-                <span className="font-label-code text-label-code text-secondary font-bold">INDIA DISPATCH</span>
+                <span className="font-label-code text-label-code text-secondary font-bold">DESTINATION (INDIA)</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm font-label-code text-label-code">
@@ -294,9 +294,9 @@ export const CheckoutPage: React.FC = () => {
             <div className="bg-surface-container-lowest p-space-lg border border-surface-container-high shadow-sm flex flex-col gap-space-md">
               <div className="flex items-center justify-between border-b border-surface-container-high pb-space-xs">
                 <span className="font-headline-sm text-headline-sm uppercase text-primary">
-                  03. DELIVERY SPEED
+                  03. DELIVERY METHOD
                 </span>
-                <span className="font-label-code text-label-code text-secondary font-bold">COURIER NETWORK</span>
+                <span className="font-label-code text-label-code text-secondary font-bold">STANDARD &amp; PRIORITY</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm font-label-code text-label-code">
@@ -358,9 +358,9 @@ export const CheckoutPage: React.FC = () => {
             <div className="bg-surface-container-lowest p-space-lg border border-surface-container-high shadow-sm flex flex-col gap-space-md">
               <div className="flex items-center justify-between border-b border-surface-container-high pb-space-xs">
                 <span className="font-headline-sm text-headline-sm uppercase text-primary">
-                  04. PAYMENT INTERFACE
+                  04. PAYMENT METHOD
                 </span>
-                <span className="font-label-code text-label-code text-secondary font-bold">DEMO GATEWAY</span>
+                <span className="font-label-code text-label-code text-secondary font-bold">SIMULATED GATEWAY</span>
               </div>
 
               <div className="flex flex-col gap-space-sm font-label-code text-label-code">
@@ -454,7 +454,7 @@ export const CheckoutPage: React.FC = () => {
                     onChange={() => setForm({ ...form, paymentMethod: 'cod' })}
                     className="accent-secondary"
                   />
-                  <span className="font-bold text-primary">CASH ON DELIVERY (METROPOLIS POST-INSPECTION)</span>
+                  <span className="font-bold text-primary">CASH ON DELIVERY (VERIFY AT DOORSTEP)</span>
                 </label>
               </div>
             </div>
@@ -463,7 +463,7 @@ export const CheckoutPage: React.FC = () => {
           {/* RIGHT 5 COLS: Order Summary */}
           <div className="lg:col-span-5 sticky top-36 bg-surface-container-lowest p-space-lg border border-surface-container-high shadow-sm flex flex-col gap-space-md">
             <h2 className="font-headline-sm text-headline-sm uppercase text-primary border-b border-surface-container-high pb-space-sm">
-              ORDER OVERVIEW ({cart.length})
+              ORDER SUMMARY ({cart.length})
             </h2>
 
             {/* Cart Items Miniature */}
@@ -553,17 +553,17 @@ export const CheckoutPage: React.FC = () => {
               className="w-full py-4 bg-primary text-on-primary font-title-sm text-title-sm uppercase tracking-wider hover:bg-secondary transition-all flex items-center justify-center gap-space-sm shadow-lg disabled:opacity-50"
             >
               {isSubmitting ? (
-                <span>SUBMITTING ORDER PROTOTYPE...</span>
+                <span>PROCESSING SIMULATED ORDER...</span>
               ) : (
                 <>
-                  <span>CONFIRM CONCEPT ORDER — ₹{finalTotal.toLocaleString('en-IN')}</span>
+                  <span>CONFIRM DEMO ORDER — ₹{finalTotal.toLocaleString('en-IN')}</span>
                   <span className="material-symbols-outlined text-[18px]">check</span>
                 </>
               )}
             </button>
 
             <p className="font-label-meta text-[10px] text-center text-on-surface-variant uppercase">
-              By confirming, you acknowledge this is a design concept for Downtown Originals.
+              By confirming, you acknowledge this is an interactive portfolio concept demonstration for Downtown Originals.
             </p>
           </div>
         </form>

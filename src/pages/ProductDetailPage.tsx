@@ -79,11 +79,11 @@ export const ProductDetailPage: React.FC = () => {
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
             <span>DROP 04 // SURPLUS METROPOLIS CAPSULE</span>
             <span className="text-outline">/</span>
-            <span>LIMITED RUN // 250 UNITS NUMBERED ARCHIVE</span>
+            <span>LIMITED NUMBERED RUN</span>
             <span className="text-outline">/</span>
-            <span className="text-secondary-fixed">WATER REPELLENT DWR FINISH VERIFIED</span>
+            <span className="text-secondary-fixed">COMPLIMENTARY SHIPPING OVER ₹3,999</span>
             <span className="text-outline">/</span>
-            <span>JAPANESE TECHNICAL TEXTILES</span>
+            <span>STANDARD 7-DAY EXCHANGES</span>
           </div>
         </Marquee>
       </section>
@@ -386,7 +386,7 @@ export const ProductDetailPage: React.FC = () => {
             <div className="pt-4 border-t border-surface-container-high grid grid-cols-1 sm:grid-cols-2 gap-3 font-label-code text-xs uppercase text-on-surface-variant">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[18px]">verified</span>
-                <span>AUTHENTIC METROPOLIS GRADE</span>
+                <span>STRUCTURAL CONSTRUCTION</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[18px]">local_shipping</span>
@@ -394,11 +394,11 @@ export const ProductDetailPage: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[18px]">sync</span>
-                <span>7-DAY NO-QUESTIONS EXCHANGE</span>
+                <span>7-DAY HASSLE-FREE EXCHANGES</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[18px]">lock</span>
-                <span>ENCRYPTED DEMO CHECKOUT</span>
+                <span>DEMONSTRATION CHECKOUT</span>
               </div>
             </div>
           </div>
@@ -410,14 +410,14 @@ export const ProductDetailPage: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
             <span className="font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
-              TECHNICAL SPECIFICATION
+              GARMENT ARCHITECTURE
             </span>
             <h2 className="font-headline-lg text-2xl sm:text-4xl uppercase text-primary mt-1 font-bold">
               ANATOMY OF THE {product.name}
             </h2>
           </div>
           <div className="font-label-code text-xs uppercase text-on-surface-variant max-w-sm">
-            EVERY SEAM REINFORCED WITH 12-SPI LOCKSTITCHING. TECHNICAL SPECIFICATIONS &amp; MEASUREMENTS ARE ILLUSTRATIVE CONCEPT DATA.
+            GARMENT DETAILS AND MEASUREMENTS PROVIDED FOR CONCEPT DEMONSTRATION.
           </div>
         </div>
 

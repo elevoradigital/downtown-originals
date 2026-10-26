@@ -33,12 +33,12 @@ export const HomePage: React.FC = () => {
               {/* Editorial Micro Indicators */}
               <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 font-label-code text-[11px] sm:text-xs uppercase tracking-widest text-on-surface-variant">
                 <span className="inline-flex items-center px-2.5 py-1 bg-secondary text-on-secondary font-bold tracking-widest">
-                  DROP 04 // SURPLUS &amp; FORMAL HYBRID
+                  DROP 04 // SURPLUS &amp; FORMAL CAPSULE
                 </span>
                 <span className="text-outline">/</span>
                 <span className="text-primary font-semibold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
-                  LIMITED NUMBERED CAPSULE
+                  LIMITED RUN ARCHIVE
                 </span>
               </div>
 
@@ -47,8 +47,8 @@ export const HomePage: React.FC = () => {
                 <TextAnimate
                   by="word"
                   animation="blurInUp"
-                  duration={0.5}
-                  delay={0.1}
+                  duration={0.45}
+                  delay={0.08}
                   as="span"
                   className="block text-primary"
                 >
@@ -57,8 +57,8 @@ export const HomePage: React.FC = () => {
                 <TextAnimate
                   by="word"
                   animation="blurInUp"
-                  duration={0.5}
-                  delay={0.25}
+                  duration={0.45}
+                  delay={0.2}
                   as="span"
                   className="block text-outline-variant hover:text-primary transition-colors duration-300"
                 >
@@ -67,57 +67,57 @@ export const HomePage: React.FC = () => {
               </h1>
 
               {/* Subhead and CTAs with Magic UI Blur Fade */}
-              <BlurFade delay={0.35} duration={0.5} yOffset={8}>
+              <BlurFade delay={0.3} duration={0.4} yOffset={6}>
                 <p className="font-body-lg text-base sm:text-lg text-on-surface-variant max-w-xl mb-8 leading-relaxed">
-                  Streetwear engineered for uncompromising individuality. Raw military surplus silhouettes and Japanese technical textiles re-engineered for the hyper-dense modern metropolis.
+                  Everyday streetwear engineered with structural integrity. Relaxed silhouettes, dense custom-milled textiles, and functional surplus details built to endure daily wear.
                 </p>
 
                 {/* CTA Cluster */}
                 <div className="flex flex-wrap items-center gap-4 mb-10">
                   <a
                     href="#new-arrivals"
-                    className="px-8 py-4 bg-primary text-on-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary hover:text-on-secondary transition-all flex items-center gap-2 group shadow-md active:scale-95"
+                    className="px-8 py-4 min-h-[50px] bg-primary text-on-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary hover:text-on-secondary transition-all flex items-center gap-2 group shadow-md active:scale-95"
                   >
-                    <span>SHOP NEW ARRIVALS</span>
+                    <span>EXPLORE NEW ARRIVALS</span>
                     <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
                       arrow_forward
                     </span>
                   </a>
                   <Link
                     to="/shop"
-                    className="px-6 py-4 bg-surface-container-low text-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-surface-container-highest transition-colors flex items-center gap-2 border border-surface-container-high active:scale-95"
+                    className="px-6 py-4 min-h-[50px] bg-surface-container-low text-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-surface-container-highest transition-colors flex items-center gap-2 border border-surface-container-high active:scale-95"
                   >
-                    <span>EXPLORE THE COLLECTION</span>
+                    <span>VIEW ALL PIECES</span>
                   </Link>
                 </div>
               </BlurFade>
 
               {/* Metric Pulse Ticker with Magic UI Blur Fade */}
-              <BlurFade delay={0.45} duration={0.45} yOffset={6}>
+              <BlurFade delay={0.4} duration={0.4} yOffset={6}>
                 <div className="bg-surface-container-low p-4 border border-surface-container-high grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div className="flex items-center gap-2 font-label-code text-[11px] uppercase text-on-surface-variant">
                     <span className="material-symbols-outlined text-secondary text-[18px]">local_shipping</span>
-                    <span>DISPATCH 24-48 HRS</span>
+                    <span>DISPATCH IN 24-48 HRS</span>
                   </div>
                   <div className="flex items-center gap-2 font-label-code text-[11px] uppercase text-on-surface-variant">
                     <span className="material-symbols-outlined text-primary text-[18px]">published_with_changes</span>
-                    <span>7-DAY EASY EXCHANGES</span>
+                    <span>7-DAY HASSLE-FREE EXCHANGES</span>
                   </div>
                   <div className="flex items-center gap-2 font-label-code text-[11px] uppercase text-on-surface-variant">
                     <span className="material-symbols-outlined text-secondary text-[18px]">verified</span>
-                    <span>METROPOLIS GRADE</span>
+                    <span>FREE SHIPPING OVER ₹3,999</span>
                   </div>
                 </div>
               </BlurFade>
             </div>
 
             {/* Right Column: Hero Fashion Photography with Magic UI Blur Fade */}
-            <BlurFade delay={0.2} duration={0.6} yOffset={10} className="lg:col-span-5">
+            <BlurFade delay={0.15} duration={0.5} yOffset={8} className="lg:col-span-5">
               <div className="relative w-full h-[480px] sm:h-[600px] lg:h-[720px] bg-surface-container-low overflow-hidden group border border-surface-container-high shadow-lg">
                 <img
                   src={LOOKBOOK_HERO_IMAGE}
-                  alt="Downtown Originals Metropolis '25 Lookbook Model"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  alt="Downtown Originals Lookbook — Model wearing Metro Surplus M-65 Jacket in Washed Charcoal"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
@@ -127,7 +127,7 @@ export const HomePage: React.FC = () => {
                     SERIES 04 // LOOK 01
                   </div>
                   <div className="bg-secondary/95 backdrop-blur-sm px-3 py-1 font-label-code text-[11px] uppercase tracking-wider font-bold text-on-secondary">
-                    METRO SURPLUS M-65 HYBRID
+                    METRO SURPLUS M-65 JACKET
                   </div>
                 </div>
               </div>
@@ -138,17 +138,17 @@ export const HomePage: React.FC = () => {
         {/* SECTION 2: NEW ARRIVALS */}
         <section id="new-arrivals" className="w-full px-4 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface border-b border-surface-container-high">
           {/* Section Header with Blur Fade */}
-          <BlurFade delay={0.1} duration={0.45} yOffset={8}>
+          <BlurFade delay={0.1} duration={0.4} yOffset={6}>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
               <div>
                 <span className="font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
-                  LIMITED PRODUCTION RUN
+                  DROP 04 ARCHIVE RELEASES
                 </span>
                 <h2 className="font-headline-lg text-3xl sm:text-5xl uppercase text-primary leading-none mt-1">
-                  FRESH OFF THE DROP.
+                  NEW ARRIVALS.
                 </h2>
                 <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-xl mt-2">
-                  The latest pieces worth making room for. Engineered for daily wear, built for endurance.
+                  Functional silhouettes, heavyweight French terry, and modular utility cargos cut for everyday movement.
                 </p>
               </div>
 
@@ -158,7 +158,7 @@ export const HomePage: React.FC = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveNewArrivalTab(tab.id)}
-                    className={`px-4 py-2 font-title-sm text-xs uppercase tracking-wider transition-all whitespace-nowrap border ${
+                    className={`px-4 py-2 font-title-sm text-xs uppercase tracking-wider transition-all whitespace-nowrap border active:scale-95 ${
                       activeNewArrivalTab === tab.id
                         ? 'bg-primary text-on-primary border-primary shadow-sm'
                         : 'bg-surface-container-low text-on-surface border-surface-container-high hover:border-primary'
@@ -173,7 +173,7 @@ export const HomePage: React.FC = () => {
           </BlurFade>
 
           {/* Product Grid with Blur Fade */}
-          <BlurFade delay={0.2} duration={0.5} yOffset={10}>
+          <BlurFade delay={0.15} duration={0.45} yOffset={8}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {filteredNewArrivals.map((product) => (
                 <ProductCard key={product.id} product={product} />
@@ -185,9 +185,9 @@ export const HomePage: React.FC = () => {
           <div className="mt-12 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link
               to="/shop"
-              className="px-8 py-4 bg-primary text-on-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary hover:text-on-secondary transition-all flex items-center gap-2 group shadow-md"
+              className="px-8 py-4 bg-primary text-on-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary hover:text-on-secondary transition-all flex items-center gap-2 group shadow-md active:scale-95"
             >
-              <span>VIEW FULL CATALOG ({PRODUCTS.length} PIECES)</span>
+              <span>VIEW ALL PIECES ({PRODUCTS.length} STYLES)</span>
               <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
                 arrow_forward
               </span>
@@ -197,17 +197,17 @@ export const HomePage: React.FC = () => {
 
         {/* SECTION 3: CURATED STREETWEAR */}
         <section className="w-full px-4 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface-container-lowest border-b border-surface-container-high">
-          <BlurFade delay={0.1} duration={0.45} yOffset={8}>
+          <BlurFade delay={0.1} duration={0.4} yOffset={6}>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
               <div>
                 <span className="font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
-                  DIRECTORY 2025
+                  CORE CATEGORIES
                 </span>
                 <h2 className="font-headline-lg text-3xl sm:text-5xl uppercase text-primary leading-none mt-1">
-                  CURATED STREETWEAR.
+                  CURATED SILHOUETTES.
                 </h2>
                 <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-2xl mt-2">
-                  Core apparel categories crafted from heavyweight textiles, surplus silhouettes, and modern ergonomics.
+                  Wardrobe foundations shaped by substantial textiles, relaxed proportions, and purposeful utility.
                 </p>
               </div>
               <Link
@@ -221,7 +221,7 @@ export const HomePage: React.FC = () => {
           </BlurFade>
 
           {/* 5 Categories Cards Grid with Blur Fade */}
-          <BlurFade delay={0.15} duration={0.5} yOffset={10}>
+          <BlurFade delay={0.15} duration={0.45} yOffset={8}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
               {CURATED_CATEGORIES.map((cat) => (
                 <Link
@@ -232,8 +232,9 @@ export const HomePage: React.FC = () => {
                   <div className="relative aspect-[3/4] bg-surface-container-low overflow-hidden">
                     <img
                       src={cat.image}
-                      alt={cat.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      alt={`Downtown Originals Category: ${cat.title}`}
+                      className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105"
+                      loading="lazy"
                     />
                     <div className="absolute top-2.5 left-2.5 px-2 py-0.5 bg-primary text-on-primary font-label-code text-xs font-bold">
                       {cat.num}
@@ -252,7 +253,7 @@ export const HomePage: React.FC = () => {
                       </p>
                     </div>
                     <div className="pt-2 border-t border-surface-container-high flex items-center justify-between font-label-code text-xs text-primary uppercase">
-                      <span>EXPLORE DROP</span>
+                      <span>SHOP CATEGORY</span>
                       <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">
                         arrow_forward
                       </span>
@@ -264,7 +265,7 @@ export const HomePage: React.FC = () => {
           </BlurFade>
         </section>
 
-        {/* SECTION 4: CAMPAIGN EDITORIAL WITH SHINE BORDER */}
+        {/* SECTION 4: CAMPAIGN EDITORIAL */}
         <section id="campaign" className="relative w-full bg-primary text-on-primary py-16 sm:py-24 overflow-hidden">
           <div className="w-full px-4 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Narrative */}
@@ -273,13 +274,13 @@ export const HomePage: React.FC = () => {
                 CAMPAIGN EDITORIAL // METROPOLIS '25
               </span>
               <div className="font-label-code text-xs uppercase tracking-wider text-outline-variant mb-4">
-                CAPTURED ON 35MM FILM • SHIBUYA CONCRETE DIVISION
+                VISUAL ARCHIVE • DROP 04
               </div>
               <h2 className="font-headline-lg text-4xl sm:text-6xl uppercase text-on-primary leading-none mb-6">
                 <TextAnimate
                   by="word"
                   animation="blurInUp"
-                  duration={0.5}
+                  duration={0.45}
                   delay={0.1}
                   as="span"
                   className="block text-on-primary"
@@ -289,12 +290,12 @@ export const HomePage: React.FC = () => {
                 <span className="text-secondary-fixed block">MORE YOU.</span>
               </h2>
               <p className="font-body-lg text-base sm:text-lg text-primary-fixed-dim max-w-xl mb-8 leading-relaxed">
-                Style is never about blending into the collective backdrop. Built between the high-density networks of Tokyo, London, and downtown grid districts. Each garment is produced with surplus durability and technical tactility to endure everyday metropolitan existence.
+                Personal style is an everyday statement. We design garments that prioritize structure, proportion, and comfortable utility—giving you pieces that move naturally from dawn commutes to midnight city streets.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Link
                   to="/shop"
-                  className="px-8 py-4 bg-secondary text-on-secondary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary-container transition-colors flex items-center gap-2 shadow-lg"
+                  className="px-8 py-4 bg-secondary text-on-secondary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary-container transition-colors flex items-center gap-2 shadow-lg active:scale-95"
                 >
                   <span>SHOP THE EDITORIAL LOOKS</span>
                   <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
@@ -312,32 +313,32 @@ export const HomePage: React.FC = () => {
               >
                 <img
                   src={CAMPAIGN_IMAGE}
-                  alt="Campaign Editorial Metropolis '25 Lookbook"
+                  alt="Downtown Originals Campaign Editorial Metropolis '25 Lookbook"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 right-4 bg-black/85 backdrop-blur-sm px-3 py-1 font-label-code text-xs text-on-primary uppercase border border-white/10 z-10">
-                  35MM ARCHIVE / DO-25-CAPSULE
+                  METROPOLIS '25 CAPSULE
                 </div>
               </ShineBorder>
             </div>
           </div>
         </section>
 
-        {/* SECTION 5: WHY DOWNTOWN ORIGINALS */}
+        {/* SECTION 5: STANDARDS & CRAFT */}
         <section className="w-full px-4 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface border-b border-surface-container-high">
-          <BlurFade delay={0.1} duration={0.45} yOffset={8}>
+          <BlurFade delay={0.1} duration={0.4} yOffset={6}>
             <div className="mb-10">
               <span className="font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
-                MANUFACTURING CODE
+                DESIGN PHILOSOPHY
               </span>
               <h2 className="font-headline-lg text-3xl sm:text-5xl uppercase text-primary leading-none mt-1">
-                WHY DOWNTOWN ORIGINALS.
+                STANDARDS &amp; CRAFT.
               </h2>
             </div>
           </BlurFade>
 
-          <BlurFade delay={0.2} duration={0.5} yOffset={10}>
+          <BlurFade delay={0.15} duration={0.45} yOffset={8}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Pillar 1 */}
               <div className="p-6 bg-surface-container-lowest flex flex-col justify-between border border-surface-container-high hover:border-primary transition-colors">
@@ -346,15 +347,15 @@ export const HomePage: React.FC = () => {
                     01
                   </div>
                   <h3 className="font-title-md text-base sm:text-lg uppercase text-primary mb-2 font-bold">
-                    PREMIUM TEXTILE DENSITY
+                    SUBSTANTIAL TEXTILES
                   </h3>
                   <p className="font-body-sm text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                    Milled from custom 500GSM loopback cotton, Japanese selvedge twill, and high-tensile ripstop nylon. No corner cutting on seam strength or weight.
+                    Selected for density and hand-feel. Heavyweight 500 GSM loopback cotton, durable ripstop twill, and rigid selvedge denim that maintain clean structural drape.
                   </p>
                 </div>
                 <div className="mt-6 pt-3 flex items-center gap-1 font-label-code text-xs text-outline uppercase border-t border-surface-container-high">
                   <span className="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
-                  <span>CUSTOM SPECS</span>
+                  <span>PREMIUM WEIGHT</span>
                 </div>
               </div>
 
@@ -365,15 +366,15 @@ export const HomePage: React.FC = () => {
                     02
                   </div>
                   <h3 className="font-title-md text-base sm:text-lg uppercase text-primary mb-2 font-bold">
-                    LIMITED BATCH RUNS
+                    CONTROLLED RUNS
                   </h3>
                   <p className="font-body-sm text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                    We never overproduce for seasonal discount racks. Every capsule drop is limited to 150–500 numbered units worldwide, safeguarding rarity.
+                    Produced in small, numbered capsule batches to prioritize quality control and reduce deadstock. Once an edition sells out, it enters our design archive.
                   </p>
                 </div>
                 <div className="mt-6 pt-3 flex items-center gap-1 font-label-code text-xs text-outline uppercase border-t border-surface-container-high">
                   <span className="material-symbols-outlined text-[16px] text-secondary">verified</span>
-                  <span>NUMBERED ARCHIVE</span>
+                  <span>LIMITED BATCHES</span>
                 </div>
               </div>
 
@@ -384,15 +385,15 @@ export const HomePage: React.FC = () => {
                     03
                   </div>
                   <h3 className="font-title-md text-base sm:text-lg uppercase text-primary mb-2 font-bold">
-                    MODULAR UTILITY PATTERNING
+                    FUNCTIONAL DETAILS
                   </h3>
                   <p className="font-body-sm text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                    Engineered with articulated knees, dual-entry bellows cargo pockets, and adjustable shock cords to adapt across shifting city climates.
+                    Articulated knee darts, two-way metal zippers, and adjustable bungee hem cords designed for natural movement and versatility across city settings.
                   </p>
                 </div>
                 <div className="mt-6 pt-3 flex items-center gap-1 font-label-code text-xs text-outline uppercase border-t border-surface-container-high">
                   <span className="material-symbols-outlined text-[16px] text-secondary">tune</span>
-                  <span>ERGONOMIC FIT</span>
+                  <span>PRACTICAL UTILITY</span>
                 </div>
               </div>
 
@@ -403,34 +404,34 @@ export const HomePage: React.FC = () => {
                     04
                   </div>
                   <h3 className="font-title-md text-base sm:text-lg uppercase text-primary mb-2 font-bold">
-                    ARCHIVE LONGEVITY
+                    TIMELESS FIT
                   </h3>
                   <p className="font-body-sm text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                    Designed outside the frantic trend cycle. Every garment develops richer character through years of authentic metropolitan abrasion.
+                    Designed outside fleeting trend cycles. Focused on relaxed dropped shoulders, balanced proportions, and durable construction that stay wearable season after season.
                   </p>
                 </div>
                 <div className="mt-6 pt-3 flex items-center gap-1 font-label-code text-xs text-outline uppercase border-t border-surface-container-high">
                   <span className="material-symbols-outlined text-[16px] text-secondary">all_inclusive</span>
-                  <span>LIFETIME RESILIENCE</span>
+                  <span>SEASONLESS WEAR</span>
                 </div>
               </div>
             </div>
           </BlurFade>
         </section>
 
-        {/* SECTION 6: GLOBAL STREET STYLE SPOTLIGHT */}
+        {/* SECTION 6: COMMUNITY STYLE SPOTLIGHT */}
         <section className="w-full px-4 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface-container-lowest">
-          <BlurFade delay={0.1} duration={0.45} yOffset={8}>
+          <BlurFade delay={0.1} duration={0.4} yOffset={6}>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
               <div>
                 <span className="font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
-                  COMMUNITY SPOTLIGHT
+                  COMMUNITY
                 </span>
                 <h2 className="font-headline-lg text-3xl sm:text-5xl uppercase text-primary leading-none mt-1">
-                  GLOBAL STREET STYLE.
+                  STREET STYLE.
                 </h2>
                 <p className="font-body-md text-sm sm:text-base text-on-surface-variant mt-2">
-                  Styled by tastemakers worldwide. Tag <span className="text-primary font-bold">#DOWNTOWNORIGINALS</span> on Instagram to be featured.
+                  Styled by individuals in cities worldwide. Tag <span className="text-primary font-bold">#DOWNTOWNORIGINALS</span> to share your look.
                 </p>
               </div>
               <a
@@ -445,14 +446,15 @@ export const HomePage: React.FC = () => {
             </div>
           </BlurFade>
 
-          <BlurFade delay={0.2} duration={0.5} yOffset={10}>
+          <BlurFade delay={0.15} duration={0.45} yOffset={8}>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {COMMUNITY_POSTS.map((post, idx) => (
                 <div key={idx} className="relative aspect-square bg-surface-container-low group overflow-hidden border border-surface-container-high hover:border-primary transition-colors">
                   <img
                     src={post.image}
-                    alt={`${post.handle} in ${post.location}`}
+                    alt={`Street style by ${post.handle} in ${post.location} wearing Downtown Originals`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter grayscale group-hover:grayscale-0"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute bottom-3 left-3 right-3 text-on-primary">

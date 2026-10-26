@@ -45,14 +45,14 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
         <div className="p-space-md sm:p-space-lg bg-surface-container-low border-b border-surface-container-high flex items-center justify-between">
           <div>
             <span className="font-label-meta text-label-meta uppercase tracking-widest text-secondary font-bold">
-              PARAMETRIC MEASUREMENT MATRIX
+              GARMENT MEASUREMENTS &amp; SIZING
             </span>
             <h3 className="font-headline-sm text-headline-sm uppercase text-primary mt-0.5">
-              SIZE &amp; FIT SPECIFICATION
+              SIZE &amp; FIT GUIDE
             </h3>
             {productName && (
               <p className="font-label-code text-label-code text-on-surface-variant">
-                TARGET: {productName}
+                PIECE: {productName}
               </p>
             )}
           </div>
@@ -68,7 +68,7 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
         {/* Unit Toggle & Instructions */}
         <div className="p-4 sm:p-space-md flex flex-wrap items-center justify-between gap-space-sm border-b border-surface-container-high bg-surface-container-lowest">
           <p className="font-body-sm text-xs sm:text-body-sm text-on-surface-variant max-w-md">
-            Cut with relaxed dropped shoulders and architectural drape. Take your usual streetwear size for an intentional oversized silhouette, or size down for tailored fit.
+            Garments are cut with relaxed dropped shoulders and generous volume. Choose your standard size for an intentional, relaxed streetwear fit, or size down one size for a closer, more tailored fit.
           </p>
 
           <div className="flex border border-primary bg-surface-container-lowest">
@@ -99,8 +99,8 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
                 <th className="py-2.5 px-3">SIZE</th>
                 <th className="py-2.5 px-3">CHEST WIDTH</th>
                 <th className="py-2.5 px-3">BODY LENGTH</th>
-                <th className="py-2.5 px-3">SHOULDER</th>
-                <th className="py-2.5 px-3">SLEEVE</th>
+                <th className="py-2.5 px-3">SHOULDER WIDTH</th>
+                <th className="py-2.5 px-3">SLEEVE LENGTH</th>
               </tr>
             </thead>
             <tbody>
@@ -119,7 +119,7 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
 
         {/* Footer */}
         <div className="p-space-md bg-surface-container-low border-t border-surface-container-high flex justify-between items-center font-label-meta text-[11px] text-on-surface-variant uppercase">
-          <span>* Measured flat across garment. Tolerances ±1.5cm.</span>
+          <span>* Measurements taken flat across the garment. Standard tolerance: ±1.5 cm / 0.5 in.</span>
           <button
             onClick={onClose}
             className="px-4 py-2 bg-primary text-on-primary font-title-sm text-xs uppercase tracking-wider hover:bg-secondary transition-colors"

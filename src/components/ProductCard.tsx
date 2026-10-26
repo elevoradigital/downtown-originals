@@ -107,7 +107,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-1.5 font-label-meta text-[10px] uppercase text-on-surface-variant font-bold">
-                <span>SELECT SIZE // ARCHIVE FIT:</span>
+                <span>SELECT SIZE:</span>
                 <button
                   onClick={(e) => {
                     e.preventDefault();

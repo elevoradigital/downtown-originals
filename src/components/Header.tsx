@@ -4,13 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { Marquee } from './magicui/marquee';
+import { SplineGlassBackdrop } from './SplineGlassBackdrop';
 
 interface HeaderProps {
   onOpenSearch: () => void;
   splineSceneUrl?: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
+export const Header: React.FC<HeaderProps> = ({ onOpenSearch, splineSceneUrl }) => {
   const { cartCount, openCart } = useCart();
   const { wishlistCount } = useWishlist();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -141,33 +142,39 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             </Link>
           </div>
 
-          {/* Center: Desktop Liquid Glass Floating Capsule Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 p-1.5 rounded-full liquid-glass-pill relative">
-            {navLinks.map((link) => {
-              const active = isActive(link.path);
-              return (
-                <Link
-                  key={link.label}
-                  to={link.path}
-                  className={`relative font-title-sm text-xs tracking-wider uppercase px-4 py-2 rounded-full transition-colors duration-200 z-10 flex items-center gap-1.5 select-none ${
-                    active ? 'text-white font-bold' : 'text-on-surface-variant hover:text-primary'
-                  }`}
-                >
-                  {active && (
-                    <motion.div
-                      layoutId="desktopLiquidGlassActivePill"
-                      className="absolute inset-0 bg-primary rounded-full shadow-md z-[-1]"
-                      transition={{ type: 'spring', stiffness: 400, damping: 32 }}
-                    />
-                  )}
-                  <span>{link.label}</span>
-                  {active && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
+          {/* Center: Desktop Refractive Liquid Glass Floating Capsule Navigation */}
+          <SplineGlassBackdrop
+            sceneUrl={splineSceneUrl}
+            variant="chromatic"
+            className="hidden lg:flex items-center rounded-full shadow-[0_12px_28px_rgba(0,0,0,0.35),0_6px_18px_rgba(36,91,255,0.2)]"
+          >
+            <nav className="flex items-center gap-1 p-1.5 relative">
+              {navLinks.map((link) => {
+                const active = isActive(link.path);
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.path}
+                    className={`relative font-title-sm text-xs tracking-wider uppercase px-4 py-2 rounded-full transition-colors duration-200 z-10 flex items-center gap-1.5 select-none ${
+                      active ? 'text-white font-bold' : 'text-white/80 hover:text-white'
+                    }`}
+                  >
+                    {active && (
+                      <motion.div
+                        layoutId="desktopLiquidGlassActivePill"
+                        className="absolute inset-0 bg-white/20 border border-white/35 rounded-full shadow-[0_2px_12px_rgba(255,255,255,0.25)] z-[-1]"
+                        transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                      />
+                    )}
+                    <span>{link.label}</span>
+                    {active && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+          </SplineGlassBackdrop>
 
           {/* Right: Liquid Glass Utility Actions */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">

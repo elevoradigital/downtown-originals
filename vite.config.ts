@@ -9,13 +9,11 @@ export default defineConfig({
     host: true
   },
   build: {
-    chunkSizeWarningLimit: 1200,
     rollupOptions: {
       output: {
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-motion': ['framer-motion'],
-          'vendor-spline': ['@splinetool/runtime']
+          'vendor-motion': ['framer-motion']
         }
       }
     }

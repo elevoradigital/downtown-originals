@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Oswald:wght@500;600;700&amp;family=Space+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f9f9f9;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary": "#000000", "on-primary-fixed": "#1c1b1b", "surface-bright": "#f9f9f9", "surface": "#f9f9f9", "on-background": "#1a1c1c", "secondary-fixed": "#dde1ff", "surface-tint": "#5f5e5e", "on-tertiary-fixed-variant": "#484645", "surface-container-highest": "#e2e2e2", "error-container": "#ffdad6", "on-error-container": "#93000a", "inverse-surface": "#2f3131", "primary-fixed-dim": "#c8c6c5", "on-tertiary-container": "#868381", "secondary-container": "#265cff", "inverse-primary": "#c8c6c5", "surface-dim": "#dadada", "on-secondary-fixed": "#001453", "on-tertiary-fixed": "#1d1b1a", "tertiary-container": "#1d1b1a", "secondary": "#0043d9", "primary-fixed": "#e5e2e1", "outline": "#747878", "primary-container": "#1c1b1b", "secondary-fixed-dim": "#b7c4ff", "on-secondary": "#ffffff", "on-error": "#ffffff", "primary": "#000000", "on-primary-fixed-variant": "#474646", "on-tertiary": "#ffffff", "on-surface-variant": "#444748", "error": "#ba1a1a", "surface-container-low": "#f3f3f3", "on-surface": "#1a1c1c", "background": "#f9f9f9", "surface-variant": "#e2e2e2", "tertiary-fixed": "#e6e1df", "inverse-on-surface": "#f1f1f1", "on-secondary-fixed-variant": "#0038b8", "tertiary-fixed-dim": "#cac6c3", "on-primary": "#ffffff", "outline-variant": "#c4c7c7", "on-secondary-container": "#efefff", "surface-container-lowest": "#ffffff", "on-primary-container": "#858383", "surface-container": "#eeeeee", "surface-container-high": "#e8e8e8" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-mobile": "1rem", "space-sm": "0.5rem", "gutter-sm": "0.75rem", "gutter": "1.5rem", "margin": "2.5rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-2xl": "4rem" }, "fontFamily": { "title-sm": ["Space Grotesk"], "title-md": ["Space Grotesk"], "headline-md": ["Oswald"], "headline-lg": ["Oswald"], "headline-lg-mobile": ["Oswald"], "body-md": ["Space Grotesk"], "body-lg": ["Space Grotesk"], "label-code": ["JetBrains Mono"], "label-meta": ["JetBrains Mono"], "display-hero-mobile": ["Oswald"], "display-hero": ["Oswald"], "headline-sm": ["Oswald"], "body-sm": ["Space Grotesk"] }, "fontSize": { "title-sm": ["16px", { "lineHeight": "22px", "letterSpacing": "0.00em", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["32px", { "lineHeight": "36px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["64px", { "lineHeight": "68px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg-mobile": ["36px", { "lineHeight": "40px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0.00em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-code": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }], "label-meta": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "400" }], "display-hero-mobile": ["48px", { "lineHeight": "48px", "letterSpacing": "0.02em", "fontWeight": "700" }], "display-hero": ["96px", { "lineHeight": "96px", "letterSpacing": "0.02em", "fontWeight": "700" }], "headline-sm": ["24px", { "lineHeight": "28px", "letterSpacing": "0.02em", "fontWeight": "500" }], "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"><button aria-label="Go Back" class="w-11 h-11 flex items-center justify-center text-primary" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button></div><div class="flex-1 text-center truncate px-space-xs"><h1 class="font-headline-sm text-headline-sm uppercase tracking-wide text-primary truncate">Cart Bag</h1></div><div class="flex items-center gap-space-xs"><a aria-label="Shopping Bag" class="w-11 h-11 relative flex items-center justify-center text-primary" data-path="cart-bag" href="#"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="absolute top-2 right-1.5 bg-secondary text-on-secondary font-label-meta text-label-meta px-1 py-0.5 rounded-full min-w-[16px] text-center leading-none">2</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Marquee / Ticker of Delight -->
+<div class="w-full bg-primary text-on-primary py-1 px-margin-mobile flex items-center justify-between overflow-hidden">
+<div class="flex items-center gap-space-xs truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-ping"></span>
+<span class="font-label-meta text-label-meta tracking-widest uppercase">ARCHIVAL DROP 04 • LIVE ALLOCATION SECURED</span>
+</div>
+<span class="font-label-code text-label-code text-secondary-fixed">08:42 REMAINING</span>
+</div>
+<div class="p-margin-mobile flex flex-col gap-space-md">
+<!-- Header Bag Status Block -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-primary uppercase">Your Bag</span>
+<span class="bg-secondary-container text-on-secondary px-2 py-0.5 rounded font-label-code text-label-code tracking-wider font-semibold">2 ITEMS</span>
+</div>
+<span class="font-label-meta text-label-meta text-outline uppercase tracking-wider">SECURE SESSION</span>
+</div>
+<!-- Free Express Shipping Goal Banner -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-title-sm text-title-sm text-on-surface uppercase tracking-tight">Express Shipping Unlocked</span>
+</div>
+<span class="font-label-code text-label-code font-bold text-secondary">₹0</span>
+</div>
+<!-- Progress bar full state with subtle electric pulse -->
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-full rounded-full transition-all duration-500"></div>
+</div>
+<div class="flex justify-between items-center text-outline">
+<span class="font-label-meta text-label-meta uppercase">Dispatched from Mumbai Hub</span>
+<span class="font-label-meta text-label-meta font-semibold text-secondary">2-3 DAYS PAN-INDIA</span>
+</div>
+</div>
+</div>
+<!-- Cart Line Items -->
+<div class="flex flex-col gap-space-sm" id="cart-item-list">
+<!-- Item 1: Metro Surplus M-65 Jacket -->
+<div class="cart-item bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm transition-all" data-price="6499" id="item-m65">
+<div class="flex gap-space-md items-start">
+<!-- Thumbnail Frame -->
+<div class="relative w-24 h-28 bg-surface-container-low rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="High contrast editorial studio photograph of a raw washed charcoal Metro Surplus M-65 military utility jacket with oversized utilitarian pockets, metallic hardware and minimal urban aesthetic, shot on a concrete architectural backdrop in stark daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFIaWL5CIm9csdcc4EMxXBNuIlbE6do-6hlkkAbUwuzV-o839V0k9pgWNOXgRIe1Xt3EoZYAHxvevYVO5xfnys1-5hZ-6GRcG9pdgQRDet9qYRawMQDNWBUxhrDNpbLmGvuHPOaFLPEjcA0uyDEuvcPLZAZOd3Vf-NYC7c77YkWHz4X-Iu8WqScHxF1FLl2QxDyGr_W0BLDxc1Xr6VH51ITDYm_7Oigu6is13bf94UuG00ZYY2Nbx5"/>
+<span class="absolute top-1 left-1 bg-primary text-on-primary font-label-meta text-label-meta px-1 py-0.5 rounded uppercase">01 / 50</span>
+</div>
+<!-- Product Details -->
+<div class="flex-1 min-w-0 flex flex-col justify-between self-stretch">
+<div>
+<div class="flex items-start justify-between gap-space-xs">
+<h3 class="font-title-md text-title-md text-primary uppercase leading-tight truncate">Metro Surplus M-65</h3>
+<button aria-label="Remove Metro Surplus M-65" class="w-11 h-11 -mr-2 -mt-2 flex items-center justify-center text-outline hover:text-error transition-colors rounded-full" onclick="removeItem('item-m65')">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant uppercase mt-0.5">Washed Charcoal</p>
+<!-- Spec Meta Tags -->
+<div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
+<span class="bg-surface-container px-2 py-0.5 rounded font-label-code text-label-code text-on-surface font-medium">SIZE: L</span>
+<span class="bg-surface-container px-2 py-0.5 rounded font-label-code text-label-code text-secondary font-medium">100% RIPSTOP</span>
+</div>
+</div>
+<!-- Price and Quantity Control -->
+<div class="flex items-center justify-between mt-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">₹6,499</span>
+<!-- Touch-Optimized Stepper -->
+<div class="flex items-center bg-surface-container rounded p-0.5">
+<button aria-label="Decrease quantity" class="w-11 h-11 flex items-center justify-center text-primary active:bg-surface-container-highest rounded transition-colors" onclick="updateQty('item-m65', -1)">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="qty-display font-label-code text-label-code text-primary font-semibold px-2 min-w-[24px] text-center">1</span>
+<button aria-label="Increase quantity" class="w-11 h-11 flex items-center justify-center text-primary active:bg-surface-container-highest rounded transition-colors" onclick="updateQty('item-m65', 1)">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2: Heavyweight Box-Fit Tee -->
+<div class="cart-item bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm transition-all" data-price="2499" id="item-tee">
+<div class="flex gap-space-md items-start">
+<!-- Thumbnail Frame -->
+<div class="relative w-24 h-28 bg-surface-container-low rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Brutalist streetwear studio photo of a heavyweight 300 GSM box-fit t-shirt in washed black jersey with dropped shoulders, minimalist seam construction, resting against clean white textured studio plaster" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkw5z_F84rmx1ctc1FdscAqFjUilHJxG3RezeExm6nTmuxuexQ7Dw7vhOnIUFD4SAK_DPdYUKu4x00bg9iMvWKJjUF40qN0uZx2XwWZNdvTEYK27q4jrV2QxsbX6UFZvsA_8Xh5eeOzyyxR_GG7jhb7gEtqjMLWRVqkZ6gKK790-WZk_DhXKwlWGsTD2T5OLvBjIfCSCQRn_X5fxwbbZXTMGhiVHqeQF7yKiM9ujwDOVPql24P4A96"/>
+<span class="absolute top-1 left-1 bg-secondary text-on-secondary font-label-meta text-label-meta px-1 py-0.5 rounded uppercase">RESTOCK</span>
+</div>
+<!-- Product Details -->
+<div class="flex-1 min-w-0 flex flex-col justify-between self-stretch">
+<div>
+<div class="flex items-start justify-between gap-space-xs">
+<h3 class="font-title-md text-title-md text-primary uppercase leading-tight truncate">Heavyweight Box-Fit Tee</h3>
+<button aria-label="Remove Heavyweight Box-Fit Tee" class="w-11 h-11 -mr-2 -mt-2 flex items-center justify-center text-outline hover:text-error transition-colors rounded-full" onclick="removeItem('item-tee')">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant uppercase mt-0.5">Washed Black</p>
+<!-- Spec Meta Tags -->
+<div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
+<span class="bg-surface-container px-2 py-0.5 rounded font-label-code text-label-code text-on-surface font-medium">SIZE: M</span>
+<span class="bg-surface-container px-2 py-0.5 rounded font-label-code text-label-code text-on-surface-variant">300 GSM COMBED</span>
+</div>
+</div>
+<!-- Price and Quantity Control -->
+<div class="flex items-center justify-between mt-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">₹2,499</span>
+<!-- Touch-Optimized Stepper -->
+<div class="flex items-center bg-surface-container rounded p-0.5">
+<button aria-label="Decrease quantity" class="w-11 h-11 flex items-center justify-center text-primary active:bg-surface-container-highest rounded transition-colors" onclick="updateQty('item-tee', -1)">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="qty-display font-label-code text-label-code text-primary font-semibold px-2 min-w-[24px] text-center">1</span>
+<button aria-label="Increase quantity" class="w-11 h-11 flex items-center justify-center text-primary active:bg-surface-container-highest rounded transition-colors" onclick="updateQty('item-tee', 1)">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Code / Voucher Accordion -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm">
+<details class="group cursor-pointer">
+<summary class="flex items-center justify-between list-none py-1">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px] text-secondary">redeem</span>
+<span class="font-title-sm text-title-sm uppercase tracking-wide">Promo Code or Gift Card</span>
+</div>
+<span class="material-symbols-outlined text-outline transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="pt-space-md flex flex-col gap-space-xs">
+<div class="flex items-stretch gap-space-xs">
+<div class="relative flex-1">
+<input class="w-full h-12 bg-surface-container px-space-md font-label-code text-label-code uppercase text-primary placeholder:text-outline rounded focus:outline-none focus:bg-surface-container-highest transition-colors" id="promo-input" placeholder="e.g. ARCHIVE10" type="text"/>
+</div>
+<button class="h-12 px-space-lg bg-primary text-on-primary font-title-sm text-title-sm uppercase tracking-wider rounded active:bg-secondary transition-colors" onclick="applyPromo()">
+              Apply
+            </button>
+</div>
+<p class="font-label-meta text-label-meta text-secondary hidden uppercase tracking-wide flex items-center gap-1" id="promo-feedback">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Code verified: 10% archival bonus applied!
+          </p>
+</div>
+</details>
+</div>
+<!-- Order Summary & Price Breakdown -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-title-sm text-title-sm uppercase tracking-wider text-primary">Order Summary</h2>
+<span class="font-label-meta text-label-meta text-outline uppercase tracking-wider">ALL TAXES PAID</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span class="font-label-code text-label-code text-primary font-medium" id="summary-subtotal">₹8,998</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span>Estimated Delivery (Pan-India)</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+</span>
+<span class="font-label-code text-label-code text-secondary font-bold">FREE</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Applicable Taxes (GST 12%)</span>
+<span class="font-label-code text-label-code text-outline">Included</span>
+</div>
+<div class="hidden flex items-center justify-between font-body-md text-body-md text-secondary" id="discount-row">
+<span>Archival Privilege (10%)</span>
+<span class="font-label-code text-label-code font-bold" id="summary-discount">-₹900</span>
+</div>
+<!-- Total Highlight Bar -->
+<div class="bg-surface-container p-space-md rounded flex items-center justify-between mt-space-xs">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm uppercase text-primary tracking-wide">Total Amount</span>
+<span class="font-label-meta text-label-meta text-outline uppercase">Final charge in INR</span>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-primary font-bold tracking-tight" id="summary-total">₹8,998</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Frictionless Checkout Block -->
+<div class="flex flex-col gap-space-sm">
+<!-- High-Impact Primary CTA -->
+<button class="w-full min-h-[56px] py-4 px-space-lg bg-primary text-on-primary font-headline-sm text-headline-sm uppercase tracking-wider rounded flex items-center justify-between active:bg-secondary transition-all shadow-md group">
+<span class="flex items-center gap-2">
+<span>Proceed To Checkout</span>
+<span class="font-label-code text-label-code text-secondary-fixed opacity-90 group-hover:text-on-primary" id="btn-total-preview">(₹8,998)</span>
+</span>
+<span class="material-symbols-outlined text-[24px] transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<!-- Express One-Tap Checkout Container -->
+<div class="bg-surface-container-high p-space-md rounded flex flex-col gap-2">
+<div class="flex items-center justify-center gap-space-xs text-outline">
+<span class="h-px bg-outline-variant flex-1"></span>
+<span class="font-label-meta text-label-meta uppercase tracking-widest text-on-surface-variant">Fast 1-Tap Checkout</span>
+<span class="h-px bg-outline-variant flex-1"></span>
+</div>
+<div class="flex items-center justify-center gap-space-sm py-1">
+<span class="bg-surface-container-lowest px-2.5 py-1.5 rounded font-label-code text-label-code font-bold text-primary shadow-xs">UPI</span>
+<span class="bg-surface-container-lowest px-2.5 py-1.5 rounded font-label-code text-label-code font-bold text-primary shadow-xs">GPAY</span>
+<span class="bg-surface-container-lowest px-2.5 py-1.5 rounded font-label-code text-label-code font-bold text-primary shadow-xs">PHONEPE</span>
+<span class="bg-surface-container-lowest px-2.5 py-1.5 rounded font-label-code text-label-code font-bold text-primary shadow-xs">CARDS</span>
+</div>
+<p class="font-label-meta text-label-meta text-center text-outline uppercase tracking-wider">
+          Instant OTP login &amp; auto-filled addresses
+        </p>
+</div>
+<!-- Trust Badges Grid -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="min-w-0">
+<p class="font-title-sm text-title-sm text-primary uppercase">100% Secure Encrypted Checkout</p>
+<p class="font-body-sm text-body-sm text-outline">256-bit AES encryption &amp; RBI compliance</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+</div>
+<div class="min-w-0">
+<p class="font-title-sm text-title-sm text-primary uppercase">Verified 7-Day Easy Size Exchanges</p>
+<p class="font-body-sm text-body-sm text-outline">Doorstep courier pickup across India</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">token</span>
+</div>
+<div class="min-w-0">
+<p class="font-title-sm text-title-sm text-primary uppercase">Authentic Numbered Run</p>
+<p class="font-body-sm text-body-sm text-outline">Individual garment authentication certificate included</p>
+</div>
+</div>
+</div>
+<!-- Illustrative Note -->
+<p class="text-center font-label-meta text-label-meta text-outline uppercase tracking-wider pb-space-lg">
+        Illustrative concept data for Downtown Originals Bag Session
+      </p>
+</div>
+</div>
+</div>
+<script>
+  let promoApplied = false;
+
+  function updateTotals() {
+    let subtotal = 0;
+    const items = document.querySelectorAll('.cart-item');
+    items.forEach(item => {
+      const price = parseInt(item.getAttribute('data-price'), 10);
+      const qty = parseInt(item.querySelector('.qty-display').innerText, 10);
+      subtotal += price * qty;
+    });
+
+    let discount = promoApplied ? Math.round(subtotal * 0.10) : 0;
+    let finalTotal = Math.max(0, subtotal - discount);
+
+    const subtotalFormatted = '₹' + subtotal.toLocaleString('en-IN');
+    const totalFormatted = '₹' + finalTotal.toLocaleString('en-IN');
+
+    const subtotalEl = document.getElementById('summary-subtotal');
+    if (subtotalEl) subtotalEl.innerText = subtotalFormatted;
+
+    const totalEl = document.getElementById('summary-total');
+    if (totalEl) totalEl.innerText = totalFormatted;
+
+    const btnTotalEl = document.getElementById('btn-total-preview');
+    if (btnTotalEl) btnTotalEl.innerText = '(' + totalFormatted + ')';
+
+    const discountRow = document.getElementById('discount-row');
+    const discountEl = document.getElementById('summary-discount');
+    if (discountRow && discountEl) {
+      if (promoApplied) {
+        discountRow.classList.remove('hidden');
+        discountEl.innerText = '-₹' + discount.toLocaleString('en-IN');
+      } else {
+        discountRow.classList.add('hidden');
+      }
+    }
+  }
+
+  function updateQty(itemId, delta) {
+    const item = document.getElementById(itemId);
+    if (!item) return;
+    const qtySpan = item.querySelector('.qty-display');
+    let qty = parseInt(qtySpan.innerText, 10) + delta;
+    if (qty < 1) qty = 1;
+    if (qty > 5) qty = 5;
+    qtySpan.innerText = qty;
+    updateTotals();
+  }
+
+  function removeItem(itemId) {
+    const item = document.getElementById(itemId);
+    if (!item) return;
+    item.style.opacity = '0';
+    item.style.transform = 'translateX(20px)';
+    setTimeout(() => {
+      item.remove();
+      updateTotals();
+    }, 200);
+  }
+
+  function applyPromo() {
+    const input = document.getElementById('promo-input');
+    const feedback = document.getElementById('promo-feedback');
+    if (input && input.value.trim().length > 0) {
+      promoApplied = true;
+      if (feedback) feedback.classList.remove('hidden');
+      updateTotals();
+    }
+  }
+</script></main></body></html>

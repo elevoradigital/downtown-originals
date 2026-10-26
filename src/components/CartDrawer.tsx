@@ -1,0 +1,254 @@
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+
+export const CartDrawer: React.FC = () => {
+  const {
+    cart,
+    isCartOpen,
+    closeCart,
+    cartCount,
+    subtotal,
+    shippingFee,
+    freeShippingThreshold,
+    amountNeededForFreeShipping,
+    updateQuantity,
+    removeFromCart
+  } = useCart();
+
+  const navigate = useNavigate();
+
+  const progressPercent = Math.min(100, Math.round((subtotal / freeShippingThreshold) * 100));
+
+  const handleCheckoutClick = () => {
+    closeCart();
+    navigate('/checkout');
+  };
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 z-50 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
+          isCartOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={closeCart}
+      />
+
+      {/* Drawer */}
+      <aside
+        id="cartDrawer"
+        aria-label="Shopping Cart Drawer"
+        className={`fixed top-0 right-0 h-full w-full sm:w-[460px] bg-surface-container-lowest z-50 shadow-2xl flex flex-col transition-transform duration-300 ease-out ${
+          isCartOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        {/* Drawer Header */}
+        <div className="p-space-lg bg-surface-container-lowest flex items-center justify-between border-b border-surface-container-high shadow-sm">
+          <div className="flex items-center gap-space-sm">
+            <span className="font-headline-sm text-headline-sm uppercase text-primary">
+              SHOPPING BAG
+            </span>
+            <span className="font-label-code text-label-code px-2 py-0.5 bg-secondary text-on-secondary font-bold">
+              {cartCount}
+            </span>
+          </div>
+          <button
+            aria-label="Close cart drawer"
+            onClick={closeCart}
+            className="p-space-xs text-primary hover:text-secondary transition-colors"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[24px]">close</span>
+          </button>
+        </div>
+
+        {/* Free Shipping Progress Indicator */}
+        <div className="px-space-lg py-space-sm bg-surface-container-low border-b border-surface-container-high">
+          {amountNeededForFreeShipping > 0 ? (
+            <div className="flex flex-col gap-1.5">
+              <div className="flex justify-between items-center font-label-meta text-label-meta uppercase tracking-wider text-on-surface">
+                <span>ADD ₹{amountNeededForFreeShipping.toLocaleString('en-IN')} FOR FREE SHIPPING</span>
+                <span className="font-bold text-secondary">{progressPercent}%</span>
+              </div>
+              <div className="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-secondary transition-all duration-300 ease-out"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center gap-space-xs font-label-meta text-label-meta uppercase tracking-widest text-secondary font-semibold">
+              <span className="material-symbols-outlined text-[16px]">check_circle</span>
+              <span>UNLOCKED: COMPLIMENTARY EXPRESS METRO SHIPPING</span>
+            </div>
+          )}
+        </div>
+
+        {/* Cart Item List */}
+        <div className="flex-1 overflow-y-auto p-space-lg flex flex-col gap-space-md">
+          {cart.length === 0 ? (
+            <div className="flex-1 flex flex-col items-center justify-center text-center py-space-2xl gap-space-md">
+              <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+                <span className="material-symbols-outlined text-[32px]">shopping_bag</span>
+              </div>
+              <div>
+                <h4 className="font-headline-sm text-headline-sm uppercase text-primary">
+                  YOUR BAG IS EMPTY
+                </h4>
+                <p className="font-body-md text-body-md text-on-surface-variant max-w-xs mt-1">
+                  Discover Drop 04 and limited surplus capsule editions before archive closure.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  closeCart();
+                  navigate('/shop');
+                }}
+                className="mt-space-sm px-space-lg py-3 bg-primary text-on-primary font-title-sm text-title-sm uppercase tracking-wider hover:bg-secondary transition-colors"
+              >
+                BROWSE NEW DROP
+              </button>
+            </div>
+          ) : (
+            cart.map((item) => (
+              <div
+                key={item.id}
+                className="flex gap-space-md pb-space-md border-b border-surface-container-high last:border-b-0 group"
+              >
+                {/* Thumbnail */}
+                <Link
+                  to={`/product/${item.product.slug}`}
+                  onClick={closeCart}
+                  className="w-20 h-24 sm:w-24 sm:h-28 bg-surface-container-low shrink-0 overflow-hidden"
+                >
+                  <img
+                    src={item.product.images[0]}
+                    alt={item.product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </Link>
+
+                {/* Info */}
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-start gap-space-xs">
+                      <Link
+                        to={`/product/${item.product.slug}`}
+                        onClick={closeCart}
+                        className="font-title-sm text-title-sm text-primary uppercase line-clamp-1 hover:text-secondary transition-colors"
+                      >
+                        {item.product.name}
+                      </Link>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-on-surface-variant hover:text-error transition-colors p-0.5"
+                        aria-label="Remove item"
+                      >
+                        <span className="material-symbols-outlined text-[18px]">close</span>
+                      </button>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-space-xs font-label-meta text-label-meta uppercase tracking-wider text-on-surface-variant mt-1">
+                      <span>{item.selectedColor}</span>
+                      <span>/</span>
+                      <span className="font-bold text-primary">SIZE {item.selectedSize}</span>
+                    </div>
+
+                    <div className="font-label-code text-label-code text-primary font-semibold mt-1">
+                      ₹{item.price.toLocaleString('en-IN')}
+                    </div>
+                  </div>
+
+                  {/* Quantity Stepper */}
+                  <div className="flex items-center justify-between pt-2">
+                    <div className="flex items-center border border-outline-variant bg-surface-container-lowest">
+                      <button
+                        type="button"
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        className="w-7 h-7 flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors"
+                        aria-label="Decrease quantity"
+                      >
+                        -
+                      </button>
+                      <span className="w-8 text-center font-label-code text-label-code font-bold">
+                        {item.quantity}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="w-7 h-7 flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors"
+                        aria-label="Increase quantity"
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <div className="font-label-code text-label-code font-bold text-primary">
+                      ₹{(item.price * item.quantity).toLocaleString('en-IN')}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Drawer Footer / Checkout Summary */}
+        {cart.length > 0 && (
+          <div className="p-space-lg bg-surface-container-lowest border-t border-surface-container-high flex flex-col gap-space-md shadow-lg">
+            <div className="flex flex-col gap-1.5 font-label-code text-label-code text-on-surface">
+              <div className="flex justify-between">
+                <span className="text-on-surface-variant">SUBTOTAL</span>
+                <span className="font-bold">₹{subtotal.toLocaleString('en-IN')}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-on-surface-variant">ESTIMATED SHIPPING</span>
+                <span className="font-bold">
+                  {shippingFee === 0 ? (
+                    <span className="text-secondary uppercase">FREE</span>
+                  ) : (
+                    `₹${shippingFee}`
+                  )}
+                </span>
+              </div>
+              <div className="flex justify-between pt-2 border-t border-surface-container-high font-headline-sm text-headline-sm text-primary">
+                <span>ESTIMATED TOTAL</span>
+                <span>₹{(subtotal + shippingFee).toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            <p className="font-label-meta text-[11px] text-on-surface-variant leading-tight">
+              Taxes calculated at checkout. Illustrative e-commerce prototype for Downtown Originals.
+            </p>
+
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={handleCheckoutClick}
+                className="w-full py-4 bg-primary text-on-primary font-title-sm text-title-sm uppercase tracking-wider hover:bg-secondary transition-all flex items-center justify-center gap-space-sm group"
+              >
+                <span>PROCEED TO CHECKOUT</span>
+                <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  closeCart();
+                  navigate('/shop');
+                }}
+                className="w-full py-2.5 text-on-surface-variant font-label-code text-label-code uppercase tracking-wider hover:text-primary transition-colors text-center"
+              >
+                CONTINUE SHOPPING
+              </button>
+            </div>
+          </div>
+        )}
+      </aside>
+    </>
+  );
+};

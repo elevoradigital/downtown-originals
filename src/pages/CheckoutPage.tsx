@@ -32,6 +32,7 @@ export const CheckoutPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [confirmedOrderId, setConfirmedOrderId] = useState('');
+  const [isMobileSummaryOpen, setIsMobileSummaryOpen] = useState(false);
 
   const deliveryCost = form.deliveryMethod === 'priority' ? 250 : shippingFee;
   const finalTotal = Math.max(0, subtotal + deliveryCost - discount);
@@ -167,6 +168,56 @@ export const CheckoutPage: React.FC = () => {
           </Link>
         </div>
 
+        {/* Mobile Order Summary Collapsible Banner */}
+        <div className="lg:hidden mb-6 bg-surface-container-lowest border border-surface-container-high overflow-hidden shadow-sm">
+          <button
+            type="button"
+            onClick={() => setIsMobileSummaryOpen(prev => !prev)}
+            className="w-full p-4 flex items-center justify-between font-label-code text-xs uppercase"
+          >
+            <div className="flex items-center gap-2 text-primary font-bold">
+              <span className="material-symbols-outlined text-[18px]">shopping_bag</span>
+              <span>{isMobileSummaryOpen ? 'HIDE ORDER SUMMARY' : 'SHOW ORDER SUMMARY'} ({cart.length})</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-headline-sm text-sm text-primary font-bold">₹{finalTotal.toLocaleString('en-IN')}</span>
+              <span className="material-symbols-outlined text-[18px]">
+                {isMobileSummaryOpen ? 'expand_less' : 'expand_more'}
+              </span>
+            </div>
+          </button>
+
+          {isMobileSummaryOpen && (
+            <div className="p-4 pt-0 border-t border-surface-container-high flex flex-col gap-3 animate-fadeIn">
+              {/* Cart Items Miniature */}
+              <div className="max-h-56 overflow-y-auto flex flex-col gap-2 pt-3">
+                {cart.map((item) => (
+                  <div key={item.id} className="flex gap-3 pb-2 border-b border-surface-container-high last:border-b-0">
+                    <img
+                      src={item.product.images[0]}
+                      alt={item.product.name}
+                      className="w-12 h-16 bg-surface-container object-cover shrink-0"
+                    />
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <h4 className="font-title-sm text-xs uppercase text-primary font-bold line-clamp-1">
+                          {item.product.name}
+                        </h4>
+                        <p className="font-label-meta text-[10px] uppercase text-on-surface-variant">
+                          {item.selectedColor} • SIZE {item.selectedSize} • QTY: {item.quantity}
+                        </p>
+                      </div>
+                      <div className="font-label-code text-xs font-bold text-primary">
+                        ₹{(item.price * item.quantity).toLocaleString('en-IN')}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
         <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
           {/* LEFT 7 COLS: Form Fields */}
           <div className="lg:col-span-7 flex flex-col gap-space-xl">
@@ -185,6 +236,8 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="email"
                     required
+                    autoComplete="email"
+                    inputMode="email"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="marcus@metropolis.agency"
@@ -196,6 +249,8 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="tel"
                     required
+                    autoComplete="tel"
+                    inputMode="tel"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     placeholder="+91 98765 43210"
@@ -220,6 +275,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="text"
                     required
+                    autoComplete="given-name"
                     value={form.firstName}
                     onChange={(e) => setForm({ ...form, firstName: e.target.value })}
                     placeholder="Marcus"
@@ -231,6 +287,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="text"
                     required
+                    autoComplete="family-name"
                     value={form.lastName}
                     onChange={(e) => setForm({ ...form, lastName: e.target.value })}
                     placeholder="Vance"
@@ -242,6 +299,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="text"
                     required
+                    autoComplete="street-address"
                     value={form.address}
                     onChange={(e) => setForm({ ...form, address: e.target.value })}
                     placeholder="Flat 402, Highline Industrial Lofts, Lower Parel"
@@ -253,6 +311,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="text"
                     required
+                    autoComplete="address-level2"
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
                     className="p-3 bg-surface-container-low border border-surface-container-high text-primary font-body-md focus:border-primary focus:outline-none"
@@ -263,6 +322,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="text"
                     required
+                    autoComplete="address-level1"
                     value={form.state}
                     onChange={(e) => setForm({ ...form, state: e.target.value })}
                     className="p-3 bg-surface-container-low border border-surface-container-high text-primary font-body-md focus:border-primary focus:outline-none"
@@ -273,6 +333,8 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="text"
                     required
+                    autoComplete="postal-code"
+                    inputMode="numeric"
                     value={form.postalCode}
                     onChange={(e) => setForm({ ...form, postalCode: e.target.value })}
                     className="p-3 bg-surface-container-low border border-surface-container-high text-primary font-body-md focus:border-primary focus:outline-none"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PRODUCTS } from '../data/products';
@@ -24,6 +24,10 @@ export const ProductDetailPage: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [addedRecently, setAddedRecently] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [shareNotice, setShareNotice] = useState<string | null>(null);
+  const primaryAddBtnRef = useRef<HTMLButtonElement>(null);
 
   // When slug changes, reset defaults
   useEffect(() => {
@@ -32,8 +36,23 @@ export const ProductDetailPage: React.FC = () => {
     const availableSize = product.sizes.find(s => s.inStock)?.size || 'M';
     setSelectedSize(availableSize);
     setQuantity(1);
+    setShowStickyBar(false);
     window.scrollTo(0, 0);
   }, [slug, product]);
+
+  // Observer for Sticky Add to Bag bar when primary button leaves viewport
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!primaryAddBtnRef.current) return;
+      const rect = primaryAddBtnRef.current.getBoundingClientRect();
+      // Show sticky purchase bar if the main Add to Bag button scrolled past the top of the viewport
+      setShowStickyBar(rect.bottom < 60);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const activeColor = product.colors[selectedColorIndex] || product.colors[0];
   const isFavorited = isInWishlist(product.id);
@@ -61,6 +80,51 @@ export const ProductDetailPage: React.FC = () => {
     if (!isSelectedSizeAvailable) return;
     addToCart(product, activeColor.name, selectedSize, quantity);
     navigate('/checkout');
+  };
+
+  // Gallery Touch Swipe Navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        // Swipe left -> next image
+        setSelectedImageIndex((prev) => (prev + 1) % product.images.length);
+      } else {
+        // Swipe right -> prev image
+        setSelectedImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length);
+      }
+    }
+    setTouchStartX(null);
+  };
+
+  // Product Sharing with Clipboard Fallback
+  const handleShare = async () => {
+    const shareData = {
+      title: `Downtown Originals — ${product.name}`,
+      text: product.subtitle || `Check out the ${product.name} from Drop 04`,
+      url: window.location.href,
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        // User dismissed share dialog
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        setShareNotice('LINK COPIED TO CLIPBOARD [ ✓ ]');
+        setTimeout(() => setShareNotice(null), 3000);
+      } catch (err) {
+        // Clipboard write failed
+      }
+    }
   };
 
   // Cross-sell items
@@ -102,7 +166,16 @@ export const ProductDetailPage: React.FC = () => {
             <span className="text-outline-variant">/</span>
             <span className="text-primary font-bold truncate max-w-[200px] sm:max-w-none">{product.name}</span>
           </nav>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={handleShare}
+              className="inline-flex items-center gap-1 px-2.5 py-1 bg-surface-container hover:bg-surface-container-high text-primary font-label-code text-[11px] tracking-wider uppercase border border-surface-container-high active:scale-95 transition-all"
+              aria-label="Share product"
+            >
+              <span className="material-symbols-outlined text-[14px]">share</span>
+              <span className="hidden sm:inline">SHARE</span>
+            </button>
             <span className="inline-flex items-center px-2 py-0.5 bg-surface-container text-primary font-label-code text-[11px] tracking-wider uppercase border border-surface-container-high">
               SKU: {product.sku}
             </span>
@@ -113,13 +186,25 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Share Toast Feedback */}
+      {shareNotice && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-primary text-on-primary px-4 py-2 border border-secondary shadow-2xl font-label-code text-xs uppercase font-bold animate-fadeIn flex items-center gap-2">
+          <span className="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+          <span>{shareNotice}</span>
+        </div>
+      )}
+
       {/* Main 2-Column Product Studio Viewport */}
       <section className="w-full px-4 sm:px-8 lg:px-12 py-8 sm:py-12 bg-surface">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* LEFT COLUMN: Multi-Angle Editorial Gallery */}
+          {/* LEFT COLUMN: Multi-Angle Editorial Gallery with Touch Swipe */}
           <div className="lg:col-span-7 flex flex-col gap-4">
-            {/* Main Image Viewport Frame with Smooth Crossfade */}
-            <div className="relative w-full aspect-[4/5] bg-surface-container-low overflow-hidden border border-surface-container-high shadow-md">
+            {/* Main Image Viewport Frame with Smooth Crossfade & Touch Swipe */}
+            <div
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              className="relative w-full aspect-[4/5] bg-surface-container-low overflow-hidden border border-surface-container-high shadow-md touch-pan-y"
+            >
               <AnimatePresence mode="wait">
                 <motion.img
                   key={selectedImageIndex}
@@ -129,9 +214,21 @@ export const ProductDetailPage: React.FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0.85 }}
                   transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none"
                 />
               </AnimatePresence>
+
+              {/* Mobile Dot Indicators */}
+              <div className="sm:hidden absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-10 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full pointer-events-none">
+                {product.images.map((_, dotIdx) => (
+                  <span
+                    key={dotIdx}
+                    className={`h-1.5 rounded-full transition-all duration-200 ${
+                      selectedImageIndex === dotIdx ? 'bg-secondary w-3' : 'bg-white/60 w-1.5'
+                    }`}
+                  />
+                ))}
+              </div>
 
               {/* Float Badges Top Left */}
               <div className="absolute top-4 left-4 flex flex-col gap-1.5 z-10 pointer-events-none">
@@ -338,6 +435,7 @@ export const ProductDetailPage: React.FC = () => {
 
                 {/* Add to Bag Button with Tactile Feedback */}
                 <button
+                  ref={primaryAddBtnRef}
                   type="button"
                   disabled={!isSelectedSizeAvailable}
                   onClick={handleAddToCart}
@@ -514,12 +612,61 @@ export const ProductDetailPage: React.FC = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {styledLookProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>
       </section>
+
+      {/* Mobile Sticky Add to Bag Bar (Synchronized with PDP Commerce State) */}
+      <div
+        id="pdpStickyBar"
+        className={`fixed bottom-0 inset-x-0 z-50 bg-surface-container-lowest/98 backdrop-blur-md border-t border-surface-container-high p-3 sm:hidden shadow-2xl transition-transform duration-300 ease-out ${
+          showStickyBar ? 'translate-y-0' : 'translate-y-full pointer-events-none'
+        }`}
+        style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom, 12px))' }}
+      >
+        <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
+          {/* Thumbnail & Meta */}
+          <div className="flex items-center gap-2.5 min-w-0">
+            <img
+              src={product.images[selectedImageIndex] || product.images[0]}
+              alt={product.name}
+              className="w-10 h-12 object-cover bg-surface-container border border-surface-container-high shrink-0"
+            />
+            <div className="min-w-0">
+              <h4 className="font-title-sm text-xs uppercase text-primary font-bold truncate">
+                {product.name}
+              </h4>
+              <div className="flex items-center gap-1.5 font-label-code text-[11px] text-on-surface-variant">
+                <span className="font-bold text-primary">₹{(product.price * quantity).toLocaleString('en-IN')}</span>
+                <span>•</span>
+                <span className="text-secondary font-bold">SIZE {selectedSize}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Sticky Purchase Action */}
+          <button
+            type="button"
+            disabled={!isSelectedSizeAvailable}
+            onClick={handleAddToCart}
+            className={`px-4 py-3 min-h-[44px] font-title-sm text-xs uppercase tracking-wider shrink-0 font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md ${
+              !isSelectedSizeAvailable
+                ? 'bg-surface-container text-outline cursor-not-allowed border border-outline-variant shadow-none'
+                : addedRecently
+                ? 'bg-secondary text-on-secondary border border-secondary font-black'
+                : 'bg-primary text-on-primary hover:bg-secondary'
+            }`}
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {addedRecently ? 'check' : 'shopping_bag'}
+            </span>
+            <span>{addedRecently ? 'ADDED [✓]' : 'ADD TO BAG'}</span>
+          </button>
+        </div>
+      </div>
 
       {/* Size Guide Modal */}
       <SizeGuideModal

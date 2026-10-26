@@ -7,6 +7,7 @@ import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
 import { SearchModal } from './components/SearchModal';
 import { SizeGuideModal } from './components/SizeGuideModal';
+import { BottomNav } from './components/BottomNav';
 import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
@@ -74,6 +75,9 @@ const AppContent: React.FC = () => {
 
       {/* Site Footer */}
       <Footer onOpenSizeGuide={() => setIsGlobalSizeGuideOpen(true)} />
+
+      {/* Mobile Fixed Bottom Navigation Bar */}
+      <BottomNav onOpenSearch={() => setIsSearchOpen(true)} />
 
       {/* Global Modals & Drawers */}
       <CartDrawer />

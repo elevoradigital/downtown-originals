@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Product, ProductSize } from '../types';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
+import { QuickAddModal } from './QuickAddModal';
 
 interface ProductCardProps {
   product: Product;
@@ -183,46 +184,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
           )}
         </div>
 
-        {/* Mobile Quick Size Picker */}
-        {showSizePicker && (
-          <div
-            className="sm:hidden bg-surface-container-low p-2 border border-surface-container-high my-1 animate-fadeIn"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-center mb-1 font-label-meta text-[9px] uppercase text-on-surface-variant font-bold">
-              <span>SELECT SIZE:</span>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowSizePicker(false);
-                }}
-                className="p-1 hover:text-primary text-xs"
-                aria-label="Close size picker"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="grid grid-cols-5 gap-1">
-              {product.sizes.map((s) => (
-                <button
-                  key={s.size}
-                  disabled={!s.inStock}
-                  onClick={(e) => handleSizeSelect(s.size, e)}
-                  className={`min-h-[36px] py-1 text-center font-label-code text-[11px] font-bold border transition-all duration-120 active:scale-90 flex items-center justify-center ${
-                    !s.inStock
-                      ? 'opacity-30 border-surface-container-high bg-surface-container text-outline line-through cursor-not-allowed'
-                      : justAddedSize === s.size
-                      ? 'bg-secondary text-on-secondary border-secondary scale-95 font-black'
-                      : 'border-primary hover:bg-secondary hover:text-on-secondary hover:border-secondary bg-surface-container-lowest text-primary'
-                  }`}
-                >
-                  {justAddedSize === s.size ? '✓' : s.size}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Price & Color Swatches Footer */}
         <div className="flex items-center justify-between pt-2 border-t border-surface-container-high">
           <div className="flex items-baseline gap-1.5 sm:gap-2">
@@ -242,9 +203,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setShowSizePicker(prev => !prev);
+                setShowSizePicker(true);
               }}
-              className="sm:hidden px-2.5 py-1 min-h-[28px] bg-primary text-on-primary font-label-code text-[10px] uppercase font-bold hover:bg-secondary active:scale-95 transition-all flex items-center justify-center"
+              className="sm:hidden px-3 py-1.5 min-h-[34px] bg-primary text-on-primary font-label-code text-[11px] uppercase font-bold hover:bg-secondary active:scale-95 transition-all flex items-center justify-center shadow-sm"
               aria-label="Quick add size"
               type="button"
             >
@@ -279,6 +240,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
           </div>
         </div>
       </div>
+
+      {/* Mobile Quick Add Bottom Sheet Modal */}
+      <QuickAddModal
+        product={product}
+        isOpen={showSizePicker}
+        onClose={() => setShowSizePicker(false)}
+        initialColorIndex={selectedColorIndex}
+      />
     </article>
   );
 };

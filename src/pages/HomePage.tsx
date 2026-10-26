@@ -26,24 +26,24 @@ export const HomePage: React.FC = () => {
     <div className="w-full pt-24 sm:pt-28 bg-surface">
       <div className="flex flex-col w-full">
         {/* HERO SECTION: High-contrast Editorial Split */}
-        <section className="relative w-full bg-surface-container-lowest -mt-24 sm:-mt-28 pt-24 sm:pt-28 pb-12 sm:pb-20 overflow-hidden border-b border-surface-container-high">
-          <div className="w-full px-4 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[calc(100vh-6rem)]">
+        <section className="relative w-full bg-surface-container-lowest -mt-24 sm:-mt-28 pt-24 sm:pt-28 pb-8 sm:pb-20 overflow-hidden border-b border-surface-container-high">
+          <div className="w-full px-4 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center min-h-[calc(100vh-6rem)]">
             {/* Left Column: Typography & Intent */}
-            <div className="lg:col-span-7 flex flex-col justify-center py-8 lg:py-12 pr-0 lg:pr-8">
+            <div className="lg:col-span-7 flex flex-col justify-center py-4 sm:py-8 lg:py-12 pr-0 lg:pr-8">
               {/* Editorial Micro Indicators */}
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 font-label-code text-[11px] sm:text-xs uppercase tracking-widest text-on-surface-variant">
-                <span className="inline-flex items-center px-2.5 py-1 bg-secondary text-on-secondary font-bold tracking-widest">
-                  DROP 04 // SURPLUS &amp; FORMAL CAPSULE
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4 font-label-code text-[11px] sm:text-xs uppercase tracking-widest text-on-surface-variant">
+                <span className="inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 bg-secondary text-on-secondary font-bold tracking-widest">
+                  DROP 04 // SURPLUS &amp; FORMAL
                 </span>
                 <span className="text-outline">/</span>
                 <span className="text-primary font-semibold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
-                  LIMITED RUN ARCHIVE
+                  LIMITED RUN
                 </span>
               </div>
 
               {/* Master Title with Magic UI Text Animate */}
-              <h1 className="font-display-hero text-5xl sm:text-7xl lg:text-[88px] uppercase tracking-tight text-primary leading-[0.95] mb-6">
+              <h1 className="font-display-hero text-4xl sm:text-7xl lg:text-[88px] uppercase tracking-tight text-primary leading-[0.95] mb-4 sm:mb-6">
                 <TextAnimate
                   by="word"
                   animation="blurInUp"
@@ -67,57 +67,59 @@ export const HomePage: React.FC = () => {
               </h1>
 
               {/* Subhead and CTAs with Magic UI Blur Fade */}
-              <BlurFade delay={0.3} duration={0.4} yOffset={6}>
-                <p className="font-body-lg text-base sm:text-lg text-on-surface-variant max-w-xl mb-8 leading-relaxed">
+              <BlurFade delay={0.15} duration={0.4} yOffset={6}>
+                <p className="font-body-lg text-sm sm:text-base lg:text-lg text-on-surface-variant max-w-xl mb-6 sm:mb-8 leading-relaxed">
                   Everyday streetwear engineered with structural integrity. Relaxed silhouettes, dense custom-milled textiles, and functional surplus details built to endure daily wear.
                 </p>
 
-                {/* CTA Cluster */}
-                <div className="flex flex-wrap items-center gap-4 mb-10">
-                  <a
-                    href="#new-arrivals"
-                    className="px-8 py-4 min-h-[50px] bg-primary text-on-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary hover:text-on-secondary transition-all flex items-center gap-2 group shadow-md active:scale-95"
+                {/* CTA Cluster with High-Visibility Touch Targets */}
+                <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-10">
+                  <Link
+                    to="/shop"
+                    className="flex-1 sm:flex-initial px-6 sm:px-8 py-3.5 sm:py-4 min-h-[48px] bg-primary text-on-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-secondary hover:text-on-secondary transition-all flex items-center justify-center gap-2 group shadow-md active:scale-95"
                   >
-                    <span>EXPLORE NEW ARRIVALS</span>
+                    <span>SHOP DROP 04</span>
                     <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
                       arrow_forward
                     </span>
-                  </a>
-                  <Link
-                    to="/shop"
-                    className="px-6 py-4 min-h-[50px] bg-surface-container-low text-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-surface-container-highest transition-colors flex items-center gap-2 border border-surface-container-high active:scale-95"
-                  >
-                    <span>VIEW ALL PIECES</span>
                   </Link>
+                  <a
+                    href="#new-arrivals"
+                    className="flex-1 sm:flex-initial px-5 sm:px-6 py-3.5 sm:py-4 min-h-[48px] bg-surface-container-low text-primary font-title-sm text-xs sm:text-sm uppercase tracking-wider hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2 border border-surface-container-high active:scale-95"
+                  >
+                    <span>NEW ARRIVALS</span>
+                  </a>
                 </div>
               </BlurFade>
 
-              {/* Metric Pulse Ticker with Magic UI Blur Fade */}
-              <BlurFade delay={0.4} duration={0.4} yOffset={6}>
-                <div className="bg-surface-container-low p-4 border border-surface-container-high grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="flex items-center gap-2 font-label-code text-[11px] uppercase text-on-surface-variant">
-                    <span className="material-symbols-outlined text-secondary text-[18px]">local_shipping</span>
+              {/* Metric Pulse Ticker */}
+              <BlurFade delay={0.25} duration={0.4} yOffset={6}>
+                <div className="bg-surface-container-low p-3 sm:p-4 border border-surface-container-high grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+                  <div className="flex items-center gap-2 font-label-code text-[10px] sm:text-[11px] uppercase text-on-surface-variant">
+                    <span className="material-symbols-outlined text-secondary text-[16px] sm:text-[18px]">local_shipping</span>
                     <span>DISPATCH IN 24-48 HRS</span>
                   </div>
-                  <div className="flex items-center gap-2 font-label-code text-[11px] uppercase text-on-surface-variant">
-                    <span className="material-symbols-outlined text-primary text-[18px]">published_with_changes</span>
+                  <div className="flex items-center gap-2 font-label-code text-[10px] sm:text-[11px] uppercase text-on-surface-variant">
+                    <span className="material-symbols-outlined text-primary text-[16px] sm:text-[18px]">published_with_changes</span>
                     <span>7-DAY HASSLE-FREE EXCHANGES</span>
                   </div>
-                  <div className="flex items-center gap-2 font-label-code text-[11px] uppercase text-on-surface-variant">
-                    <span className="material-symbols-outlined text-secondary text-[18px]">verified</span>
+                  <div className="flex items-center gap-2 font-label-code text-[10px] sm:text-[11px] uppercase text-on-surface-variant">
+                    <span className="material-symbols-outlined text-secondary text-[16px] sm:text-[18px]">verified</span>
                     <span>FREE SHIPPING OVER ₹3,999</span>
                   </div>
                 </div>
               </BlurFade>
             </div>
 
-            {/* Right Column: Hero Fashion Photography with Magic UI Blur Fade */}
-            <BlurFade delay={0.15} duration={0.5} yOffset={8} className="lg:col-span-5">
-              <div className="relative w-full h-[480px] sm:h-[600px] lg:h-[720px] bg-surface-container-low overflow-hidden group border border-surface-container-high shadow-lg">
+            {/* Right Column: Hero Fashion Photography with LCP Optimization */}
+            <BlurFade delay={0.1} duration={0.5} yOffset={8} className="lg:col-span-5">
+              <div className="relative w-full h-[320px] sm:h-[480px] lg:h-[720px] bg-surface-container-low overflow-hidden group border border-surface-container-high shadow-lg">
                 <img
                   src={LOOKBOOK_HERO_IMAGE}
                   alt="Downtown Originals Lookbook — Model wearing Metro Surplus M-65 Jacket in Washed Charcoal"
-                  className="w-full h-full object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
+                  fetchPriority="high"
+                  loading="eager"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 ease-out md:group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
@@ -174,7 +176,7 @@ export const HomePage: React.FC = () => {
 
           {/* Product Grid with Blur Fade */}
           <BlurFade delay={0.15} duration={0.45} yOffset={8}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
               {filteredNewArrivals.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -222,7 +224,7 @@ export const HomePage: React.FC = () => {
 
           {/* 5 Categories Cards Grid with Blur Fade */}
           <BlurFade delay={0.15} duration={0.45} yOffset={8}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6">
               {CURATED_CATEGORIES.map((cat) => (
                 <Link
                   key={cat.num}

@@ -133,20 +133,22 @@ export const CartPage: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low"
+                        className="w-10 h-10 flex items-center justify-center text-primary hover:bg-surface-container-low active:scale-90 transition-transform text-base"
+                        aria-label="Decrease quantity"
                       >
                         -
                       </button>
-                      <span className="w-8 text-center font-label-code text-xs font-bold">
+                      <span className="w-10 text-center font-label-code text-xs font-bold">
                         {item.quantity}
                       </span>
                       <button
                         type="button"
                         disabled={item.quantity >= 10}
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className={`w-8 h-8 flex items-center justify-center transition-colors ${
+                        className={`w-10 h-10 flex items-center justify-center active:scale-90 transition-transform text-base ${
                           item.quantity >= 10 ? 'opacity-30 cursor-not-allowed text-outline' : 'text-primary hover:bg-surface-container-low'
                         }`}
+                        aria-label="Increase quantity"
                       >
                         +
                       </button>
@@ -228,6 +230,29 @@ export const CartPage: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile Sticky Checkout Action Bar */}
+      <div
+        className="fixed bottom-0 inset-x-0 z-30 bg-surface-container-lowest/98 backdrop-blur-md border-t border-surface-container-high p-3 sm:hidden shadow-2xl"
+        style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom, 12px))' }}
+      >
+        <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
+          <div>
+            <div className="font-label-code text-[10px] uppercase text-on-surface-variant">TOTAL DUE</div>
+            <div className="font-headline-sm text-lg font-bold text-primary">
+              ₹{(subtotal + shippingFee).toLocaleString('en-IN')}
+            </div>
+          </div>
+          <button
+            onClick={() => navigate('/checkout')}
+            className="flex-1 py-3 px-5 min-h-[44px] bg-primary text-on-primary font-title-sm text-xs uppercase tracking-wider hover:bg-secondary transition-all font-bold flex items-center justify-center gap-1.5 shadow-md active:scale-95"
+            type="button"
+          >
+            <span>PROCEED TO CHECKOUT</span>
+            <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </button>
         </div>
       </div>
     </div>

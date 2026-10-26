@@ -30,6 +30,23 @@ export const ShopPage: React.FC = () => {
     }
   }, [categoryParam]);
 
+  // Lock body scroll when mobile filter bottom sheet is open
+  useEffect(() => {
+    if (isMobileFilterOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsMobileFilterOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMobileFilterOpen]);
+
   const handleCategoryChange = (catId: string) => {
     setSelectedCategory(catId);
     setSearchParams(catId === 'all' ? {} : { cat: catId });
@@ -411,7 +428,7 @@ export const ShopPage: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div id="shopProductGrid" className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
@@ -421,7 +438,7 @@ export const ShopPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Responsive Mobile Filter Drawer */}
+      {/* Responsive Mobile Filter Bottom Sheet */}
       <div
         className={`fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
           isMobileFilterOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -429,75 +446,116 @@ export const ShopPage: React.FC = () => {
         onClick={() => setIsMobileFilterOpen(false)}
       >
         <div
-          className={`fixed top-0 right-0 bottom-0 w-[85%] max-w-md bg-surface-container-lowest p-6 overflow-y-auto flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-out border-l border-surface-container-high ${
-            isMobileFilterOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`fixed inset-x-0 bottom-0 max-h-[85vh] bg-surface-container-lowest rounded-t-2xl shadow-2xl overflow-hidden flex flex-col transition-transform duration-300 ease-out border-t border-surface-container-high ${
+            isMobileFilterOpen ? 'translate-y-0' : 'translate-y-full'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div>
-            <div className="flex items-center justify-between pb-4 border-b border-surface-container-high">
+          {/* Bottom Sheet Handle */}
+          <div className="pt-3 pb-1 flex justify-center">
+            <div className="w-12 h-1 bg-surface-container-highest rounded-full" />
+          </div>
+
+          {/* Sheet Header */}
+          <div className="px-5 py-3 flex items-center justify-between border-b border-surface-container-high">
+            <div className="flex items-center gap-2">
               <span className="font-headline-sm text-lg uppercase text-primary font-bold">
-                PARAMETRIC FILTERS
+                FILTER PIECES
               </span>
-              <button
-                onClick={() => setIsMobileFilterOpen(false)}
-                className="w-11 h-11 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-transform"
-                aria-label="Close filters"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[24px]">close</span>
-              </button>
+              {activeFilterCount > 0 && (
+                <span className="font-label-code text-xs px-2 py-0.5 bg-secondary text-on-secondary rounded-full font-bold">
+                  {activeFilterCount} ACTIVE
+                </span>
+              )}
+            </div>
+            <button
+              onClick={() => setIsMobileFilterOpen(false)}
+              className="w-10 h-10 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-transform"
+              aria-label="Close filters"
+              type="button"
+            >
+              <span className="material-symbols-outlined text-[22px]">close</span>
+            </button>
+          </div>
+
+          {/* Scrollable Filter Sections */}
+          <div className="flex-1 overflow-y-auto px-5 py-3 flex flex-col divide-y divide-surface-container-high">
+            {/* Category Filter */}
+            <div className="py-3 flex flex-col gap-2">
+              <span className="font-label-code text-xs uppercase font-bold text-primary">
+                CATEGORY
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => handleCategoryChange(cat.id)}
+                    className={`px-3 py-1.5 font-label-code text-xs uppercase border transition-all active:scale-95 ${
+                      selectedCategory === cat.id
+                        ? 'bg-primary text-on-primary border-primary font-bold shadow-sm'
+                        : 'bg-surface-container-low text-primary border-surface-container-high hover:border-primary'
+                    }`}
+                  >
+                    {cat.name} ({cat.count})
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Fit Architecture */}
-            <div className="py-4 border-b border-surface-container-high flex flex-col gap-2">
+            <div className="py-3 flex flex-col gap-2">
               <span className="font-label-code text-xs uppercase font-bold text-primary">
                 FIT ARCHITECTURE
               </span>
-              {FIT_ARCHITECTURES.map((fit) => (
-                <label key={fit.label} className="flex items-center justify-between py-1 cursor-pointer">
-                  <span className="font-body-md text-xs sm:text-sm text-on-surface flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={selectedFits.includes(fit.label)}
-                      onChange={() => toggleFit(fit.label)}
-                      className="accent-secondary h-4 w-4"
-                    />
-                    {fit.label}
-                  </span>
-                  <span className="font-label-code text-[10px] px-1.5 py-0.5 bg-surface-container text-on-surface-variant font-bold">
-                    {fit.count}
-                  </span>
-                </label>
-              ))}
+              <div className="grid grid-cols-1 gap-1">
+                {FIT_ARCHITECTURES.map((fit) => (
+                  <label key={fit.label} className="flex items-center justify-between py-1.5 cursor-pointer hover:bg-surface-container-low px-1 transition-colors">
+                    <span className="font-body-md text-xs sm:text-sm text-on-surface flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={selectedFits.includes(fit.label)}
+                        onChange={() => toggleFit(fit.label)}
+                        className="accent-secondary h-4 w-4"
+                      />
+                      {fit.label}
+                    </span>
+                    <span className="font-label-code text-[10px] px-1.5 py-0.5 bg-surface-container text-on-surface-variant font-bold">
+                      {fit.count}
+                    </span>
+                  </label>
+                ))}
+              </div>
             </div>
 
             {/* GSM */}
-            <div className="py-4 border-b border-surface-container-high flex flex-col gap-2">
+            <div className="py-3 flex flex-col gap-2">
               <span className="font-label-code text-xs uppercase font-bold text-primary">
                 TEXTILE DENSITY
               </span>
-              {FABRIC_GSM_OPTIONS.map((gsm) => (
-                <label key={gsm} className="flex items-center justify-between py-1 cursor-pointer">
-                  <span className="font-body-md text-xs sm:text-sm text-on-surface flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={selectedGsm.includes(gsm)}
-                      onChange={() => toggleGsm(gsm)}
-                      className="accent-secondary h-4 w-4"
-                    />
-                    {gsm}
-                  </span>
-                </label>
-              ))}
+              <div className="grid grid-cols-1 gap-1">
+                {FABRIC_GSM_OPTIONS.map((gsm) => (
+                  <label key={gsm} className="flex items-center justify-between py-1.5 cursor-pointer hover:bg-surface-container-low px-1 transition-colors">
+                    <span className="font-body-md text-xs sm:text-sm text-on-surface flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={selectedGsm.includes(gsm)}
+                        onChange={() => toggleGsm(gsm)}
+                        className="accent-secondary h-4 w-4"
+                      />
+                      {gsm}
+                    </span>
+                  </label>
+                ))}
+              </div>
             </div>
 
             {/* Sizes */}
-            <div className="py-4 border-b border-surface-container-high flex flex-col gap-2">
+            <div className="py-3 flex flex-col gap-2">
               <span className="font-label-code text-xs uppercase font-bold text-primary">
-                SIZE
+                SIZE AVAILABILITY
               </span>
-              <div className="grid grid-cols-5 gap-1 pt-1">
+              <div className="grid grid-cols-5 gap-1.5 pt-1">
                 {(['S', 'M', 'L', 'XL', 'XXL'] as ProductSize[]).map((size) => {
                   const active = selectedSizes.includes(size);
                   return (
@@ -505,10 +563,10 @@ export const ShopPage: React.FC = () => {
                       key={size}
                       type="button"
                       onClick={() => toggleSize(size)}
-                      className={`py-2 text-center font-label-code text-xs font-bold border transition-colors ${
+                      className={`min-h-[44px] py-2 text-center font-label-code text-xs font-bold border transition-all active:scale-90 ${
                         active
-                          ? 'bg-secondary text-on-secondary border-secondary'
-                          : 'bg-surface-container-lowest text-primary border-outline-variant'
+                          ? 'bg-secondary text-on-secondary border-secondary font-black'
+                          : 'bg-surface-container-lowest text-primary border-surface-container-high hover:border-primary'
                       }`}
                     >
                       {size}
@@ -519,10 +577,10 @@ export const ShopPage: React.FC = () => {
             </div>
 
             {/* Price Ceiling */}
-            <div className="py-4 border-b border-surface-container-high flex flex-col gap-2">
+            <div className="py-3 flex flex-col gap-2">
               <div className="flex justify-between font-label-code text-xs font-bold text-primary">
-                <span>PRICE CEILING</span>
-                <span className="text-secondary">UP TO ₹{maxPrice.toLocaleString('en-IN')}</span>
+                <span>MAX PRICE</span>
+                <span className="text-secondary font-bold">≤ ₹{maxPrice.toLocaleString('en-IN')}</span>
               </div>
               <input
                 type="range"
@@ -531,28 +589,30 @@ export const ShopPage: React.FC = () => {
                 step="500"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
-                className="w-full accent-secondary"
+                className="w-full accent-secondary h-2 bg-surface-container-high rounded-lg cursor-pointer"
               />
             </div>
           </div>
 
-          <div className="pt-4 flex flex-col gap-2">
-            <button
-              onClick={() => setIsMobileFilterOpen(false)}
-              className="w-full py-3.5 bg-primary text-on-primary font-title-sm text-xs uppercase tracking-wider hover:bg-secondary transition-colors"
-              type="button"
-            >
-              SHOW {filteredProducts.length} PIECES
-            </button>
+          {/* Sticky Bottom Actions inside Bottom Sheet */}
+          <div className="p-4 bg-surface-container-low border-t border-surface-container-high flex items-center gap-3">
             {activeFilterCount > 0 && (
               <button
                 onClick={clearAllFilters}
-                className="w-full py-2.5 bg-surface-container-low border border-surface-container-high text-primary font-label-code text-xs uppercase"
+                className="flex-1 min-h-[48px] py-3 bg-surface-container border border-surface-container-high text-primary font-label-code text-xs uppercase font-bold hover:bg-surface-container-highest transition-colors active:scale-95"
                 type="button"
               >
-                RESET FILTERS
+                RESET
               </button>
             )}
+            <button
+              onClick={() => setIsMobileFilterOpen(false)}
+              className="flex-2 w-full min-h-[48px] py-3 bg-primary text-on-primary font-title-sm text-xs uppercase tracking-wider hover:bg-secondary transition-colors shadow-md active:scale-95 font-bold flex items-center justify-center gap-1.5"
+              type="button"
+            >
+              <span>APPLY FILTERS</span>
+              <span>({filteredProducts.length} PIECES)</span>
+            </button>
           </div>
         </div>
       </div>

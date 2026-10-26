@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { Marquee } from './magicui/marquee';
 
 interface HeaderProps {
   onOpenSearch: () => void;
@@ -30,22 +31,32 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md border-b border-surface-container-high transition-all">
-        {/* Top Announcement Marquee Bar */}
+        {/* Magic UI Announcement Marquee Bar */}
         <div className="bg-primary text-on-primary overflow-hidden border-b border-primary py-1 sm:py-1.5 select-none">
-          <div className="animate-marquee font-label-code text-[10px] sm:text-[11px] uppercase tracking-widest flex items-center gap-12 font-medium">
-            {[1, 2, 3, 4].map((idx) => (
-              <span key={idx} className="flex items-center gap-3 whitespace-nowrap">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
-                <span>ELEVORA CONCEPT PREVIEW</span>
-                <span className="text-outline">/</span>
-                <span>UNOFFICIAL PROTOTYPE PREPARED FOR DOWNTOWN ORIGINALS</span>
-                <span className="text-outline">/</span>
-                <span className="text-secondary-fixed">DROP 04: SURPLUS METROPOLIS</span>
-                <span className="text-outline">/</span>
-                <span>FREE COMPLIMENTARY EXPRESS SHIPPING OVER ₹3,999</span>
-              </span>
-            ))}
-          </div>
+          <Marquee
+            pauseOnHover
+            repeat={4}
+            className="[--duration:28s] font-label-code text-[10px] sm:text-[11px] uppercase tracking-widest font-medium py-0"
+          >
+            <div className="flex items-center gap-4 sm:gap-6 whitespace-nowrap px-3 sm:px-4">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+              <span className="font-bold text-white">DOWNTOWN ORIGINALS</span>
+              <span className="text-outline">/</span>
+              <span>STREETWEAR</span>
+              <span className="text-outline">/</span>
+              <span>FORMALS</span>
+              <span className="text-outline">/</span>
+              <span className="text-secondary-fixed font-bold">OWN YOUR EVERYDAY</span>
+              <span className="text-outline">/</span>
+              <span>NEW ARRIVALS</span>
+              <span className="text-outline">/</span>
+              <span className="text-secondary-fixed">DROP 04: SURPLUS METROPOLIS</span>
+              <span className="text-outline">/</span>
+              <span>FREE COMPLIMENTARY SHIPPING OVER ₹3,999</span>
+              <span className="text-outline">/</span>
+              <span className="text-outline-variant">ELEVORA CONCEPT PREVIEW</span>
+            </div>
+          </Marquee>
         </div>
 
         {/* Main Navigation Bar */}

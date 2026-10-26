@@ -4,6 +4,7 @@ import { PRODUCTS, CATEGORIES, FIT_ARCHITECTURES, FABRIC_GSM_OPTIONS } from '../
 import { ProductCard } from '../components/ProductCard';
 import { ProductSize } from '../types';
 import { useWishlist } from '../context/WishlistContext';
+import { BlurFade } from '../components/magicui/blur-fade';
 
 export const ShopPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -126,26 +127,28 @@ export const ShopPage: React.FC = () => {
     <div className="w-full pt-24 sm:pt-28 bg-surface">
       {/* Top Header Section */}
       <section className="w-full px-4 sm:px-8 lg:px-12 pt-8 pb-6 bg-surface-container-lowest border-b border-surface-container-high">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 font-label-code text-xs uppercase tracking-widest text-secondary font-bold mb-1">
-              <span>ARCHIVE CATALOG // DROP 04</span>
-              <span>•</span>
-              <span>SURPLUS METROPOLIS</span>
+        <BlurFade delay={0.05} duration={0.4} yOffset={6}>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 font-label-code text-xs uppercase tracking-widest text-secondary font-bold mb-1">
+                <span>ARCHIVE CATALOG // DROP 04</span>
+                <span>•</span>
+                <span>SURPLUS METROPOLIS</span>
+              </div>
+              <h1 className="font-headline-lg text-3xl sm:text-5xl uppercase text-primary leading-none">
+                {filterParam === 'wishlist' ? 'SAVED ARCHIVE PIECES' : 'SHOP ALL COLLECTION'}
+              </h1>
+              <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-2xl mt-2">
+                Engineered silhouettes, custom heavyweights, and tailored surplus staples crafted for post-industrial movement.
+              </p>
             </div>
-            <h1 className="font-headline-lg text-3xl sm:text-5xl uppercase text-primary leading-none">
-              {filterParam === 'wishlist' ? 'SAVED ARCHIVE PIECES' : 'SHOP ALL COLLECTION'}
-            </h1>
-            <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-2xl mt-2">
-              Engineered silhouettes, custom heavyweights, and tailored surplus staples crafted for post-industrial movement.
-            </p>
-          </div>
 
-          <div className="flex items-baseline gap-2 font-label-code text-xs uppercase text-on-surface-variant bg-surface-container-low px-3 py-1.5 border border-surface-container-high shrink-0 self-start md:self-auto">
-            <span className="text-primary font-bold">{filteredProducts.length} OF {PRODUCTS.length}</span>
-            <span>ARCHIVED PIECES AVAILABLE</span>
+            <div className="flex items-baseline gap-2 font-label-code text-xs uppercase text-on-surface-variant bg-surface-container-low px-3 py-1.5 border border-surface-container-high shrink-0 self-start md:self-auto">
+              <span className="text-primary font-bold">{filteredProducts.length} OF {PRODUCTS.length}</span>
+              <span>ARCHIVED PIECES AVAILABLE</span>
+            </div>
           </div>
-        </div>
+        </BlurFade>
       </section>
 
       {/* Category Pill Strip & Controls Bar */}

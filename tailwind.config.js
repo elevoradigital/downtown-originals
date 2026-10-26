@@ -105,13 +105,30 @@ export default {
         "label-meta": ["10px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "400" }],
       },
       animation: {
-        marquee: "marquee 30s linear infinite",
+        marquee: "marquee var(--duration, 30s) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration, 30s) linear infinite",
+        shine: "shine var(--duration, 14s) infinite linear",
         "pulse-fast": "pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       keyframes: {
         marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-50%)" },
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap, 1rem)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap, 1rem)))" },
+        },
+        shine: {
+          "0%": {
+            "background-position": "0% 0%",
+          },
+          "50%": {
+            "background-position": "100% 100%",
+          },
+          "100%": {
+            "background-position": "0% 0%",
+          },
         },
       },
     },

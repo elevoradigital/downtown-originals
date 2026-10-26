@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { SizeGuideModal } from '../components/SizeGuideModal';
 import { ProductCard } from '../components/ProductCard';
+import { Marquee } from '../components/magicui/marquee';
 
 export const ProductDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -63,24 +64,22 @@ export const ProductDetailPage: React.FC = () => {
     <div className="w-full pt-24 sm:pt-28 bg-surface">
       {/* Top Marquee Ticker: Product Status & Stock Alert */}
       <section className="w-full bg-primary text-on-primary py-1 sm:py-1.5 overflow-hidden select-none border-b border-primary">
-        <div className="animate-marquee font-label-code text-[10px] sm:text-[11px] uppercase tracking-widest flex items-center gap-12 text-on-primary">
-          {[1, 2, 3].map((i) => (
-            <React.Fragment key={i}>
-              <span className="flex items-center gap-2 whitespace-nowrap">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
-                <span>DROP 04 // SURPLUS METROPOLIS CAPSULE</span>
-              </span>
-              <span className="flex items-center gap-2 whitespace-nowrap">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
-                <span>LIMITED RUN // 250 UNITS NUMBERED ARCHIVE</span>
-              </span>
-              <span className="flex items-center gap-2 whitespace-nowrap">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
-                <span>WATER REPELLENT DWR FINISH VERIFIED</span>
-              </span>
-            </React.Fragment>
-          ))}
-        </div>
+        <Marquee
+          pauseOnHover
+          repeat={4}
+          className="[--duration:24s] font-label-code text-[10px] sm:text-[11px] uppercase tracking-widest text-on-primary py-0"
+        >
+          <div className="flex items-center gap-6 whitespace-nowrap px-4">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+            <span>DROP 04 // SURPLUS METROPOLIS CAPSULE</span>
+            <span className="text-outline">/</span>
+            <span>LIMITED RUN // 250 UNITS NUMBERED ARCHIVE</span>
+            <span className="text-outline">/</span>
+            <span className="text-secondary-fixed">WATER REPELLENT DWR FINISH VERIFIED</span>
+            <span className="text-outline">/</span>
+            <span>JAPANESE TECHNICAL TEXTILES</span>
+          </div>
+        </Marquee>
       </section>
 
       {/* Breadcrumbs & Meta Bar */}

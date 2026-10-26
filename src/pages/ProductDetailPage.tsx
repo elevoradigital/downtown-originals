@@ -165,16 +165,16 @@ export const ProductDetailPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Thumbnail Strip with Micro-Interactions */}
-            <div className="grid grid-cols-5 gap-3">
+            {/* Thumbnail Strip with Touch-Optimized Micro-Interactions */}
+            <div className="grid grid-cols-5 gap-2 sm:gap-3">
               {product.images.map((imgUrl, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSelectedImageIndex(idx)}
-                  className={`aspect-[4/5] bg-surface-container-low overflow-hidden border-2 transition-all duration-200 active:scale-90 ${
+                  className={`aspect-[4/5] min-h-[50px] bg-surface-container-low overflow-hidden border-2 transition-all duration-150 active:scale-95 ${
                     selectedImageIndex === idx
-                      ? 'border-secondary scale-95 shadow-sm'
-                      : 'border-surface-container-high opacity-70 hover:opacity-100 hover:border-primary'
+                      ? 'border-secondary scale-[0.98] shadow-sm ring-1 ring-secondary'
+                      : 'border-surface-container-high opacity-75 md:opacity-70 md:hover:opacity-100 md:hover:border-primary'
                   }`}
                   type="button"
                   aria-label={`View photo ${idx + 1}`}
@@ -183,6 +183,7 @@ export const ProductDetailPage: React.FC = () => {
                     src={imgUrl}
                     alt={`Thumbnail view ${idx + 1}`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </button>
               ))}
@@ -241,14 +242,14 @@ export const ProductDetailPage: React.FC = () => {
                     key={color.name}
                     type="button"
                     onClick={() => handleColorChange(idx)}
-                    className={`flex items-center gap-2 px-3 py-1.5 border text-xs font-label-code transition-all ${
+                    className={`flex items-center gap-2 px-3 py-2 min-h-[40px] border text-xs font-label-code transition-all active:scale-95 ${
                       selectedColorIndex === idx
-                        ? 'border-primary bg-surface-container-low font-bold shadow-sm'
+                        ? 'border-primary bg-surface-container-low font-bold shadow-sm ring-1 ring-primary'
                         : 'border-surface-container-high hover:border-primary'
                     }`}
                   >
                     <span
-                      className="w-3.5 h-3.5 rounded-full border border-black/20"
+                      className="w-4 h-4 rounded-full border border-black/20 shrink-0"
                       style={{ backgroundColor: color.hex }}
                     />
                     <span className="uppercase">{color.name}</span>
@@ -267,7 +268,7 @@ export const ProductDetailPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsSizeGuideOpen(true)}
-                  className="text-on-surface-variant hover:text-secondary underline underline-offset-4 flex items-center gap-1 text-xs"
+                  className="text-on-surface-variant hover:text-secondary underline underline-offset-4 flex items-center gap-1 text-xs py-1"
                 >
                   <span className="material-symbols-outlined text-[14px]">straighten</span>
                   SIZE MATRIX &amp; FIT GUIDE
@@ -283,7 +284,7 @@ export const ProductDetailPage: React.FC = () => {
                       type="button"
                       disabled={!s.inStock}
                       onClick={() => setSelectedSize(s.size)}
-                      className={`py-2.5 sm:py-3 text-center font-label-code text-xs font-bold border transition-all duration-150 active:scale-90 relative ${
+                      className={`min-h-[44px] py-2.5 sm:py-3 text-center font-label-code text-xs font-bold border transition-all duration-120 active:scale-90 relative flex items-center justify-center ${
                         !s.inStock
                           ? 'opacity-30 border-surface-container-high bg-surface-container text-outline line-through cursor-not-allowed'
                           : isSelected

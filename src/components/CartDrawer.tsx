@@ -61,9 +61,9 @@ export const CartDrawer: React.FC = () => {
         }`}
       >
         {/* Drawer Header */}
-        <div className="p-6 bg-surface-container-lowest flex items-center justify-between border-b border-surface-container-high shadow-sm">
+        <div className="p-4 sm:p-6 bg-surface-container-lowest flex items-center justify-between border-b border-surface-container-high shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="font-headline-sm text-xl uppercase text-primary font-bold">
+            <span className="font-headline-sm text-lg sm:text-xl uppercase text-primary font-bold">
               SHOPPING BAG
             </span>
             <span className="font-label-code text-xs px-2.5 py-0.5 bg-secondary text-on-secondary font-bold">
@@ -73,7 +73,7 @@ export const CartDrawer: React.FC = () => {
           <button
             aria-label="Close cart drawer"
             onClick={closeCart}
-            className="p-1 text-primary hover:text-secondary transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-transform"
             type="button"
           >
             <span className="material-symbols-outlined text-[24px]">close</span>
@@ -163,7 +163,7 @@ export const CartDrawer: React.FC = () => {
                       </Link>
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="text-on-surface-variant hover:text-error transition-colors p-0.5"
+                        className="text-on-surface-variant hover:text-error active:scale-90 transition-all p-1 min-w-[32px] min-h-[32px] flex items-center justify-center"
                         aria-label="Remove item"
                         type="button"
                       >
@@ -188,7 +188,7 @@ export const CartDrawer: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-7 h-7 flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors"
+                        className="w-8 h-8 flex items-center justify-center text-primary hover:bg-surface-container-low active:scale-90 transition-all font-bold"
                         aria-label="Decrease quantity"
                       >
                         -
@@ -200,7 +200,7 @@ export const CartDrawer: React.FC = () => {
                         type="button"
                         disabled={item.quantity >= 10}
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className={`w-7 h-7 flex items-center justify-center transition-colors ${
+                        className={`w-8 h-8 flex items-center justify-center active:scale-90 transition-all font-bold ${
                           item.quantity >= 10 ? 'opacity-30 cursor-not-allowed text-outline' : 'text-primary hover:bg-surface-container-low'
                         }`}
                         aria-label="Increase quantity"

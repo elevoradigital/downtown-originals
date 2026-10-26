@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
   
   body {
@@ -15,6 +16,7 @@
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   /* Material symbols base sizing */
@@ -27,6 +29,7 @@
     display: inline-block;
     vertical-align: middle;
     line-height: 1;
+    user-select: none;
   }
 }
 
@@ -39,20 +42,42 @@
   scrollbar-width: none;
 }
 
+/* GPU Hardware Acceleration for buttery-smooth mobile motion */
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 /* Custom marquee */
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0%, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 .animate-marquee {
   display: inline-flex;
   white-space: nowrap;
   animation: marquee 30s linear infinite;
+  will-change: transform;
 }
 
-.animate-marquee:hover {
+.animate-marquee:hover,
+.animate-marquee:active {
   animation-play-state: paused;
+}
+
+/* Touch Device Optimization: Disable sticky hover state and guarantee snappy active feedback */
+@media (hover: none) and (pointer: coarse) {
+  /* Prevent sticky hover transitions on touchscreens */
+  a:hover, button:hover {
+    transition-duration: 0ms !important;
+  }
+
+  /* Snappy active touch response */
+  a:active, button:active {
+    transition-duration: 80ms !important;
+  }
 }
 
 /* Visible Focus States for Accessible Keyboard Navigation */

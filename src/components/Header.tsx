@@ -94,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <button
               aria-label="Open Navigation Menu"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-all"
+              className="lg:hidden w-11 h-11 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-all"
               type="button"
             >
               <span className="material-symbols-outlined text-[24px]">menu</span>
@@ -133,7 +133,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
             <button
               aria-label="Search Collection"
               onClick={onOpenSearch}
-              className="w-10 h-10 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-all"
+              className="w-11 h-11 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-all"
               type="button"
             >
               <span className="material-symbols-outlined text-[22px]">search</span>
@@ -187,7 +187,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
           onClick={(e) => e.stopPropagation()}
         >
           {/* Mobile Drawer Top */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5 overflow-y-auto">
             <div className="flex items-center justify-between border-b border-surface-container-high pb-4">
               <span className="font-headline-sm text-xl uppercase text-primary font-bold">
                 DOWNTOWN ORIGINALS
@@ -195,72 +195,72 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch }) => {
               <button
                 aria-label="Close menu"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-1 text-primary hover:text-secondary active:scale-90 transition-transform"
+                className="w-11 h-11 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-transform"
                 type="button"
               >
                 <span className="material-symbols-outlined text-[24px]">close</span>
               </button>
             </div>
 
-            {/* Mobile Nav Links */}
-            <div className="flex flex-col gap-4 font-headline-sm text-2xl uppercase">
+            {/* Mobile Nav Links with Touch-Optimized Minimum 44px Tap Height */}
+            <nav className="flex flex-col gap-1 font-headline-sm text-xl uppercase">
               <Link
                 to="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-secondary transition-colors"
+                className="min-h-[44px] py-2 px-1 flex items-center hover:text-secondary active:text-secondary active:translate-x-1 transition-all"
               >
                 HOME
               </Link>
               <Link
                 to="/shop"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-secondary transition-colors"
+                className="min-h-[44px] py-2 px-1 flex items-center hover:text-secondary active:text-secondary active:translate-x-1 transition-all"
               >
                 SHOP ALL COLLECTION
               </Link>
               <Link
                 to="/shop?cat=outerwear"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-secondary transition-colors text-on-surface-variant text-xl"
+                className="min-h-[44px] py-2 px-1 flex items-center text-on-surface-variant hover:text-secondary active:text-secondary active:translate-x-1 transition-all text-lg"
               >
                 OUTERWEAR &amp; JACKETS
               </Link>
               <Link
                 to="/shop?cat=tees"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-secondary transition-colors text-on-surface-variant text-xl"
+                className="min-h-[44px] py-2 px-1 flex items-center text-on-surface-variant hover:text-secondary active:text-secondary active:translate-x-1 transition-all text-lg"
               >
                 HEAVYWEIGHT TEES
               </Link>
               <Link
                 to="/shop?cat=hoodies"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-secondary transition-colors text-on-surface-variant text-xl"
+                className="min-h-[44px] py-2 px-1 flex items-center text-on-surface-variant hover:text-secondary active:text-secondary active:translate-x-1 transition-all text-lg"
               >
                 FLEECE &amp; HOODIES
               </Link>
               <Link
                 to="/shop?cat=cargos"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-secondary transition-colors text-on-surface-variant text-xl"
+                className="min-h-[44px] py-2 px-1 flex items-center text-on-surface-variant hover:text-secondary active:text-secondary active:translate-x-1 transition-all text-lg"
               >
                 TACTICAL CARGOS
               </Link>
               <Link
                 to="/shop?cat=formals"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-secondary transition-colors text-on-surface-variant text-xl"
+                className="min-h-[44px] py-2 px-1 flex items-center text-on-surface-variant hover:text-secondary active:text-secondary active:translate-x-1 transition-all text-lg"
               >
                 REFINED FORMALS
               </Link>
               <Link
                 to="/shop?cat=accessories"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-secondary transition-colors text-on-surface-variant text-xl"
+                className="min-h-[44px] py-2 px-1 flex items-center text-on-surface-variant hover:text-secondary active:text-secondary active:translate-x-1 transition-all text-lg"
               >
                 SURPLUS ACCESSORIES
               </Link>
-            </div>
+            </nav>
           </div>
 
           {/* Mobile Drawer Bottom */}

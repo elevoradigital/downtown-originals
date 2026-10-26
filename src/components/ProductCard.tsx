@@ -19,7 +19,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
   const isFavorited = isInWishlist(product.id);
   const activeColor = product.colors[selectedColorIndex] || product.colors[0];
 
-  // Secondary editorial image for hover reveal
+  // Secondary editorial image for hover reveal (desktop only)
   const hasSecondaryImage = product.images.length > 1;
   const secondaryImageIndex = selectedColorIndex === 0 ? 1 : 0;
   const secondaryImage = product.images[secondaryImageIndex] || product.images[0];
@@ -36,11 +36,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
     setTimeout(() => {
       setShowSizePicker(false);
       setJustAddedSize(null);
-    }, 450);
+    }, 400);
   };
 
   return (
-    <article className="group flex flex-col bg-surface-container-lowest border border-surface-container-high hover:border-primary transition-colors duration-250 relative select-none">
+    <article className="group flex flex-col bg-surface-container-lowest border border-surface-container-high hover:border-primary transition-colors duration-200 relative select-none">
       {/* Product Image Frame */}
       <div className="relative aspect-[3/4] sm:aspect-[4/5] bg-surface-container-low overflow-hidden">
         <Link to={`/product/${product.slug}`} className="block w-full h-full relative overflow-hidden">
@@ -49,18 +49,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
             src={product.images[selectedColorIndex] || product.images[0]}
             alt={product.name}
             loading="lazy"
-            className={`w-full h-full object-cover transition-all duration-500 ease-out will-change-transform ${
-              hasSecondaryImage ? 'group-hover:opacity-0' : 'group-hover:scale-[1.03]'
+            className={`w-full h-full object-cover transition-all duration-300 ease-out will-change-transform ${
+              hasSecondaryImage ? 'md:group-hover:opacity-0' : 'md:group-hover:scale-[1.03]'
             }`}
           />
 
-          {/* Secondary Editorial Image on Hover */}
+          {/* Secondary Editorial Image on Hover (Scoped to desktop pointer hover) */}
           {hasSecondaryImage && (
             <img
               src={secondaryImage}
               alt={`${product.name} alternate view`}
               loading="lazy"
-              className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500 ease-out pointer-events-none will-change-transform"
+              className="w-full h-full object-cover absolute inset-0 opacity-0 md:group-hover:opacity-100 md:group-hover:scale-[1.03] transition-all duration-300 ease-out pointer-events-none will-change-transform hidden md:block"
             />
           )}
         </Link>
@@ -79,7 +79,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
           )}
         </div>
 
-        {/* Wishlist Button with Tactile Micro-Interaction */}
+        {/* Wishlist Button with Touch-Friendly Hit Target and Tactile Feedback */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -87,20 +87,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
             toggleWishlist(product.id);
           }}
           aria-label={isFavorited ? 'Remove from wishlist' : 'Add to wishlist'}
-          className={`absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-200 active:scale-85 z-10 ${
+          className={`absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-9 h-9 flex items-center justify-center transition-all duration-150 active:scale-85 z-10 ${
             isFavorited
               ? 'bg-secondary text-on-secondary shadow-md'
               : 'bg-surface-container-lowest/90 backdrop-blur-sm text-primary hover:bg-primary hover:text-on-primary border border-surface-container-high'
           }`}
           type="button"
         >
-          <span className="material-symbols-outlined text-[17px] sm:text-[18px]">
+          <span className="material-symbols-outlined text-[18px]">
             {isFavorited ? 'favorite' : 'favorite_border'}
           </span>
         </button>
 
         {/* Quick Add Overlay on Desktop Hover */}
-        <div className="hidden sm:flex absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 flex-col justify-end z-20">
+        <div className="hidden sm:flex absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-200 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 flex-col justify-end z-20">
           {showSizePicker ? (
             <div
               className="bg-surface-container-lowest p-2.5 shadow-xl border border-surface-container-high animate-fadeIn"
@@ -124,7 +124,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
                     key={s.size}
                     disabled={!s.inStock}
                     onClick={(e) => handleSizeSelect(s.size, e)}
-                    className={`py-1 text-center font-label-code text-[11px] font-bold border transition-all duration-150 active:scale-95 ${
+                    className={`py-1.5 text-center font-label-code text-[11px] font-bold border transition-all duration-150 active:scale-95 ${
                       !s.inStock
                         ? 'opacity-30 border-surface-container-high bg-surface-container text-outline line-through cursor-not-allowed'
                         : justAddedSize === s.size
@@ -170,7 +170,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
           {/* Product Title */}
           <Link
             to={`/product/${product.slug}`}
-            className="font-title-sm text-sm sm:text-[15px] text-primary uppercase font-bold tracking-tight hover:text-secondary transition-colors duration-200 line-clamp-1 block"
+            className="font-title-sm text-sm sm:text-[15px] text-primary uppercase font-bold tracking-tight hover:text-secondary transition-colors duration-150 line-clamp-1 block"
           >
             {product.name}
           </Link>
@@ -196,7 +196,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
                   e.preventDefault();
                   setShowSizePicker(false);
                 }}
-                className="hover:text-primary text-xs"
+                className="p-1 hover:text-primary text-xs"
+                aria-label="Close size picker"
               >
                 ✕
               </button>
@@ -207,7 +208,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
                   key={s.size}
                   disabled={!s.inStock}
                   onClick={(e) => handleSizeSelect(s.size, e)}
-                  className={`py-1 text-center font-label-code text-[10px] font-bold border transition-all duration-150 active:scale-95 ${
+                  className={`min-h-[36px] py-1 text-center font-label-code text-[11px] font-bold border transition-all duration-120 active:scale-90 flex items-center justify-center ${
                     !s.inStock
                       ? 'opacity-30 border-surface-container-high bg-surface-container text-outline line-through cursor-not-allowed'
                       : justAddedSize === s.size
@@ -243,15 +244,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
                 e.stopPropagation();
                 setShowSizePicker(prev => !prev);
               }}
-              className="sm:hidden px-2 py-0.5 bg-primary text-on-primary font-label-code text-[10px] uppercase font-bold hover:bg-secondary active:scale-95 transition-all"
+              className="sm:hidden px-2.5 py-1 min-h-[28px] bg-primary text-on-primary font-label-code text-[10px] uppercase font-bold hover:bg-secondary active:scale-95 transition-all flex items-center justify-center"
               aria-label="Quick add size"
               type="button"
             >
               + ADD
             </button>
 
-            {/* Color Swatch Dots */}
-            <div className="flex items-center gap-1.5">
+            {/* Color Swatch Dots with Touch-Friendly Hit Target */}
+            <div className="flex items-center gap-1">
               {product.colors.map((color, index) => (
                 <button
                   key={color.name}
@@ -262,13 +263,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd })
                     e.stopPropagation();
                     setSelectedColorIndex(index);
                   }}
-                  className={`w-3.5 h-3.5 rounded-full border transition-all duration-200 active:scale-90 ${
-                    selectedColorIndex === index
-                      ? 'ring-1 ring-offset-1 ring-primary scale-110'
-                      : 'border-outline-variant hover:scale-105'
-                  }`}
-                  style={{ backgroundColor: color.hex }}
-                />
+                  className="w-7 h-7 sm:w-6 sm:h-6 flex items-center justify-center active:scale-90 transition-transform"
+                >
+                  <span
+                    className={`w-3.5 h-3.5 rounded-full border transition-all duration-150 ${
+                      selectedColorIndex === index
+                        ? 'ring-2 ring-offset-1 ring-primary scale-110'
+                        : 'border-outline-variant hover:scale-105'
+                    }`}
+                    style={{ backgroundColor: color.hex }}
+                  />
+                </button>
               ))}
             </div>
           </div>

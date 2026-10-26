@@ -19,14 +19,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       document.body.style.overflow = 'hidden';
       setTimeout(() => inputRef.current?.focus(), 50);
       setResults(PRODUCTS.slice(0, 4)); // default suggested items
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleKeyDown);
       return () => {
         document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
       };
     } else {
       document.body.style.overflow = '';
       setQuery('');
     }
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (!query.trim()) {
@@ -53,33 +58,38 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center pt-14 sm:pt-20 px-2 sm:px-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
+      onClick={onClose}
+    >
       <div
-        className="w-full max-w-2xl bg-surface-container-lowest shadow-2xl overflow-hidden border border-surface-container-high flex flex-col"
+        className="w-full max-w-2xl bg-surface-container-lowest shadow-2xl overflow-hidden border border-surface-container-high flex flex-col max-h-[85vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="p-space-md border-b border-surface-container-high flex items-center gap-space-sm bg-surface-container-low">
-          <span className="material-symbols-outlined text-primary text-[24px]">search</span>
+        <div className="p-3 sm:p-4 border-b border-surface-container-high flex items-center gap-2 sm:gap-3 bg-surface-container-low">
+          <span className="material-symbols-outlined text-primary text-[22px] sm:text-[24px]">search</span>
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="SEARCH PRODUCTS, SILHOUETTES, GSM, OR CATEGORIES..."
-            className="flex-1 bg-transparent font-title-sm text-title-sm uppercase tracking-wide text-primary placeholder:text-on-surface-variant/50 focus:outline-none"
+            placeholder="SEARCH PRODUCTS, SILHOUETTES, GSM..."
+            className="flex-1 bg-transparent font-title-sm text-xs sm:text-sm uppercase tracking-wide text-primary placeholder:text-on-surface-variant/50 focus:outline-none"
           />
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="p-1 text-on-surface-variant hover:text-primary"
+              className="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-90"
+              aria-label="Clear search input"
             >
               <span className="material-symbols-outlined text-[18px]">close</span>
             </button>
           )}
           <button
             onClick={onClose}
-            className="font-label-code text-label-code px-2 py-1 bg-surface-container-high hover:bg-primary hover:text-on-primary transition-colors uppercase"
+            className="font-label-code text-xs px-2.5 py-1.5 min-h-[36px] bg-surface-container-high hover:bg-primary hover:text-on-primary transition-colors uppercase font-bold active:scale-95"
+            aria-label="Close search"
           >
             ESC
           </button>

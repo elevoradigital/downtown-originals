@@ -15,7 +15,7 @@ export interface ShineBorderProps extends Omit<React.HTMLAttributes<HTMLDivEleme
 export const ShineBorder: React.FC<ShineBorderProps> = ({
   borderRadius = 0,
   borderWidth = 1,
-  duration = 12,
+  duration = 14,
   color = ['#245BFF', '#FFFFFF', '#245BFF'],
   className,
   children,
@@ -36,6 +36,12 @@ export const ShineBorder: React.FC<ShineBorderProps> = ({
       )}
       {...props}
     >
+      {/* 
+        Mobile Optimization:
+        On screens < 768px (md:), the continuous radial shine gradient animation is paused (animate-none)
+        and renders as a refined, restrained border with subtle opacity.
+        On desktop (md:), the full dynamic animated shine activates.
+      */}
       <div
         style={
           {
@@ -47,7 +53,7 @@ export const ShineBorder: React.FC<ShineBorderProps> = ({
           } as React.CSSProperties
         }
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 size-full rounded-[--border-radius] p-[--border-width] will-change-[background-position] ![-webkit-mask-composite:xor] ![mask-composite:exclude] [background-image:var(--background-radial-gradient)] [background-size:300%_300%] [mask:var(--mask-linear-gradient)] motion-safe:animate-shine opacity-80 z-20"
+        className="pointer-events-none absolute inset-0 size-full rounded-[--border-radius] p-[--border-width] will-change-[background-position] ![-webkit-mask-composite:xor] ![mask-composite:exclude] [background-image:var(--background-radial-gradient)] [background-size:300%_300%] [mask:var(--mask-linear-gradient)] opacity-50 md:opacity-80 md:motion-safe:animate-shine z-20 transition-opacity"
       />
       {children}
     </div>

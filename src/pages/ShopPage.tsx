@@ -441,7 +441,8 @@ export const ShopPage: React.FC = () => {
               </span>
               <button
                 onClick={() => setIsMobileFilterOpen(false)}
-                className="p-1 text-primary hover:text-secondary"
+                className="w-11 h-11 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-transform"
+                aria-label="Close filters"
                 type="button"
               >
                 <span className="material-symbols-outlined text-[24px]">close</span>

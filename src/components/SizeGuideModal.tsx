@@ -58,22 +58,23 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
           </div>
           <button
             onClick={onClose}
-            className="p-space-xs text-primary hover:text-secondary transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-primary hover:text-secondary active:scale-90 transition-transform"
+            aria-label="Close size guide"
           >
             <span className="material-symbols-outlined text-[24px]">close</span>
           </button>
         </div>
 
         {/* Unit Toggle & Instructions */}
-        <div className="p-space-md flex flex-wrap items-center justify-between gap-space-sm border-b border-surface-container-high bg-surface-container-lowest">
-          <p className="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+        <div className="p-4 sm:p-space-md flex flex-wrap items-center justify-between gap-space-sm border-b border-surface-container-high bg-surface-container-lowest">
+          <p className="font-body-sm text-xs sm:text-body-sm text-on-surface-variant max-w-md">
             Cut with relaxed dropped shoulders and architectural drape. Take your usual streetwear size for an intentional oversized silhouette, or size down for tailored fit.
           </p>
 
           <div className="flex border border-primary bg-surface-container-lowest">
             <button
               onClick={() => setUnit('cm')}
-              className={`px-3 py-1 font-label-code text-label-code uppercase font-bold transition-colors ${
+              className={`px-4 py-2 min-h-[38px] font-label-code text-xs uppercase font-bold transition-all active:scale-95 ${
                 unit === 'cm' ? 'bg-primary text-on-primary' : 'text-primary hover:bg-surface-container-low'
               }`}
             >
@@ -81,7 +82,7 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
             </button>
             <button
               onClick={() => setUnit('inches')}
-              className={`px-3 py-1 font-label-code text-label-code uppercase font-bold transition-colors ${
+              className={`px-4 py-2 min-h-[38px] font-label-code text-xs uppercase font-bold transition-all active:scale-95 ${
                 unit === 'inches' ? 'bg-primary text-on-primary' : 'text-primary hover:bg-surface-container-low'
               }`}
             >

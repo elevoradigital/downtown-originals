@@ -36,10 +36,10 @@ export const Marquee: React.FC<MarqueeProps> = ({
         .map((_, i) => (
           <div
             key={i}
-            className={cn('flex shrink-0 justify-around [gap:var(--gap)]', {
+            className={cn('flex shrink-0 justify-around [gap:var(--gap)] will-change-transform transform-gpu', {
               'animate-marquee flex-row': !vertical,
               'animate-marquee-vertical flex-col': vertical,
-              'group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]': pauseOnHover,
+              'group-hover:[animation-play-state:paused] group-active:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]': pauseOnHover,
               '[animation-direction:reverse]': reverse,
             })}
             aria-hidden={i > 0 ? true : undefined}

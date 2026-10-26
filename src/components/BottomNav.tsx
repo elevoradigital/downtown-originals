@@ -27,7 +27,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onOpenSearch }) => {
     <nav
       aria-label="Mobile Navigation Bar"
       id="mobileBottomNav"
-      className="fixed bottom-0 inset-x-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md border-t border-surface-container-high md:hidden transition-transform duration-300"
+      className="fixed bottom-0 inset-x-0 z-40 liquid-glass-surface border-t border-white/40 md:hidden transition-transform duration-300"
       style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
       <div className="h-16 px-2 flex items-center justify-around">

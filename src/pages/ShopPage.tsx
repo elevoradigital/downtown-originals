@@ -123,25 +123,25 @@ export const ShopPage: React.FC = () => {
   }, [selectedCategory, selectedFits, selectedGsm, selectedSizes, maxPrice, sortBy, filterParam, wishlist]);
 
   return (
-    <div className="w-full pt-28 bg-surface">
+    <div className="w-full pt-24 sm:pt-28 bg-surface">
       {/* Top Header Section */}
-      <section className="w-full px-margin-mobile md:px-margin pt-space-lg pb-space-md bg-surface-container-lowest border-b border-surface-container-high">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+      <section className="w-full px-4 sm:px-8 lg:px-12 pt-8 pb-6 bg-surface-container-lowest border-b border-surface-container-high">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <div className="flex items-center gap-space-xs font-label-meta text-label-meta uppercase tracking-widest text-secondary font-bold mb-1">
+            <div className="flex items-center gap-2 font-label-code text-xs uppercase tracking-widest text-secondary font-bold mb-1">
               <span>ARCHIVE CATALOG // DROP 04</span>
               <span>•</span>
               <span>SURPLUS METROPOLIS</span>
             </div>
-            <h1 className="font-headline-lg text-4xl sm:text-headline-lg uppercase text-primary leading-none">
+            <h1 className="font-headline-lg text-3xl sm:text-5xl uppercase text-primary leading-none">
               {filterParam === 'wishlist' ? 'SAVED ARCHIVE PIECES' : 'SHOP ALL COLLECTION'}
             </h1>
-            <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-space-xs">
+            <p className="font-body-md text-sm sm:text-base text-on-surface-variant max-w-2xl mt-2">
               Engineered silhouettes, custom heavyweights, and tailored surplus staples crafted for post-industrial movement.
             </p>
           </div>
 
-          <div className="flex items-baseline gap-space-xs font-label-code text-label-code uppercase text-on-surface-variant bg-surface-container-low px-space-sm py-space-xs border border-surface-container-high shrink-0">
+          <div className="flex items-baseline gap-2 font-label-code text-xs uppercase text-on-surface-variant bg-surface-container-low px-3 py-1.5 border border-surface-container-high shrink-0 self-start md:self-auto">
             <span className="text-primary font-bold">{filteredProducts.length} OF {PRODUCTS.length}</span>
             <span>ARCHIVED PIECES AVAILABLE</span>
           </div>
@@ -149,19 +149,20 @@ export const ShopPage: React.FC = () => {
       </section>
 
       {/* Category Pill Strip & Controls Bar */}
-      <section className="sticky top-28 z-30 w-full bg-surface-container-lowest/95 backdrop-blur-md border-b border-surface-container-high shadow-sm">
-        <div className="px-margin-mobile md:px-margin py-space-sm flex flex-col md:flex-row items-center justify-between gap-space-sm">
+      <section className="sticky top-20 sm:top-24 z-30 w-full bg-surface-container-lowest/95 backdrop-blur-md border-b border-surface-container-high shadow-sm">
+        <div className="px-4 sm:px-8 lg:px-12 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Category Pills */}
-          <div className="w-full md:w-auto flex items-center gap-space-xs overflow-x-auto no-scrollbar shrink-0">
+          <div className="w-full md:w-auto flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0 pb-1 md:pb-0">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id)}
-                className={`category-pill px-space-md py-space-xs font-title-sm text-title-sm uppercase tracking-wider transition-colors whitespace-nowrap ${
+                className={`category-pill px-4 py-1.5 font-title-sm text-xs uppercase tracking-wider transition-all whitespace-nowrap border ${
                   selectedCategory === cat.id
-                    ? 'bg-primary text-on-primary'
-                    : 'bg-surface-container-low text-on-surface hover:bg-surface-container'
+                    ? 'bg-primary text-on-primary border-primary shadow-sm'
+                    : 'bg-surface-container-low text-on-surface border-surface-container-high hover:border-primary'
                 }`}
+                type="button"
               >
                 {cat.name} [{cat.count}]
               </button>
@@ -169,23 +170,24 @@ export const ShopPage: React.FC = () => {
           </div>
 
           {/* Sort & Mobile Filter Toggle */}
-          <div className="w-full md:w-auto flex items-center justify-between md:justify-end gap-space-sm">
+          <div className="w-full md:w-auto flex items-center justify-between md:justify-end gap-3">
             {/* Mobile Filter Button */}
             <button
               onClick={() => setIsMobileFilterOpen(true)}
-              className="lg:hidden flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container-low border border-surface-container-high text-primary font-label-code text-label-code uppercase tracking-wider hover:bg-surface-container transition-colors"
+              className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-low border border-surface-container-high text-primary font-label-code text-xs uppercase tracking-wider hover:bg-surface-container transition-colors"
+              type="button"
             >
               <span className="material-symbols-outlined text-[18px]">tune</span>
               <span>FILTERS {activeFilterCount > 0 && `(${activeFilterCount})`}</span>
             </button>
 
             {/* Sort Select */}
-            <div className="flex items-center gap-2 font-label-code text-label-code text-primary uppercase">
+            <div className="flex items-center gap-2 font-label-code text-xs text-primary uppercase">
               <span className="hidden sm:inline text-on-surface-variant">SORT BY:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-surface-container-low border border-surface-container-high px-space-sm py-space-xs font-label-code text-label-code uppercase text-primary focus:outline-none cursor-pointer"
+                className="bg-surface-container-low border border-surface-container-high px-3 py-1.5 font-label-code text-xs uppercase text-primary focus:outline-none cursor-pointer"
               >
                 <option value="featured">FEATURED</option>
                 <option value="newest">NEWEST</option>
@@ -198,38 +200,38 @@ export const ShopPage: React.FC = () => {
       </section>
 
       {/* Main Content: Sidebar + Products Grid */}
-      <section className="w-full px-margin-mobile md:px-margin py-space-xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+      <section className="w-full px-4 sm:px-8 lg:px-12 py-8 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Desktop Parametric Matrix Sidebar */}
           <aside
             id="filterSidebar"
-            className="lg:col-span-3 hidden lg:flex flex-col gap-space-lg sticky top-52 bg-surface-container-lowest p-space-lg border border-surface-container-high shadow-sm"
+            className="lg:col-span-3 hidden lg:flex flex-col gap-6 sticky top-44 bg-surface-container-lowest p-6 border border-surface-container-high shadow-sm"
           >
             {/* Sidebar Title */}
-            <div className="flex items-center justify-between pb-space-sm bg-surface-container-low px-space-sm py-space-xs border border-surface-container-high">
-              <span className="font-headline-sm text-headline-sm uppercase text-primary">
+            <div className="flex items-center justify-between pb-3 bg-surface-container-low px-3 py-2 border border-surface-container-high">
+              <span className="font-headline-sm text-sm uppercase text-primary font-bold">
                 PARAMETRIC MATRIX
               </span>
-              <span className="font-label-code text-label-code text-secondary font-bold">
+              <span className="font-label-code text-xs text-secondary font-bold">
                 REV.04
               </span>
             </div>
 
             {/* Fit Architecture Filter */}
-            <div className="flex flex-col gap-space-xs">
-              <div className="flex items-center justify-between font-label-code text-label-code uppercase font-semibold text-primary">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between font-label-code text-xs uppercase font-bold text-primary">
                 <span>FIT ARCHITECTURE</span>
-                <span className="text-on-surface-variant text-[10px]">SELECT MULTIPLE</span>
+                <span className="text-on-surface-variant text-[10px]">MULTIPLE</span>
               </div>
-              <div className="flex flex-col gap-1.5 pt-space-xs">
+              <div className="flex flex-col gap-1 pt-1">
                 {FIT_ARCHITECTURES.map((fit) => {
                   const checked = selectedFits.includes(fit.label);
                   return (
                     <label
                       key={fit.label}
-                      className="flex items-center justify-between cursor-pointer p-space-xs hover:bg-surface-container-low transition-colors"
+                      className="flex items-center justify-between cursor-pointer p-1.5 hover:bg-surface-container-low transition-colors"
                     >
-                      <span className="font-body-md text-body-md text-on-surface flex items-center gap-2">
+                      <span className="font-body-md text-xs sm:text-sm text-on-surface flex items-center gap-2">
                         <input
                           type="checkbox"
                           checked={checked}
@@ -238,7 +240,7 @@ export const ShopPage: React.FC = () => {
                         />
                         {fit.label}
                       </span>
-                      <span className="font-label-meta text-label-meta px-1.5 py-0.5 bg-surface-container text-on-surface-variant">
+                      <span className="font-label-code text-[10px] px-1.5 py-0.5 bg-surface-container text-on-surface-variant font-bold">
                         {fit.count}
                       </span>
                     </label>
@@ -248,20 +250,20 @@ export const ShopPage: React.FC = () => {
             </div>
 
             {/* Textile Density / GSM Filter */}
-            <div className="flex flex-col gap-space-xs pt-space-sm border-t border-surface-container-high">
-              <div className="flex items-center justify-between font-label-code text-label-code uppercase font-semibold text-primary">
+            <div className="flex flex-col gap-2 pt-4 border-t border-surface-container-high">
+              <div className="flex items-center justify-between font-label-code text-xs uppercase font-bold text-primary">
                 <span>TEXTILE DENSITY</span>
                 <span className="text-on-surface-variant text-[10px]">GSM SPECS</span>
               </div>
-              <div className="flex flex-col gap-1.5 pt-space-xs">
+              <div className="flex flex-col gap-1 pt-1">
                 {FABRIC_GSM_OPTIONS.map((gsm) => {
                   const checked = selectedGsm.includes(gsm);
                   return (
                     <label
                       key={gsm}
-                      className="flex items-center justify-between cursor-pointer p-space-xs hover:bg-surface-container-low transition-colors"
+                      className="flex items-center justify-between cursor-pointer p-1.5 hover:bg-surface-container-low transition-colors"
                     >
-                      <span className="font-body-md text-body-md text-on-surface flex items-center gap-2">
+                      <span className="font-body-md text-xs sm:text-sm text-on-surface flex items-center gap-2">
                         <input
                           type="checkbox"
                           checked={checked}
@@ -277,12 +279,12 @@ export const ShopPage: React.FC = () => {
             </div>
 
             {/* Size Filter Pills */}
-            <div className="flex flex-col gap-space-xs pt-space-sm border-t border-surface-container-high">
-              <div className="flex items-center justify-between font-label-code text-label-code uppercase font-semibold text-primary">
+            <div className="flex flex-col gap-2 pt-4 border-t border-surface-container-high">
+              <div className="flex items-center justify-between font-label-code text-xs uppercase font-bold text-primary">
                 <span>SIZE MATRIX</span>
                 <span className="text-on-surface-variant text-[10px]">STREET FIT</span>
               </div>
-              <div className="grid grid-cols-5 gap-1 pt-space-xs">
+              <div className="grid grid-cols-5 gap-1 pt-1">
                 {(['S', 'M', 'L', 'XL', 'XXL'] as ProductSize[]).map((size) => {
                   const active = selectedSizes.includes(size);
                   return (
@@ -290,9 +292,9 @@ export const ShopPage: React.FC = () => {
                       key={size}
                       type="button"
                       onClick={() => toggleSize(size)}
-                      className={`py-1.5 text-center font-label-code text-label-code font-bold border transition-colors ${
+                      className={`py-1.5 text-center font-label-code text-xs font-bold border transition-colors ${
                         active
-                          ? 'bg-secondary text-on-secondary border-secondary'
+                          ? 'bg-secondary text-on-secondary border-secondary shadow-sm'
                           : 'bg-surface-container-lowest text-primary border-outline-variant hover:border-primary'
                       }`}
                     >
@@ -304,8 +306,8 @@ export const ShopPage: React.FC = () => {
             </div>
 
             {/* Price Filter Slider */}
-            <div className="flex flex-col gap-space-xs pt-space-sm border-t border-surface-container-high">
-              <div className="flex items-center justify-between font-label-code text-label-code uppercase font-semibold text-primary">
+            <div className="flex flex-col gap-2 pt-4 border-t border-surface-container-high">
+              <div className="flex items-center justify-between font-label-code text-xs uppercase font-bold text-primary">
                 <span>PRICE CEILING</span>
                 <span className="font-bold text-secondary">UP TO ₹{maxPrice.toLocaleString('en-IN')}</span>
               </div>
@@ -318,7 +320,7 @@ export const ShopPage: React.FC = () => {
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
                 className="w-full accent-secondary cursor-pointer mt-1"
               />
-              <div className="flex justify-between font-label-meta text-[10px] text-on-surface-variant">
+              <div className="flex justify-between font-label-code text-[10px] text-on-surface-variant">
                 <span>₹2,000</span>
                 <span>₹10,000</span>
               </div>
@@ -338,44 +340,45 @@ export const ShopPage: React.FC = () => {
           </aside>
 
           {/* Product Grid Area */}
-          <div className="lg:col-span-9 flex flex-col gap-space-xl">
+          <div className="lg:col-span-9 flex flex-col gap-6">
             {/* Active Filters Pill Bar */}
             {activeFilterCount > 0 && (
-              <div className="flex flex-wrap items-center gap-2 p-space-sm bg-surface-container-lowest border border-surface-container-high font-label-code text-label-code uppercase">
+              <div className="flex flex-wrap items-center gap-2 p-3 bg-surface-container-lowest border border-surface-container-high font-label-code text-xs uppercase">
                 <span className="text-on-surface-variant font-bold">APPLIED FILTERS:</span>
                 {selectedCategory !== 'all' && (
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-low border border-outline-variant">
                     CAT: {selectedCategory}
-                    <button onClick={() => handleCategoryChange('all')}>✕</button>
+                    <button onClick={() => handleCategoryChange('all')} className="hover:text-primary">✕</button>
                   </span>
                 )}
                 {selectedFits.map((fit) => (
                   <span key={fit} className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-low border border-outline-variant">
                     {fit}
-                    <button onClick={() => toggleFit(fit)}>✕</button>
+                    <button onClick={() => toggleFit(fit)} className="hover:text-primary">✕</button>
                   </span>
                 ))}
                 {selectedGsm.map((gsm) => (
                   <span key={gsm} className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-low border border-outline-variant">
                     {gsm}
-                    <button onClick={() => toggleGsm(gsm)}>✕</button>
+                    <button onClick={() => toggleGsm(gsm)} className="hover:text-primary">✕</button>
                   </span>
                 ))}
                 {selectedSizes.map((size) => (
                   <span key={size} className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-low border border-outline-variant">
                     SIZE: {size}
-                    <button onClick={() => toggleSize(size)}>✕</button>
+                    <button onClick={() => toggleSize(size)} className="hover:text-primary">✕</button>
                   </span>
                 ))}
                 {maxPrice < 10000 && (
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-low border border-outline-variant">
                     ≤ ₹{maxPrice}
-                    <button onClick={() => setMaxPrice(10000)}>✕</button>
+                    <button onClick={() => setMaxPrice(10000)} className="hover:text-primary">✕</button>
                   </span>
                 )}
                 <button
                   onClick={clearAllFilters}
                   className="text-secondary font-bold hover:underline ml-auto"
+                  type="button"
                 >
                   CLEAR ALL
                 </button>
@@ -384,28 +387,28 @@ export const ShopPage: React.FC = () => {
 
             {/* Grid */}
             {filteredProducts.length === 0 ? (
-              <div className="py-space-2xl px-space-lg bg-surface-container-lowest border border-surface-container-high text-center flex flex-col items-center justify-center gap-space-md">
+              <div className="py-20 px-8 bg-surface-container-lowest border border-surface-container-high text-center flex flex-col items-center justify-center gap-4">
                 <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
                   <span className="material-symbols-outlined text-[36px]">filter_alt_off</span>
                 </div>
                 <div>
-                  <h3 className="font-headline-sm text-headline-sm uppercase text-primary">
+                  <h3 className="font-headline-sm text-xl uppercase text-primary font-bold">
                     NO ARCHIVED PIECES MATCH YOUR CRITERIA
                   </h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant max-w-md mt-1">
-                    Try loosening your GSM specs, fit architecture, or price limit to view more garments.
+                  <p className="font-body-md text-sm text-on-surface-variant max-w-md mt-1">
+                    Try loosening your GSM specs, fit architecture, or price ceiling to view more garments.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={clearAllFilters}
-                  className="px-space-lg py-3 bg-primary text-on-primary font-title-sm text-title-sm uppercase tracking-wider hover:bg-secondary transition-colors"
+                  className="px-6 py-3 bg-primary text-on-primary font-title-sm text-xs uppercase tracking-wider hover:bg-secondary transition-colors"
                 >
                   RESET MATRIX TO DEFAULT
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
@@ -423,32 +426,33 @@ export const ShopPage: React.FC = () => {
         onClick={() => setIsMobileFilterOpen(false)}
       >
         <div
-          className={`fixed top-0 right-0 bottom-0 w-[85%] max-w-md bg-surface-container-lowest p-space-lg overflow-y-auto flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-out ${
+          className={`fixed top-0 right-0 bottom-0 w-[85%] max-w-md bg-surface-container-lowest p-6 overflow-y-auto flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-out border-l border-surface-container-high ${
             isMobileFilterOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div>
-            <div className="flex items-center justify-between pb-space-md border-b border-surface-container-high">
-              <span className="font-headline-sm text-headline-sm uppercase text-primary">
+            <div className="flex items-center justify-between pb-4 border-b border-surface-container-high">
+              <span className="font-headline-sm text-lg uppercase text-primary font-bold">
                 PARAMETRIC FILTERS
               </span>
               <button
                 onClick={() => setIsMobileFilterOpen(false)}
                 className="p-1 text-primary hover:text-secondary"
+                type="button"
               >
                 <span className="material-symbols-outlined text-[24px]">close</span>
               </button>
             </div>
 
             {/* Fit Architecture */}
-            <div className="py-space-md border-b border-surface-container-high flex flex-col gap-2">
-              <span className="font-label-code text-label-code uppercase font-bold text-primary">
+            <div className="py-4 border-b border-surface-container-high flex flex-col gap-2">
+              <span className="font-label-code text-xs uppercase font-bold text-primary">
                 FIT ARCHITECTURE
               </span>
               {FIT_ARCHITECTURES.map((fit) => (
                 <label key={fit.label} className="flex items-center justify-between py-1 cursor-pointer">
-                  <span className="font-body-md text-sm text-on-surface flex items-center gap-2">
+                  <span className="font-body-md text-xs sm:text-sm text-on-surface flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={selectedFits.includes(fit.label)}
@@ -457,21 +461,21 @@ export const ShopPage: React.FC = () => {
                     />
                     {fit.label}
                   </span>
-                  <span className="font-label-meta text-xs text-on-surface-variant">
+                  <span className="font-label-code text-[10px] px-1.5 py-0.5 bg-surface-container text-on-surface-variant font-bold">
                     {fit.count}
                   </span>
                 </label>
               ))}
             </div>
 
-            {/* GSM Filter */}
-            <div className="py-space-md border-b border-surface-container-high flex flex-col gap-2">
-              <span className="font-label-code text-label-code uppercase font-bold text-primary">
-                TEXTILE DENSITY / GSM
+            {/* GSM */}
+            <div className="py-4 border-b border-surface-container-high flex flex-col gap-2">
+              <span className="font-label-code text-xs uppercase font-bold text-primary">
+                TEXTILE DENSITY
               </span>
               {FABRIC_GSM_OPTIONS.map((gsm) => (
-                <label key={gsm} className="flex items-center py-1 cursor-pointer">
-                  <span className="font-body-md text-sm text-on-surface flex items-center gap-2">
+                <label key={gsm} className="flex items-center justify-between py-1 cursor-pointer">
+                  <span className="font-body-md text-xs sm:text-sm text-on-surface flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={selectedGsm.includes(gsm)}
@@ -485,18 +489,19 @@ export const ShopPage: React.FC = () => {
             </div>
 
             {/* Sizes */}
-            <div className="py-space-md border-b border-surface-container-high flex flex-col gap-2">
-              <span className="font-label-code text-label-code uppercase font-bold text-primary">
+            <div className="py-4 border-b border-surface-container-high flex flex-col gap-2">
+              <span className="font-label-code text-xs uppercase font-bold text-primary">
                 SIZE
               </span>
-              <div className="grid grid-cols-5 gap-1.5">
+              <div className="grid grid-cols-5 gap-1 pt-1">
                 {(['S', 'M', 'L', 'XL', 'XXL'] as ProductSize[]).map((size) => {
                   const active = selectedSizes.includes(size);
                   return (
                     <button
                       key={size}
+                      type="button"
                       onClick={() => toggleSize(size)}
-                      className={`py-2 text-center font-label-code text-xs font-bold border ${
+                      className={`py-2 text-center font-label-code text-xs font-bold border transition-colors ${
                         active
                           ? 'bg-secondary text-on-secondary border-secondary'
                           : 'bg-surface-container-lowest text-primary border-outline-variant'
@@ -510,10 +515,10 @@ export const ShopPage: React.FC = () => {
             </div>
 
             {/* Price Ceiling */}
-            <div className="py-space-md flex flex-col gap-2">
+            <div className="py-4 border-b border-surface-container-high flex flex-col gap-2">
               <div className="flex justify-between font-label-code text-xs font-bold text-primary">
                 <span>PRICE CEILING</span>
-                <span className="text-secondary">₹{maxPrice.toLocaleString('en-IN')}</span>
+                <span className="text-secondary">UP TO ₹{maxPrice.toLocaleString('en-IN')}</span>
               </div>
               <input
                 type="range"
@@ -522,24 +527,28 @@ export const ShopPage: React.FC = () => {
                 step="500"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
-                className="w-full accent-secondary mt-1"
+                className="w-full accent-secondary"
               />
             </div>
           </div>
 
-          <div className="pt-space-md border-t border-surface-container-high flex gap-2">
-            <button
-              onClick={clearAllFilters}
-              className="flex-1 py-3 bg-surface-container-low border border-outline text-primary font-title-sm text-xs uppercase"
-            >
-              RESET
-            </button>
+          <div className="pt-4 flex flex-col gap-2">
             <button
               onClick={() => setIsMobileFilterOpen(false)}
-              className="flex-1 py-3 bg-primary text-on-primary font-title-sm text-xs uppercase hover:bg-secondary"
+              className="w-full py-3.5 bg-primary text-on-primary font-title-sm text-xs uppercase tracking-wider hover:bg-secondary transition-colors"
+              type="button"
             >
-              APPLY ({filteredProducts.length})
+              SHOW {filteredProducts.length} PIECES
             </button>
+            {activeFilterCount > 0 && (
+              <button
+                onClick={clearAllFilters}
+                className="w-full py-2.5 bg-surface-container-low border border-surface-container-high text-primary font-label-code text-xs uppercase"
+                type="button"
+              >
+                RESET FILTERS
+              </button>
+            )}
           </div>
         </div>
       </div>

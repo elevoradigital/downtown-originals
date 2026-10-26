@@ -73,7 +73,7 @@ async function runBrowserQA() {
     // Reset Filters
     await page.evaluate(() => {
       const buttons = Array.from(document.querySelectorAll('button'));
-      const allBtn = buttons.find(b => b.textContent.includes('ALL [24]'));
+      const allBtn = buttons.find(b => b.textContent.includes('ALL [') || b.textContent.trim().startsWith('ALL'));
       if (allBtn) allBtn.click();
     });
     await new Promise(r => setTimeout(r, 300));

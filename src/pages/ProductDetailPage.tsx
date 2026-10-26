@@ -60,23 +60,23 @@ export const ProductDetailPage: React.FC = () => {
   const styledLookProducts = PRODUCTS.filter(p => p.id !== product.id).slice(0, 3);
 
   return (
-    <div className="w-full pt-28 bg-surface">
+    <div className="w-full pt-24 sm:pt-28 bg-surface">
       {/* Top Marquee Ticker: Product Status & Stock Alert */}
-      <section className="w-full bg-primary text-on-primary py-space-xs overflow-hidden select-none border-b border-primary">
-        <div className="animate-marquee font-label-code text-label-code uppercase tracking-widest flex items-center gap-space-2xl text-on-primary">
+      <section className="w-full bg-primary text-on-primary py-1 sm:py-1.5 overflow-hidden select-none border-b border-primary">
+        <div className="animate-marquee font-label-code text-[10px] sm:text-[11px] uppercase tracking-widest flex items-center gap-12 text-on-primary">
           {[1, 2, 3].map((i) => (
             <React.Fragment key={i}>
-              <span className="flex items-center gap-space-xs whitespace-nowrap">
-                <span className="w-2 h-2 rounded-full bg-secondary-container"></span>
-                DROP 04 // SURPLUS METROPOLIS CAPSULE
+              <span className="flex items-center gap-2 whitespace-nowrap">
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                <span>DROP 04 // SURPLUS METROPOLIS CAPSULE</span>
               </span>
-              <span className="flex items-center gap-space-xs whitespace-nowrap">
-                <span className="w-2 h-2 rounded-full bg-secondary-container"></span>
-                LIMITED RUN // 250 UNITS NUMBERED ARCHIVE
+              <span className="flex items-center gap-2 whitespace-nowrap">
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                <span>LIMITED RUN // 250 UNITS NUMBERED ARCHIVE</span>
               </span>
-              <span className="flex items-center gap-space-xs whitespace-nowrap">
-                <span className="w-2 h-2 rounded-full bg-secondary-container"></span>
-                WATER REPELLENT DWR FINISH VERIFIED
+              <span className="flex items-center gap-2 whitespace-nowrap">
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                <span>WATER REPELLENT DWR FINISH VERIFIED</span>
               </span>
             </React.Fragment>
           ))}
@@ -84,9 +84,9 @@ export const ProductDetailPage: React.FC = () => {
       </section>
 
       {/* Breadcrumbs & Meta Bar */}
-      <section className="w-full px-margin-mobile md:px-margin py-space-md bg-surface-container-lowest border-b border-surface-container-high">
-        <div className="flex flex-wrap items-center justify-between gap-space-sm font-label-code text-label-code uppercase text-on-surface-variant">
-          <nav className="flex items-center gap-space-xs">
+      <section className="w-full px-4 sm:px-8 lg:px-12 py-3 sm:py-4 bg-surface-container-lowest border-b border-surface-container-high">
+        <div className="flex flex-wrap items-center justify-between gap-3 font-label-code text-xs uppercase text-on-surface-variant">
+          <nav className="flex items-center gap-1.5">
             <Link to="/" className="hover:text-primary transition-colors">HOME</Link>
             <span className="text-outline-variant">/</span>
             <Link to="/shop" className="hover:text-primary transition-colors">SHOP ALL</Link>
@@ -95,13 +95,13 @@ export const ProductDetailPage: React.FC = () => {
               {product.category}
             </Link>
             <span className="text-outline-variant">/</span>
-            <span className="text-primary font-bold">{product.name}</span>
+            <span className="text-primary font-bold truncate max-w-[200px] sm:max-w-none">{product.name}</span>
           </nav>
-          <div className="flex items-center gap-space-md">
-            <span className="inline-flex items-center gap-space-xs px-space-xs py-0.5 bg-surface-container-high text-primary font-label-meta text-label-meta tracking-widest uppercase">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center px-2 py-0.5 bg-surface-container text-primary font-label-code text-[11px] tracking-wider uppercase border border-surface-container-high">
               SKU: {product.sku}
             </span>
-            <span className="inline-flex items-center gap-space-xs px-space-xs py-0.5 bg-secondary text-on-secondary font-label-meta text-label-meta tracking-widest uppercase font-semibold">
+            <span className="inline-flex items-center px-2 py-0.5 bg-secondary text-on-secondary font-label-code text-[11px] tracking-wider uppercase font-semibold">
               {product.runNumber || 'LIMITED DROP'}
             </span>
           </div>
@@ -109,12 +109,12 @@ export const ProductDetailPage: React.FC = () => {
       </section>
 
       {/* Main 2-Column Product Studio Viewport */}
-      <section className="w-full px-margin-mobile md:px-margin py-space-lg bg-surface">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+      <section className="w-full px-4 sm:px-8 lg:px-12 py-8 sm:py-12 bg-surface">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* LEFT COLUMN: Multi-Angle Editorial Gallery */}
-          <div className="lg:col-span-7 flex flex-col gap-space-md">
+          <div className="lg:col-span-7 flex flex-col gap-4">
             {/* Main Image Viewport Frame */}
-            <div className="relative w-full aspect-[4/5] bg-surface-container-low overflow-hidden group shadow-md border border-surface-container-high">
+            <div className="relative w-full aspect-[4/5] bg-surface-container-low overflow-hidden border border-surface-container-high shadow-md">
               <img
                 src={product.images[selectedImageIndex] || product.images[0]}
                 alt={`${product.name} in ${activeColor.name}`}
@@ -122,11 +122,11 @@ export const ProductDetailPage: React.FC = () => {
               />
 
               {/* Float Badges Top Left */}
-              <div className="absolute top-space-md left-space-md flex flex-col gap-space-xs z-10 pointer-events-none">
-                <span className="px-space-sm py-space-xs bg-primary text-on-primary font-label-code text-label-code uppercase tracking-wider shadow-sm">
+              <div className="absolute top-4 left-4 flex flex-col gap-1.5 z-10 pointer-events-none">
+                <span className="px-2.5 py-1 bg-primary text-on-primary font-label-code text-xs uppercase tracking-wider font-bold shadow-sm">
                   {product.badge || 'LIMITED'}
                 </span>
-                <span className="px-space-sm py-space-xs bg-surface-container-lowest text-primary font-label-code text-label-code uppercase tracking-wider border border-surface-container-high shadow-sm">
+                <span className="px-2.5 py-1 bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-code text-xs uppercase tracking-wider border border-surface-container-high shadow-sm font-semibold">
                   {product.gsm}
                 </span>
               </div>
@@ -135,11 +135,12 @@ export const ProductDetailPage: React.FC = () => {
               <button
                 onClick={() => toggleWishlist(product.id)}
                 aria-label="Wishlist toggle"
-                className={`absolute top-space-md right-space-md w-11 h-11 flex items-center justify-center transition-colors shadow-md z-10 ${
+                className={`absolute top-4 right-4 w-10 h-10 flex items-center justify-center transition-all shadow-md z-10 border ${
                   isFavorited
-                    ? 'bg-secondary text-on-secondary'
-                    : 'bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary'
+                    ? 'bg-secondary text-on-secondary border-secondary'
+                    : 'bg-surface-container-lowest/90 backdrop-blur-sm text-primary hover:bg-primary hover:text-on-primary border-surface-container-high'
                 }`}
+                type="button"
               >
                 <span className="material-symbols-outlined text-[20px]">
                   {isFavorited ? 'favorite' : 'favorite_border'}
@@ -147,22 +148,24 @@ export const ProductDetailPage: React.FC = () => {
               </button>
 
               {/* Image Counter Overlay */}
-              <div className="absolute bottom-space-md right-space-md px-space-sm py-1 bg-black/75 backdrop-blur-sm text-on-primary font-label-code text-label-code">
+              <div className="absolute bottom-4 right-4 px-2.5 py-1 bg-black/80 backdrop-blur-sm text-on-primary font-label-code text-xs font-semibold">
                 {selectedImageIndex + 1} / {product.images.length}
               </div>
             </div>
 
             {/* Thumbnail Strip */}
-            <div className="grid grid-cols-5 gap-space-sm">
+            <div className="grid grid-cols-5 gap-3">
               {product.images.map((imgUrl, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSelectedImageIndex(idx)}
                   className={`aspect-[4/5] bg-surface-container-low overflow-hidden border-2 transition-all ${
                     selectedImageIndex === idx
-                      ? 'border-secondary scale-95 shadow-md'
-                      : 'border-transparent opacity-70 hover:opacity-100'
+                      ? 'border-secondary scale-95 shadow-sm'
+                      : 'border-surface-container-high opacity-70 hover:opacity-100 hover:border-primary'
                   }`}
+                  type="button"
+                  aria-label={`View photo ${idx + 1}`}
                 >
                   <img
                     src={imgUrl}
@@ -175,52 +178,52 @@ export const ProductDetailPage: React.FC = () => {
           </div>
 
           {/* RIGHT COLUMN: Sticky Buy Box & Commerce Controls */}
-          <div className="lg:col-span-5 flex flex-col gap-space-lg sticky top-36 bg-surface-container-lowest p-space-lg border border-surface-container-high shadow-sm">
+          <div className="lg:col-span-5 flex flex-col gap-6 sticky top-28 sm:top-36 bg-surface-container-lowest p-6 sm:p-8 border border-surface-container-high shadow-sm">
             {/* Title & Price Header */}
             <div>
-              <div className="flex items-center gap-space-xs font-label-meta text-label-meta uppercase tracking-wider text-secondary font-bold mb-1">
+              <div className="flex items-center gap-2 font-label-code text-xs uppercase tracking-wider text-secondary font-bold mb-1">
                 <span>{product.categoryLabel}</span>
                 <span>•</span>
                 <span>{product.fitArchitecture}</span>
               </div>
-              <h1 className="font-headline-lg text-3xl sm:text-4xl uppercase text-primary tracking-tight leading-tight">
+              <h1 className="font-headline-lg text-2xl sm:text-4xl uppercase text-primary tracking-tight leading-tight font-bold">
                 {product.name}
               </h1>
               {product.subtitle && (
-                <p className="font-body-md text-body-md text-on-surface-variant mt-1">
+                <p className="font-body-md text-sm sm:text-base text-on-surface-variant mt-1">
                   {product.subtitle}
                 </p>
               )}
 
               {/* Price Row */}
-              <div className="flex flex-wrap items-baseline justify-between gap-space-sm mt-space-md pt-space-sm border-t border-surface-container-high">
-                <div className="flex items-baseline gap-space-sm">
-                  <span className="font-headline-sm text-headline-sm font-bold text-primary">
+              <div className="flex flex-wrap items-baseline justify-between gap-2 mt-4 pt-4 border-t border-surface-container-high">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-headline-sm text-2xl sm:text-3xl font-bold text-primary">
                     ₹{product.price.toLocaleString('en-IN')}
                   </span>
                   {product.originalPrice && (
-                    <span className="font-label-code text-label-code text-outline line-through">
+                    <span className="font-label-code text-sm text-outline line-through">
                       ₹{product.originalPrice.toLocaleString('en-IN')}
                     </span>
                   )}
                 </div>
-                <span className="font-label-meta text-[11px] text-secondary font-semibold">
-                  INCL. OF ALL TAXES • FREE SHIPPING OVER ₹3,999
+                <span className="font-label-code text-xs text-secondary font-bold">
+                  INCL. TAXES • FREE SHIPPING OVER ₹3,999
                 </span>
               </div>
-              <div className="flex items-center gap-1 font-label-meta text-[10px] uppercase text-on-surface-variant/80 pt-1">
-                <span className="material-symbols-outlined text-[13px] text-secondary">info</span>
+              <div className="flex items-center gap-1.5 font-label-code text-[11px] uppercase text-on-surface-variant/80 pt-2">
+                <span className="material-symbols-outlined text-[14px] text-secondary">info</span>
                 <span>ILLUSTRATIVE DEMO PRICE &amp; CONCEPT SPECIFICATIONS</span>
               </div>
             </div>
 
             {/* Colour Selector */}
-            <div className="flex flex-col gap-space-xs pt-space-xs">
-              <div className="flex items-center justify-between font-label-code text-label-code uppercase text-primary">
-                <span className="font-semibold">COLOURWAY:</span>
+            <div className="flex flex-col gap-2 pt-2 border-t border-surface-container-high">
+              <div className="flex items-center justify-between font-label-code text-xs uppercase text-primary">
+                <span className="font-bold">COLOURWAY:</span>
                 <span className="text-secondary font-bold">{activeColor.name}</span>
               </div>
-              <div className="flex items-center gap-space-sm pt-1">
+              <div className="flex flex-wrap items-center gap-2 pt-1">
                 {product.colors.map((color, idx) => (
                   <button
                     key={color.name}
@@ -228,7 +231,7 @@ export const ProductDetailPage: React.FC = () => {
                     onClick={() => handleColorChange(idx)}
                     className={`flex items-center gap-2 px-3 py-1.5 border text-xs font-label-code transition-all ${
                       selectedColorIndex === idx
-                        ? 'border-primary bg-surface-container-low shadow-sm'
+                        ? 'border-primary bg-surface-container-low font-bold shadow-sm'
                         : 'border-surface-container-high hover:border-primary'
                     }`}
                   >
@@ -243,23 +246,23 @@ export const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Size Selector */}
-            <div className="flex flex-col gap-space-xs pt-space-xs">
-              <div className="flex items-center justify-between font-label-code text-label-code uppercase text-primary">
+            <div className="flex flex-col gap-2 pt-2 border-t border-surface-container-high">
+              <div className="flex items-center justify-between font-label-code text-xs uppercase text-primary">
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold">SELECT SIZE:</span>
+                  <span className="font-bold">SELECT SIZE:</span>
                   <span className="text-secondary font-bold">{selectedSize}</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsSizeGuideOpen(true)}
-                  className="text-on-surface-variant hover:text-secondary underline underline-offset-4 flex items-center gap-1"
+                  className="text-on-surface-variant hover:text-secondary underline underline-offset-4 flex items-center gap-1 text-xs"
                 >
                   <span className="material-symbols-outlined text-[14px]">straighten</span>
                   SIZE MATRIX &amp; FIT GUIDE
                 </button>
               </div>
 
-              <div className="grid grid-cols-5 gap-space-xs pt-1">
+              <div className="grid grid-cols-5 gap-2 pt-1">
                 {product.sizes.map((s) => {
                   const isSelected = selectedSize === s.size;
                   return (
@@ -268,7 +271,7 @@ export const ProductDetailPage: React.FC = () => {
                       type="button"
                       disabled={!s.inStock}
                       onClick={() => setSelectedSize(s.size)}
-                      className={`py-3 text-center font-label-code text-label-code font-bold border transition-all relative ${
+                      className={`py-2.5 sm:py-3 text-center font-label-code text-xs font-bold border transition-all relative ${
                         !s.inStock
                           ? 'opacity-30 border-surface-container-high bg-surface-container text-outline line-through cursor-not-allowed'
                           : isSelected
@@ -289,8 +292,8 @@ export const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Quantity Stepper & CTAs */}
-            <div className="flex flex-col gap-space-sm pt-space-xs">
-              <div className="flex flex-col sm:flex-row items-stretch gap-space-sm">
+            <div className="flex flex-col gap-3 pt-2 border-t border-surface-container-high">
+              <div className="flex flex-col sm:flex-row items-stretch gap-3">
                 {/* Stepper */}
                 <div className="flex items-center justify-between sm:justify-start border border-primary bg-surface-container-lowest h-12 px-2 sm:px-0">
                   <span className="sm:hidden font-label-code text-xs text-on-surface-variant uppercase font-semibold">QUANTITY:</span>
@@ -303,7 +306,7 @@ export const ProductDetailPage: React.FC = () => {
                     >
                       -
                     </button>
-                    <span className="w-10 text-center font-label-code text-label-code font-bold">
+                    <span className="w-10 text-center font-label-code text-sm font-bold">
                       {quantity}
                     </span>
                     <button
@@ -325,13 +328,13 @@ export const ProductDetailPage: React.FC = () => {
                   type="button"
                   disabled={!isSelectedSizeAvailable}
                   onClick={handleAddToCart}
-                  className={`flex-1 py-4 font-title-sm text-title-sm uppercase tracking-wider transition-all flex items-center justify-center gap-space-sm shadow-md group ${
+                  className={`flex-1 py-3.5 sm:py-4 font-title-sm text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98] ${
                     !isSelectedSizeAvailable
                       ? 'bg-surface-container-high text-outline cursor-not-allowed border border-outline-variant shadow-none'
                       : 'bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary'
                   }`}
                 >
-                  <span className="material-symbols-outlined text-[20px]">
+                  <span className="material-symbols-outlined text-[18px]">
                     {!isSelectedSizeAvailable ? 'block' : 'shopping_bag'}
                   </span>
                   <span>
@@ -347,7 +350,7 @@ export const ProductDetailPage: React.FC = () => {
                 type="button"
                 disabled={!isSelectedSizeAvailable}
                 onClick={handleBuyNow}
-                className={`w-full py-3.5 font-title-sm text-title-sm uppercase tracking-wider transition-all flex items-center justify-center gap-space-sm shadow-md ${
+                className={`w-full py-3.5 font-title-sm text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98] ${
                   !isSelectedSizeAvailable
                     ? 'bg-surface-container text-outline cursor-not-allowed border border-outline-variant shadow-none'
                     : 'bg-secondary text-on-secondary hover:bg-secondary-container'
@@ -363,20 +366,20 @@ export const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Fast Assurance Bullets */}
-            <div className="pt-space-md border-t border-surface-container-high grid grid-cols-1 sm:grid-cols-2 gap-space-sm font-label-meta text-label-meta uppercase text-on-surface-variant">
-              <div className="flex items-center gap-space-xs">
+            <div className="pt-4 border-t border-surface-container-high grid grid-cols-1 sm:grid-cols-2 gap-3 font-label-code text-xs uppercase text-on-surface-variant">
+              <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[18px]">verified</span>
                 <span>AUTHENTIC METROPOLIS GRADE</span>
               </div>
-              <div className="flex items-center gap-space-xs">
+              <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[18px]">local_shipping</span>
                 <span>DISPATCH IN 24-48 HRS</span>
               </div>
-              <div className="flex items-center gap-space-xs">
+              <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[18px]">sync</span>
                 <span>7-DAY NO-QUESTIONS EXCHANGE</span>
               </div>
-              <div className="flex items-center gap-space-xs">
+              <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[18px]">lock</span>
                 <span>ENCRYPTED DEMO CHECKOUT</span>
               </div>
@@ -386,39 +389,39 @@ export const ProductDetailPage: React.FC = () => {
       </section>
 
       {/* SECTION: ANATOMY & TECHNICAL SPECIFICATIONS */}
-      <section className="w-full px-margin-mobile md:px-margin py-space-2xl bg-surface-container-lowest border-y border-surface-container-high">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+      <section className="w-full px-4 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface-container-lowest border-y border-surface-container-high">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="font-label-code text-label-code uppercase tracking-widest text-secondary font-bold">
+            <span className="font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
               TECHNICAL SPECIFICATION
             </span>
-            <h2 className="font-headline-lg text-3xl sm:text-headline-lg uppercase text-primary mt-1">
+            <h2 className="font-headline-lg text-2xl sm:text-4xl uppercase text-primary mt-1 font-bold">
               ANATOMY OF THE {product.name}
             </h2>
           </div>
-          <div className="font-label-meta text-label-meta uppercase text-on-surface-variant max-w-sm">
+          <div className="font-label-code text-xs uppercase text-on-surface-variant max-w-sm">
             EVERY SEAM REINFORCED WITH 12-SPI LOCKSTITCHING. TECHNICAL SPECIFICATIONS &amp; MEASUREMENTS ARE ILLUSTRATIVE CONCEPT DATA.
           </div>
         </div>
 
         {/* 3 Editorial Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Item 1: Specifications */}
-          <div className="p-space-lg bg-surface border border-surface-container-high shadow-sm flex flex-col gap-space-md">
+          <div className="p-6 bg-surface border border-surface-container-high hover:border-primary transition-colors flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-title-md text-title-md uppercase text-primary font-bold">
+              <h3 className="font-title-md text-base sm:text-lg uppercase text-primary font-bold">
                 GARMENT SPECIFICATIONS
               </h3>
               <span className="material-symbols-outlined text-secondary">tune</span>
             </div>
-            <ul className="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant">
+            <ul className="flex flex-col gap-2.5 font-body-md text-xs sm:text-sm text-on-surface-variant">
               {product.specifications.map((spec, i) => (
-                <li key={i} className="flex items-start gap-space-xs">
-                  <span className="font-label-code text-label-code text-secondary font-bold">
+                <li key={i} className="flex items-start gap-2">
+                  <span className="font-label-code text-xs text-secondary font-bold">
                     0{i + 1}.
                   </span>
                   <span>
-                    <strong>{spec.label}:</strong> {spec.value}
+                    <strong className="text-primary">{spec.label}:</strong> {spec.value}
                   </span>
                 </li>
               ))}
@@ -426,23 +429,24 @@ export const ProductDetailPage: React.FC = () => {
           </div>
 
           {/* Item 2: Fit Advice */}
-          <div className="p-space-lg bg-surface border border-surface-container-high shadow-sm flex flex-col gap-space-md">
+          <div className="p-6 bg-surface border border-surface-container-high hover:border-primary transition-colors flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-title-md text-title-md uppercase text-primary font-bold">
+              <h3 className="font-title-md text-base sm:text-lg uppercase text-primary font-bold">
                 SIZE &amp; FIT ADVICE
               </h3>
               <span className="material-symbols-outlined text-secondary">accessibility_new</span>
             </div>
-            <div className="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant">
-              <div className="p-space-sm bg-surface-container text-primary font-label-code text-label-code border border-surface-container-high">
+            <div className="flex flex-col gap-3 font-body-md text-xs sm:text-sm text-on-surface-variant flex-1 justify-between">
+              <div className="p-3 bg-surface-container text-primary font-label-code text-xs border border-surface-container-high">
                 MODEL HEIGHT: 186CM / 6'1" WEARING SIZE LARGE
               </div>
-              <p>
+              <p className="leading-relaxed">
                 Engineered with dropped shoulders and a boxy contemporary torso drape. Deliberately oversized to allow comfortable layering over our 500 GSM loopback fleece hoodies.
               </p>
               <button
                 onClick={() => setIsSizeGuideOpen(true)}
-                className="text-secondary font-bold font-label-code text-label-code uppercase text-left hover:underline flex items-center gap-1 mt-auto"
+                className="text-secondary font-bold font-label-code text-xs uppercase text-left hover:underline flex items-center gap-1 mt-auto pt-2"
+                type="button"
               >
                 <span>OPEN COMPLETE MATRIX MEASUREMENTS</span>
                 <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
@@ -451,18 +455,18 @@ export const ProductDetailPage: React.FC = () => {
           </div>
 
           {/* Item 3: Care Guide */}
-          <div className="p-space-lg bg-surface border border-surface-container-high shadow-sm flex flex-col gap-space-md">
+          <div className="p-6 bg-surface border border-surface-container-high hover:border-primary transition-colors flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-title-md text-title-md uppercase text-primary font-bold">
+              <h3 className="font-title-md text-base sm:text-lg uppercase text-primary font-bold">
                 FABRIC &amp; TEXTILE CARE
               </h3>
               <span className="material-symbols-outlined text-secondary">dry_cleaning</span>
             </div>
-            <div className="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant">
+            <div className="flex flex-col gap-3 font-body-md text-xs sm:text-sm text-on-surface-variant">
               <p className="font-semibold text-primary">
                 {product.material}
               </p>
-              <ul className="flex flex-col gap-1.5 text-body-sm">
+              <ul className="flex flex-col gap-2">
                 <li>• Machine wash cold at 30°C on gentle cycle</li>
                 <li>• Do not use fabric softeners or chlorine bleach</li>
                 <li>• Dry flat or hang in shade away from direct sunlight</li>
@@ -474,26 +478,26 @@ export const ProductDetailPage: React.FC = () => {
       </section>
 
       {/* SECTION: STYLED IN THIS LOOK / CROSS-SELL */}
-      <section className="w-full px-margin-mobile md:px-margin py-space-2xl bg-surface">
-        <div className="flex items-end justify-between gap-space-md mb-space-xl">
+      <section className="w-full px-4 sm:px-8 lg:px-12 py-16 sm:py-20 bg-surface">
+        <div className="flex items-end justify-between gap-4 mb-10">
           <div>
-            <span className="font-label-code text-label-code uppercase tracking-widest text-secondary font-bold">
+            <span className="font-label-code text-xs uppercase tracking-widest text-secondary font-bold">
               CURATED CAPSULE
             </span>
-            <h2 className="font-headline-lg text-3xl sm:text-headline-lg uppercase text-primary mt-1">
+            <h2 className="font-headline-lg text-2xl sm:text-4xl uppercase text-primary mt-1 font-bold">
               STYLED IN THIS LOOK
             </h2>
           </div>
           <Link
             to="/shop"
-            className="font-title-sm text-title-sm uppercase tracking-wider text-primary hover:text-secondary flex items-center gap-1 transition-colors"
+            className="font-title-sm text-xs sm:text-sm uppercase tracking-wider text-primary hover:text-secondary flex items-center gap-1 transition-colors"
           >
             <span>VIEW ALL COMPATIBLE PIECES</span>
             <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {styledLookProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
